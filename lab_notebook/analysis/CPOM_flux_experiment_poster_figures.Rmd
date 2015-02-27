@@ -1,0 +1,47 @@
+# CPOM Flux Experiment Poster Figures
+## 7 July 2014
+
+###Import Data
+
+    sod10 <- read.table ("./data/sod_calculation_10jun2014.csv", header = T, sep = ",")
+    sod12 <- read.table ("./data/sod_calculation_12jun2014.csv", header = T, sep = ",")   
+    sod17 <- read.table ("./data/sod_calculation_17jun2014.csv", header = T, sep = ",")
+    sod24 <- read.table ("./data/sod_calculation_24jun2014.csv", header = T, sep = ",")
+    sod01 <- read.table ("./data/sod_calculation_1jul2014.csv", header = T, sep = ",")
+    botOM <- read.table ("./data/CPOM_flux_bottleOM_initial.csv", header = T, sep = ",")
+
+###Combine Dates
+
+    SOD <- rbind(sod10, sod12, sod17, sod24, sod01)
+    day <- c(rep("2014-06-10", 16), rep("2014-06-12", 16), rep("2014-06-17", 16), rep("2014-06-24", 16),rep("2014-07-01", 16))
+    SOD <- data.frame(day, SOD)
+    
+###Plots
+
+    plot(SOD ~ CPOM, data = SOD)
+    plot(SOD ~ nutrient, data = SOD)
+    plot(SOD ~ CPOM, data = SOD, subset = nutrient == "no")
+    plot(SOD ~ CPOM, data = SOD, subset = nutrient == "yes")
+    plot(SOD ~ nutrient, data = SOD, subset = CPOM == "no")
+    plot(SOd ~ nutrient, data = SOD, subset = CPOM == "yes")
+    plot(SOD ~ day, data = SOD, subset = CPOM == "yes")
+    plot(DOpre ~ CPOM, data = SOD, subset = nutrient == "yes")
+    plot(DOpre ~ CPOM, data = SOD, subset = nutrient == "no")
+    plot(DOpre ~ nutrient, data = SOD, subset = CPOM == "yes")
+    plot(DOpre ~ nutrient, data = SOD, subset = CPOM == "no")
+    plot(dDO ~ nutrient, data = SOD, subset = CPOM =="yes")
+    plot(dDO ~ nutrient, data = SOD, subset = CPOM =="no")
+    plot(dDO ~ CPOM, data = SOD, subset = nutrient =="yes")
+    plot(dDO ~ CPOM, data = SOD, subset = CPOM =="no"")
+    plot(SOD ~ CPOM == "yes", data = SOD, subset = day)
+    plot(SOD ~ dDO, data = SOD)
+    plot(SOD ~ dDO, data = SOD, subset = CPOM == "no")
+    plot(SOD ~ dDO, data = SOD, subset = CPOM == "yes")
+    plot(SOD ~ dDO, data = SOD, subset = nutrient == "no")
+    plot(SOD ~ dDO, data = SOD, subset = nutrient == "yes")
+    plot(SOD ~ day, data = SOD, subset = nutrient == "yes")
+    plot(SOD ~ as.numeric(day), data = SOD, subset = nutrient == "no")
+    points(SOD ~ as.numeric(day), data = SOD, subset = CPOM =="yes", col = "green")
+    plot(SOD ~ day, data = SOD, subset = CPOM)
+    plot(SOD ~ day, data = SOD, subset = nutrient == "no")
+    plot(SOD ~ day, data = SOD, subset = nutrient == "yes")
