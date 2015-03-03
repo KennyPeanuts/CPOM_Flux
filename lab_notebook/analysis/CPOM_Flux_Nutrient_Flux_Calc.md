@@ -1,4 +1,4 @@
-# Analysis of the Nutrient Data from CPOM Flux Exp.
+# Calculation of the Areal Nutrient Flux from the CPOM Flux Exp.
 ## Summer 2014
 ## Metadata
 * Code created: 20 Jan 2014
