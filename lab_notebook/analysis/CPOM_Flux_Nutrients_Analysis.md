@@ -9,6 +9,7 @@
 * Modified: 10 Feb 2015 - KF - added code to calculate flux for 24 June Sampling
 * Modified: 25 Feb 2015 - KF - normalized flux by time elapsed
 * Modified: 26 Feb 2015 - KF - converted flux to areal flux; create data file of flux calculations
+* Modified 3 March 2015 - KF - corrected BOD volume for areal flux calcualtions
 
 ## Purpose
 These data were collected from the CPOM Flux Exp. to assess the effect of CPOM on the flux of nutrients across the sediment water interface.
@@ -413,7 +414,7 @@ So the inital nutrient concentration for 1 July is the concentration on 24 June 
     flux.samp <- rbind(flux.12Jun.C, flux.12Jun.N, flux.17Jun.C, flux.17Jun.N, flux.24Jun.C, flux.24Jun.N, flux.1Jul.C, flux.1Jul.N)
     flux.day <- flux.samp[,-1]/days.elap # removed the `CPOM` variable from the data and normalize by days
 
-To convert the flux in `flux.day` from mg/L/d to mg/m2/d I calculated the volume of water in the bottles when the samples were collected as 300 ml bottle - 100 ml sediment = 200 ml - 30 ml removed for SOD measurement and water R = 170 ml = 0.17 L
+To convert the flux in `flux.day` from mg/L/d to mg/m2/d I calculated the volume of water in the bottles when the samples were collected as 300 ml bottle - 100 ml sediment = 200 ml - 15 ml removed for T-f SOD measurement = 185 ml = 0.185 L
 
 Multiplying the volume in L by the change concentration in mg-N/L gives the change in N mass (mg) `mg/L * L/1 = mg`
 
@@ -421,7 +422,7 @@ To convert this to an areal flux, I divided the change in mass of N by the sedim
 
 This gives `mg-N/1 * 1/m2 = mg-N/m2`
 
-    flux <- (flux.day * .17) / 0.003525652
+    flux <- (flux.day * .185) / 0.003525652
     cpom.flux.nut <- data.frame(DATE, days, NUT, flux.samp[,1], flux)
     names(cpom.flux.nut) <- c("DATE", "days", "NUT", "CPOM", "NOx", "NH3", "P")
 
