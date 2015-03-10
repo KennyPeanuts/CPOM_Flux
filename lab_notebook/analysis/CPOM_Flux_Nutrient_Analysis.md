@@ -182,6 +182,16 @@ Flux calculations can be found in `CPOM_Flux_Nutrient_Flux_Calc.md` in the `anal
 
 ~~~~
 
+### Plots
+
+    plot(NOx ~ days, data = nut, subset = CPOM == "C", col = 8)
+
+    means.NOx.CPOM <- c(mean(nut$NOx[nut$CPOM == "C" & nut$days == 2]), mean(nut$NOx[nut$CPOM == "C" & nut$days == 7]), mean(nut$NOx[nut$CPOM == "C" & nut$days == 14]), mean(nut$NOx[nut$CPOM == "C" & nut$days == 21])) 
+    means.NOx.NCPOM <- c(mean(nut$NOx[nut$CPOM == "0" & nut$days == 2]), mean(nut$NOx[nut$CPOM == "0" & nut$days == 7]), mean(nut$NOx[nut$CPOM == "0" & nut$days == 14]), mean(nut$NOx[nut$CPOM == "0" & nut$days == 21])) 
+
+    points(NOx ~ days, data = nut, subset = CPOM == "0")
+
+
 ### Repeated Measures Analysis
 
   
