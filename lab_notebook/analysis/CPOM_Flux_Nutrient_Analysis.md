@@ -239,4 +239,12 @@ Flux calculations can be found in `CPOM_Flux_Nutrient_Flux_Calc.md` in the `anal
 
 ### Repeated Measures Analysis
 
-  
+To complete the repeated measures I need to add a variable for the identity of the BOD bottles
+
+    BOD <- 1:16
+
+    nut <- data.frame(BOD, nut)
+
+    summary(aov(NOx ~ CPOM * NUT * days + Error(as.factor(BOD)), data = nut))
+    summary(aov(NH3 ~ CPOM * NUT * days + Error(as.factor(BOD)), data = nut))    
+    summary(aov(P ~ CPOM * NUT * days + Error(as.factor(BOD)), data = nut))

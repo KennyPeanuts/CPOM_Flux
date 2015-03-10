@@ -10,6 +10,8 @@
 * Modified: 25 Feb 2015 - KF - normalized flux by time elapsed
 * Modified: 26 Feb 2015 - KF - converted flux to areal flux; create data file of flux calculations
 * Modified 3 March 2015 - KF - corrected BOD volume for areal flux calcualtions
+* Modified 10 March 2015 - KF - removed exploratory plots
+
 
 ## Purpose
 These data were collected from the CPOM Flux Exp. to assess the effect of CPOM on the flux of nutrients across the sediment water interface.
@@ -17,23 +19,6 @@ These data were collected from the CPOM Flux Exp. to assess the effect of CPOM o
 ## Import data
 
     nut <- read.table("./data/CPOM_Flux_Nutrients.csv", header = T, sep = ",")
-
-## Initial Exploratory plots
-
-    plot(NOx ~ DATE, data = nut, subset = CPOM == "0")
-    plot(NOx ~ DATE, data = nut, subset = CPOM == "C", add = T, col = 2)
-    
-    plot(NOx ~ DATE, data = nut, subset = CPOM == "0" & NUTS == "0")
-    plot(NOx ~ DATE, data = nut, subset = CPOM == "C" & NUTS == "0", add = T, col = 2)
-    plot(NOx ~ DATE, data = nut, subset = CPOM == "0" & NUTS == "N")
-    plot(NOx ~ DATE, data = nut, subset = CPOM == "C" & NUTS == "N", add = T, col = 2)
-    
-    plot(NH3 ~ DATE, data = nut, subset = CPOM == "C")
-    plot(NH3 ~ DATE, data = nut, subset = CPOM == "C")
-    plot(P ~ DATE, data = nut, subset = CPOM == "0")
-    plot(P ~ DATE, data = nut, subset = CPOM == "C")
-
-These plots seem to indicate qulaitatively that the presence of CPOM affected the magnitide and timing of nutrient flux across the sediment water interface.
 
 ## Flux Calculations
 
@@ -52,7 +37,7 @@ To calculate the flux:
 Calculation of the sediment nutrient flux in the unenriched samples from initiation to 12 June.  Since we do not have the nutrient data from 10 June, I am using the replacement water values as initial value.
      
      
-     NOx.flux.12Jun.C <-  nut$NOx[nut$BOD != "RW0" & nut$DATE == "12-Jun" & nut$NUTS == "0"] - nut$NOx[nut$BOD == "RW0" & nut$DATE == "10-Jun"]  
+     NOx.flux.12Jun.C <-  nut$NOx[nut$BOD != "RW0" & nut$DATE == "12-Jun" & nut$NUTS == "0"] - nut$NOx[nut$BOD == "RW0" & nut$DATE == "10-Jun"] 
      NH3.flux.12Jun.C <-  nut$NH3[nut$BOD != "RW0" & nut$DATE == "12-Jun" & nut$NUTS == "0"] - nut$NH3[nut$BOD == "RW0" & nut$DATE == "10-Jun"]
      P.flux.12Jun.C <-  nut$P[nut$BOD != "RW0" & nut$DATE == "12-Jun" & nut$NUTS == "0"] - nut$P[nut$BOD == "RW0" & nut$DATE == "10-Jun"]
      CPOM.0 <- nut$CPOM[nut$BOD != "RW0" & nut$DATE == "12-Jun" & nut$NUTS == "0"]

@@ -32,6 +32,5 @@ Modified:
 
 The code for the calculations can be found in `code/CPOM_Flux_Nutrients_Flux_Calc.md`
 
-## Output
 
 
