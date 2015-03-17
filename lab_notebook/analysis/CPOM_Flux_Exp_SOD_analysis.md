@@ -937,3 +937,8 @@ _OM normalized SOD by Date_
 ![OM SOD by Date](../output/plots/nutrient_flux_OMflux_by_date.png)
 
 _OM SOD by Date with Nutrients_
+
+## Create data file of total SOD data including sod.OM
+
+    sod.tot <- data.frame(sod.tot, sod.OM)
+    write.table(sod.tot, "./data/CPOM_Flux_SOD.csv", quote = F, row.names = F, sep = ",")
