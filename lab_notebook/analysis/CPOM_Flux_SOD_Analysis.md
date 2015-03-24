@@ -53,10 +53,18 @@ I am not sure how to interpret these results...
 
 ### Plots
 
-    par(las = 1, cex = 2, mar = c(4, 4.5, 2, 2))
+    #par(las = 1, cex = 2, mar = c(4, 4.5, 2, 2))
+
     plot(sod.OM ~ days.elap, data = sod, subset = CPOM == "yes" & nutrient == "yes", ylim = c(0, 50), pch = 16, xlab = "Days of Incubation", ylab = expression(paste("SOD (", mu, "mol (g OM)"^{-1}, " d"^{-1}, ")")))
     points(sod.OM ~ days.elap, data = sod, subset = CPOM == "yes" & nutrient == "no", pch = 1)
     points(sod.OM ~ days.elap, data = sod, subset = CPOM == "no" & nutrient == "yes", pch = 16, col = 4)
     points(sod.OM ~ days.elap, data = sod, subset = CPOM == "no" & nutrient == "no", pch = 1, col = 4)
 
+    sod.mean.CPOM <- c(mean(sod$sod.OM[sod$days.elap == 0 & sod$CPOM == "yes"]), mean(sod$sod.OM[sod$days.elap == 2 & sod$CPOM == "yes"]), mean(sod$sod.OM[sod$days.elap == 7 & sod$CPOM == "yes"]), mean(sod$sod.OM[sod$days.elap == 14 & sod$CPOM == "yes"]), mean(sod$sod.OM[sod$days.elap == 21 & sod$CPOM == "yes"])) 
+    sod.mean.ctl <- c(mean(sod$sod.OM[sod$days.elap == 0 & sod$CPOM == "no"]), mean(sod$sod.OM[sod$days.elap == 2 & sod$CPOM == "no"], na.rm = T), mean(sod$sod.OM[sod$days.elap == 7 & sod$CPOM == "no"]), mean(sod$sod.OM[sod$days.elap == 14 & sod$CPOM == "no"]), mean(sod$sod.OM[sod$days.elap == 21 & sod$CPOM == "no"])) 
     
+    plot(sod.OM ~ days.elap, data = sod, subset = CPOM == "yes", ylim = c(0, 50), xlab = "Days of Incubation", ylab = expression(paste("SOD (", mu, "mol (g OM)"^{-1}, " d"^{-1}, ")")), pch = 1, col = "light blue")
+    points(sod.mean.CPOM ~ unique(days.elap), data = sod, type = "b", pch = 16, col = "blue")
+    points(sod.OM ~ days.elap, data = sod, subset = CPOM == "no", pch = 2, col = "light green")
+    points(sod.mean.ctl ~ unique(days.elap), data = sod, type = "b", pch = 17, col = "green4")
+    legend(10, 50, c("Leaf Litter Added", "No Leaf Litter"), pch = c(16, 17))
