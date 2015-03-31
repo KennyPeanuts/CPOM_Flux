@@ -863,7 +863,7 @@ _OM Normalized SOD by Nutrient_
 #### Analyize areal normalized by time
 
     par(mar = c(5, 5, 5, 5))
-    plot((SOD * 24) ~ days.elap, data = sod.tot, subset = CPOM == "yes", pch = 19, ylim = c(0, 60), ylab = expression(paste("SOD (mmol m"^{-2}, "d"^{-1}, ")")), xlab = "Experiment Days", cex.lab = 1.5, axes = F, cex = 1.5, col = "brown")
+    plot((SOD * 24) ~ days.elap, data = sod.tot, subset = CPOM == "yes", pch = 19, ylim = c(0, 60), ylab = expression(paste("SOD (mmol m"^{-2}, "h"^{-1}, ")")), xlab = "Experiment Days", cex.lab = 1.5, axes = F, cex = 1.5, col = "brown")
     axis(1, las = 1, cex = 1.5)
     axis(2, las = 2, cex = 1.5)
     points((SOD * 24) ~ days.elap, data = sod.tot, subset = CPOM == "no", pch = 8, cex = 1.5, col = "blue")
@@ -878,7 +878,7 @@ _OM Normalized SOD by Nutrient_
 _Areal SOD by Date with CPOM_
 
     par(mar = c(5, 5, 5, 5))
-    plot((SOD * 24) ~ days.elap, data = sod.tot, subset = nutrient == "yes", pch = 17, ylim = c(0, 60), ylab = expression(paste("SOD (mmol m"^{-2}, "d"^{-1}, ")")), xlab = "Experiment Days", cex.lab = 1.5, axes = F, cex = 1.5, col = "brown")
+    plot((SOD * 24) ~ days.elap, data = sod.tot, subset = nutrient == "yes", pch = 17, ylim = c(0, 60), ylab = expression(paste("SOD (mmol m"^{-2}, "h"^{-1}, ")")), xlab = "Experiment Days", cex.lab = 1.5, axes = F, cex = 1.5, col = "brown")
     axis(1, las = 1, cex = 1.5)
     axis(2, las = 2, cex = 1.5)
     points((SOD * 24) ~ days.elap, data = sod.tot, subset = nutrient == "no", pch = 8, cex = 1.5, col = "blue")
@@ -903,7 +903,7 @@ _Areal SOD by Date with Nutrients_
     sod.OM <- sod.OM.mmol * 1000 # flux in umol O2 / g OM / d
 
     par(mar = c(5, 5, 5, 5))
-    plot(sod.OM ~ days.elap, data = sod.tot, subset = CPOM == "yes", pch = 19, ylim = c(0, 50), ylab = expression(paste("SOD (", mu,"mol (g OM)"^{-1}, "d"^{-1}, ")")), xlab = "Experiment Days", cex.lab = 1.5, axes = F, cex = 1.5, col = "light green")
+    plot(sod.OM ~ days.elap, data = sod.tot, subset = CPOM == "yes", pch = 19, ylim = c(0, 50), ylab = expression(paste("SOD (", mu,"mol (g OM)"^{-1}, "h"^{-1}, ")")), xlab = "Experiment Days", cex.lab = 1.5, axes = F, cex = 1.5, col = "light green")
     points(sod.OM ~ days.elap, data = sod.tot, subset = CPOM == "yes", pch = 1, cex = 1.5)
     axis(1, las = 1, cex = 1.5)
     axis(2, las = 2, cex = 1.5)
@@ -920,7 +920,7 @@ _Areal SOD by Date with Nutrients_
 _OM normalized SOD by Date_
 
     par(mar = c(5, 5, 5, 5))
-    plot(sod.OM ~ days.elap, data = sod.tot, subset = nutrient == "yes", pch = 19, ylim = c(0, 50), ylab = expression(paste("SOD (", mu,"mol (g OM)"^{-1}, "d"^{-1}, ")")), xlab = "Experiment Days", cex.lab = 1.5, axes = F, cex = 1.5, col = "orange")
+    plot(sod.OM ~ days.elap, data = sod.tot, subset = nutrient == "yes", pch = 19, ylim = c(0, 50), ylab = expression(paste("SOD (", mu,"mol (g OM)"^{-1}, "h"^{-1}, ")")), xlab = "Experiment Days", cex.lab = 1.5, axes = F, cex = 1.5, col = "orange")
     points(sod.OM ~ days.elap, data = sod.tot, subset = nutrient == "yes", pch = 1, cex = 1.5)
     axis(1, las = 1, cex = 1.5)
     axis(2, las = 2, cex = 1.5)
