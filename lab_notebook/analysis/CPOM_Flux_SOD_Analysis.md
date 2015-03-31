@@ -7,7 +7,6 @@
 * Code created 23 March 2015 - KF
 * Modified 31 March 2015 - KF - corrected SOD units to per h instead of per d
 
-* Modified
 
 ## Purpose
 
