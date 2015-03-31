@@ -69,7 +69,7 @@ I am not sure how to interpret these results...
     points(sod.mean.CPOM ~ unique(days.elap), data = sod, type = "b", pch = 16, col = "black", cex = 2.5)
     points(sod.OM ~ days.elap, data = sod, subset = CPOM == "no", pch = 2, col = "grey4", cex = 2)
     points(sod.mean.ctl ~ unique(days.elap), data = sod, type = "b", pch = 17, col = "black", cex = 2.5)
-    legend(10, 50, c("Leaf Litter Added", "No Leaf Litter"), pch = c(16, 17), cex = 1.5)
+    legend(10, 50, c("Leaf Litter Added ", "No Leaf Litter "), pch = c(16, 17), cex = 1.5)
     dev.copy(jpeg, "./output/plots/SOD_OM_by_days.jpg")
     dev.off()
 
