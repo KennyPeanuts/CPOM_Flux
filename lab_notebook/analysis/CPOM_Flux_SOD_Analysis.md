@@ -22,8 +22,9 @@ Flux calculations can be found in `CPOM_Flux_Exp_SOD_flux_calc.md` in the `analy
 ### Repeated Measures Analysis
 #### Each Factor Separately
 
-I am not sure how to specify the model with 2 nested factors, so I ran the analysis with each nest factor separately.
+I am using this website to ascertain how to specify the models in R
 
+[http://ww2.coastal.edu/kingw/statistics/R-tutorials/repeated.html](http://ww2.coastal.edu/kingw/statistics/R-tutorials/repeated.html)
 
     CPOM.aov <- (aov(sod.OM ~ days.elap * CPOM + Error(as.factor(bod)/CPOM), data = sod))
     summary(CPOM.aov)
