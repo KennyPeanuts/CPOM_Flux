@@ -8,6 +8,7 @@
 
 * Modified 10 March 2015 - KF - continued analysis
 * Modified 24 March 2015 - KF - made figures consistent with SOD for ASB Talk
+* Modified 8 May 2015 - KF - analyzed data with repeated measures using lme and lmeTest package
 
 ## Purpose
 
@@ -245,9 +246,225 @@ To complete the repeated measures I need to add a variable for the identity of t
     BOD <- 1:16
 
     nut <- data.frame(BOD, nut)
+    
+Based on the research for the correct method for `CPOM_Flux_SOD_Analysis.md` I analyzed these data with the `lmer` function from the `lmerTest` package ([http://cran.r-project.org/web/packages/lmerTest//lmerTest.pdf](http://cran.r-project.org/web/packages/lmerTest//lmerTest.pdf))
 
-    summary(aov(NOx ~ CPOM * NUT * days + Error(as.factor(BOD)), data = nut))
+#### Nitrate and Nitrite
 
-    summary(aov(NH3 ~ CPOM * NUT * days + Error(as.factor(BOD)), data = nut))    
+Model:
+  
+    fm.NOx <- lmer(NOx ~ 1 + days * CPOM * NUT + (1 + days | BOD), data = nut)
+    summary(fm.NOx)
 
-    summary(aov(P ~ CPOM * NUT * days + Error(as.factor(BOD)), data = nut))
+~~~~
+
+> summary(fm.NOx)
+Linear mixed model fit by REML t-tests use Satterthwaite approximations to degrees of freedom [
+merModLmerTest]
+Formula: NOx ~ 1 + days * CPOM * NUT + (1 + days | BOD)
+   Data: nut
+
+REML criterion at convergence: 607.2
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.28131 -0.29071 -0.04767  0.35740  2.79794 
+
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr 
+ BOD      (Intercept)  437.714 20.92         
+          days           1.539  1.24    -1.00
+ Residual             1422.135 37.71         
+Number of obs: 64, groups:  BOD, 16
+
+Fixed effects:
+                Estimate Std. Error       df t value Pr(>|t|)    
+(Intercept)      92.7687    20.1778  12.1480   4.598 0.000594 ***
+days             -5.9676     1.4528  19.9630  -4.108 0.000549 ***
+CPOMC           -88.2723    28.5358  12.1480  -3.093 0.009183 ** 
+NUTN            -18.0342    28.5358  12.1480  -0.632 0.539108    
+days:CPOMC        5.3827     2.0545  19.9630   2.620 0.016419 *  
+days:NUTN         0.9073     2.0545  19.9630   0.442 0.663502    
+CPOMC:NUTN       24.1854    40.3557  12.1480   0.599 0.559979    
+days:CPOMC:NUTN  -1.2313     2.9055  19.9630  -0.424 0.676267    
+---
+
+Correlation of Fixed Effects:
+            (Intr) days   CPOMC  NUTN   dy:CPOMC d:NUTN CPOMC:
+days        -0.869                                            
+CPOMC       -0.707  0.614                                     
+NUTN        -0.707  0.614  0.500                              
+days:CPOMC   0.614 -0.707 -0.869 -0.434                       
+days:NUTN    0.614 -0.707 -0.434 -0.869  0.500                
+CPOMC:NUTN   0.500 -0.434 -0.707 -0.707  0.614    0.614       
+d:CPOMC:NUT -0.434  0.500  0.614  0.614 -0.707   -0.707 -0.869
+
+~~~~
+
+These results show the fit of the model but include the test of the t-test as to whether beta = 0. This is not the same as the test of the significants of the factor on the response.  See more information at [http://stats.stackexchange.com/questions/28938/why-do-linear-regression-and-anova-give-different-p-value-in-case-of-consideri](http://stats.stackexchange.com/questions/28938/why-do-linear-regression-and-anova-give-different-p-value-in-case-of-consideri).
+
+To get the F-tests which show the sig of the factors for the response you need a to run the anova on the model.
+
+    anova(fm.NOx)
+
+~~~~
+  
+> anova(fm.NOx)
+Analysis of Variance Table of type III  with  Satterthwaite 
+approximation for degrees of freedom
+               Sum Sq Mean Sq NumDF  DenDF F.value    Pr(>F)    
+days          26412.9 26412.9     1 19.964 18.5727 0.0003424 ***
+CPOM          20270.8 20270.8     1 12.149 14.2538 0.0025910 ** 
+NUT             123.3   123.3     1 12.149  0.0867 0.7733805    
+days:CPOM     15312.7 15312.7     1 19.964 10.7674 0.0037392 ** 
+days:NUT         57.3    57.3     1 19.964  0.0403 0.8428898    
+CPOM:NUT        510.8   510.8     1 12.149  0.3592 0.5599788    
+days:CPOM:NUT   255.4   255.4     1 19.964  0.1796 0.6762666    
+
+~~~~
+
+The results indicate that the nitrate and nitrite flux varys with CPOM and days and that there is a significant interaction between CPOM and day. However consideration of the plot of the residuals by fitted (`plot(fm.NOx)`) shows some ugliness where there is correlation with the magnitude of the residuals and the fitted value. This is evident from the plot (above) where it is clear there is not homogeneity of variance across dates. 
+#### Ammonium
+
+Model:
+  
+    fm.NH3 <- lmer(NH3 ~ 1 + days * CPOM * NUT + (1 + days | BOD), data = nut)
+    summary(fm.NH3)
+
+~~~~
+  
+> summary(fm.NH3)
+Linear mixed model fit by REML t-tests use Satterthwaite approximations to degrees of freedom [
+merModLmerTest]
+Formula: NH3 ~ 1 + days * CPOM * NUT + (1 + days | BOD)
+   Data: nut
+
+REML criterion at convergence: 246.8
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-1.8709 -0.4778 -0.0985  0.4086  3.3800 
+
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr 
+ BOD      (Intercept) 3.12984  1.7691        
+          days        0.01072  0.1035   -1.00
+ Residual             1.93278  1.3902        
+Number of obs: 64, groups:  BOD, 16
+
+Fixed effects:
+                Estimate Std. Error       df t value Pr(>|t|)
+(Intercept)     -0.93319    1.08953 12.04200  -0.857    0.408
+days             0.05849    0.07090 13.77400   0.825    0.423
+CPOMC            0.69612    1.54083 12.04200   0.452    0.659
+NUTN            -2.61374    1.54083 12.04200  -1.696    0.116
+days:CPOMC      -0.07310    0.10026 13.77400  -0.729    0.478
+days:NUTN        0.11429    0.10026 13.77400   1.140    0.274
+CPOMC:NUTN       2.50866    2.17906 12.04200   1.151    0.272
+days:CPOMC:NUTN -0.10715    0.14179 13.77400  -0.756    0.463
+
+Correlation of Fixed Effects:
+            (Intr) days   CPOMC  NUTN   dy:CPOMC d:NUTN CPOMC:
+days        -0.927                                            
+CPOMC       -0.707  0.655                                     
+NUTN        -0.707  0.655  0.500                              
+days:CPOMC   0.655 -0.707 -0.927 -0.463                       
+days:NUTN    0.655 -0.707 -0.463 -0.927  0.500                
+CPOMC:NUTN   0.500 -0.463 -0.707 -0.707  0.655    0.655       
+d:CPOMC:NUT -0.463  0.500  0.655  0.655 -0.707   -0.707 -0.927
+
+~~~~
+
+F-tests:
+  
+     anova(fm.NH3)
+
+~~~~
+
+> anova(fm.NH3)
+Analysis of Variance Table of type III  with  Satterthwaite 
+approximation for degrees of freedom
+              Sum Sq Mean Sq NumDF  DenDF F.value  Pr(>F)  
+days          4.2058  4.2058     1 13.774  2.1761 0.16266  
+CPOM          6.1940  6.1940     1 12.041  3.2047 0.09858 .
+NUT           3.0089  3.0089     1 12.041  1.5568 0.23586  
+days:CPOM     6.1710  6.1710     1 13.774  3.1928 0.09598 .
+days:NUT      1.4174  1.4174     1 13.774  0.7333 0.40646  
+CPOM:NUT      2.5617  2.5617     1 12.041  1.3254 0.27197  
+days:CPOM:NUT 1.1038  1.1038     1 13.774  0.5711 0.46256 
+
+~~~~
+
+The results indicate that there is no significant effect of CPOM or nutrients on ammonium flux, nor does the flux vary over the course of the experiment.
+
+#### Orthophosphate
+
+Model:
+  
+    fm.P <- lmer(P ~ 1 + days * CPOM * NUT + (1 + days | BOD), data = nut)
+    summary(fm.P)
+    
+~~~~
+  
+> summary(fm.P)
+Linear mixed model fit by REML t-tests use Satterthwaite approximations to degrees of freedom [
+merModLmerTest]
+Formula: P ~ 1 + days * CPOM * NUT + (1 + days | BOD)
+   Data: nut
+
+REML criterion at convergence: 43.4
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.0547 -0.5611 -0.0690  0.5849  3.7864 
+
+Random effects:
+ Groups   Name        Variance  Std.Dev. Corr 
+ BOD      (Intercept) 0.0582425 0.24133       
+          days        0.0001976 0.01406  -1.00
+ Residual             0.0539034 0.23217       
+Number of obs: 64, groups:  BOD, 16
+
+Fixed effects:
+                 Estimate Std. Error        df t value Pr(>|t|)  
+(Intercept)      0.304063   0.160764 12.058000   1.891   0.0828 .
+days            -0.008895   0.010715 14.275000  -0.830   0.4202  
+CPOMC            0.003222   0.227354 12.058000   0.014   0.9889  
+NUTN             0.250129   0.227354 12.058000   1.100   0.2927  
+days:CPOMC      -0.009553   0.015154 14.275000  -0.630   0.5384  
+days:NUTN       -0.019767   0.015154 14.275000  -1.304   0.2127  
+CPOMC:NUTN      -0.173754   0.321528 12.058000  -0.540   0.5988  
+days:CPOMC:NUTN  0.014226   0.021431 14.275000   0.664   0.5174  
+---
+
+Correlation of Fixed Effects:
+            (Intr) days   CPOMC  NUTN   dy:CPOMC d:NUTN CPOMC:
+days        -0.910                                            
+CPOMC       -0.707  0.644                                     
+NUTN        -0.707  0.644  0.500                              
+days:CPOMC   0.644 -0.707 -0.910 -0.455                       
+days:NUTN    0.644 -0.707 -0.455 -0.910  0.500                
+CPOMC:NUTN   0.500 -0.455 -0.707 -0.707  0.644    0.644       
+d:CPOMC:NUT -0.455  0.500  0.644  0.644 -0.707   -0.707 -0.910
+
+~~~~
+  
+F-tests:
+  
+    anova(fm.P)
+
+~~~~
+  
+> anova(fm.P)
+Analysis of Variance Table of type III  with  Satterthwaite 
+approximation for degrees of freedom
+               Sum Sq Mean Sq NumDF  DenDF F.value   Pr(>F)   
+days          0.75101 0.75101     1 14.275 13.9325 0.002161 **
+CPOM          0.01460 0.01460     1 12.058  0.2708 0.612235   
+NUT           0.05558 0.05558     1 12.058  1.0312 0.329825   
+days:CPOM     0.00280 0.00280     1 14.275  0.0519 0.823078   
+days:NUT      0.07517 0.07517     1 14.275  1.3945 0.256946   
+CPOM:NUT      0.01574 0.01574     1 12.058  0.2920 0.598763   
+days:CPOM:NUT 0.02375 0.02375     1 14.275  0.4407 0.517383  
+
+~~~~
