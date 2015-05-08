@@ -1,5 +1,6 @@
 # Analysis of the SOD results from the CPOM Flux Experiment - Summer 2014
 
+
 ## Purpose
 
 This code it to analyze the SOD data from the treatments with and without CPOM and/or nutrients
@@ -939,6 +940,8 @@ _OM normalized SOD by Date_
 _OM SOD by Date with Nutrients_
 
 ## Create data file of total SOD data including sod.OM
+
+Convert `bod` from `int` to `Factor`
 
     sod.tot <- data.frame(sod.tot, sod.OM)
     write.table(sod.tot, "./data/CPOM_Flux_SOD.csv", quote = F, row.names = F, sep = ",")
