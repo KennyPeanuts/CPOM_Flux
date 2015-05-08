@@ -197,7 +197,7 @@ Flux calculations can be found in `CPOM_Flux_Nutrient_Flux_Calc.md` in the `anal
     means.NOx.NCPOM <- c(mean(nut$NOx[nut$CPOM == "0" & nut$days == 2]), mean(nut$NOx[nut$CPOM == "0" & nut$days == 7]), mean(nut$NOx[nut$CPOM == "0" & nut$days == 14]), mean(nut$NOx[nut$CPOM == "0" & nut$days == 21])) 
     points(unique(nut$days), means.NOx.CPOM, type = "b", pch = 16, cex = 2.5)   
     points(unique(nut$days), means.NOx.NCPOM, type = "b", pch = 17, col = 1, cex = 2.5)
-    legend(10, 200, c("Leaf Litter Added", "No Leaf Litter"), pch = c(16, 17), col = c(1, 1), cex = 1.5)
+    legend(10, 200, c("Leaf Litter ", "No Leaf Litter "), pch = c(16, 17), col = c(1, 1), cex = 1.5)
     dev.copy(png, "./output/plots/CPOM_Flux_NOx_flux.png")
     dev.off()
 
@@ -214,7 +214,7 @@ Flux calculations can be found in `CPOM_Flux_Nutrient_Flux_Calc.md` in the `anal
     means.NH3.NCPOM <- c(mean(nut$NH3[nut$CPOM == "0" & nut$days == 2]), mean(nut$NH3[nut$CPOM == "0" & nut$days == 7]), mean(nut$NH3[nut$CPOM == "0" & nut$days == 14]), mean(nut$NH3[nut$CPOM == "0" & nut$days == 21])) 
     points(unique(nut$days), means.NH3.CPOM, type = "b", pch = 16, cex = 2.5)   
     points(unique(nut$days), means.NH3.NCPOM, type = "b", pch = 17, cex = 2.5, col = 1)
-    legend(10, 10, c("Leaf Litter Added", "No Leaf Litter Added"), pch = c(16, 17), col = c(1, 1), cex = 1.5)
+    legend(10, 10, c("Leaf Litter ", "No Leaf Litter "), pch = c(16, 17), col = c(1, 1), cex = 1.5)
     dev.copy(png, "./output/plots/CPOM_Flux_NH3_flux.png")
     dev.off()
 
@@ -231,7 +231,7 @@ Flux calculations can be found in `CPOM_Flux_Nutrient_Flux_Calc.md` in the `anal
 means.P.NCPOM <- c(mean(nut$P[nut$CPOM == "0" & nut$days == 2]), mean(nut$P[nut$CPOM == "0" & nut$days == 7]), mean(nut$P[nut$CPOM == "0" & nut$days == 14]), mean(nut$P[nut$CPOM == "0" & nut$days == 21])) 
     points(unique(nut$days), means.P.CPOM, type = "b", pch = 16, cex = 2.5)   
     points(unique(nut$days), means.P.NCPOM, type = "b", pch = 17, cex = 2.5)   
-    legend(10, 1, c("Leaf Litter Added", "No Leaf Litter"), pch = c(16, 17), col = c(1, 1), cex = 1.5)
+    legend(10, 1, c("Leaf Litter ", "No Leaf Litter "), pch = c(16, 17), col = c(1, 1), cex = 1.5)
     dev.copy(png, "./output/plots/CPOM_Flux_P_flux.png")
     dev.off()
 
