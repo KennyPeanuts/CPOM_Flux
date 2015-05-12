@@ -4,6 +4,10 @@
 
 This code it to analyze the spec scan data from the treatments with and without CPOM and/or nutrients
 
+Analysis methods taken from:
+
+> Helms, J. R. A. Stubbins, J. D. Ritchie, E. C. Minor, D. J. Kieber, K. Mopper. 2008. Absorption spectral slopes and slope ratios as indicators of molecular weight, source, and photobleaching of chromophoric dissolved organic matter. Limnology and Oceanography 53:955-969.
+
 ## Import data
 
     spec10 <- read.table("./data/cpom_flux_spec_10jun2014.csv", header = T, sep = ",")
