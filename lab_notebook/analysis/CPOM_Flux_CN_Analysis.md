@@ -83,6 +83,8 @@ $Y **Nutrient Addition**
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   10.50   10.64   10.80   10.77   10.91   11.00 
 
+~~~~
+
     tapply(cn$CN[cn$CPOM == "Y"], cn$Source[cn$CPOM == "Y"], summary)
 
 ~~~~
