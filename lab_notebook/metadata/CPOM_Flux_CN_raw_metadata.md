@@ -40,6 +40,6 @@ Modified:
 
 bulk sample in vial 13 was broken during shipping and so the some of the sample was lost.  The percC and percN values are not likely reliable.
 
- 
+bulk sample vial 1 was broken during shipping and all material was lost. 
 
 
