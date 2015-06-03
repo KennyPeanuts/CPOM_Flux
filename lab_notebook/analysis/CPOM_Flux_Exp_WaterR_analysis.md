@@ -1,5 +1,11 @@
 # Analysis of the SOD results from the CPOM Flux Experiment - Summer 2014
 
+## Metadata
+
+Code created: 25 June 2015 - KF
+
+Modified: 3 June 2015 - KF - added calculated water R from 2 Jul 2014 run 
+
 ## Purpose
 
 This code it to analyze the water R data from the treatments with and without CPOM and/or nutrients
@@ -10,6 +16,7 @@ This code it to analyze the water R data from the treatments with and without CP
     wR13 <- read.table("./data/waterR_calculation_13jun2014.csv", header = T, sep = ",")
     wR18 <- read.table("./data/waterR_calculation_18jun2014.csv", header = T, sep = ",")
     wR25 <- read.table("./data/waterR_calculation_25jun2014.csv", header = T, sep = ",")
+    wR2 <- read.table("./data/waterR_calculation_2jul2014.csv", header = T, sep = ",")
 
 
 ## Data Analysis
