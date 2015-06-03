@@ -1,4 +1,4 @@
-# Analysis of the SOD results from the CPOM Flux Experiment - Summer 2014
+# Analysis of the Water Respiration results from the CPOM Flux Experiment - Summer 2014
 
 ## Metadata
 
