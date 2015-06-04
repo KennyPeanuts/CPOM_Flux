@@ -1,8 +1,8 @@
-# Metadata for the initial organic matter in the bottles in the CPOM Flux experiment 
+# Metadata for the calculations of initial organic matter in the bottles in the CPOM Flux experiment 
 
 ## File
 
-`cpom_flux_bod_om_initial.csv`
+`CPOM_Flux_BOD_OM_initial.csv`
 
 ## Metadata
 
@@ -23,8 +23,10 @@ Compilation of the organic matter data collected at the beginning of the CPOM Fl
 * `Leaf_OM_Content_Flux_Experiment_30May2014.md` for the "leaf.disc" samples
 
 * `Sediment_Dry_Mass_+AFDM_30 May2014.md` for the "sed" samples
- 
-File Created: 3 June 2015
+
+This file also contains the calculated variables from the raw OM data masses.
+
+File Created: 4 June 2015
 
 Modified: 
 
@@ -50,4 +52,12 @@ Modified:
 
 * cruc.ash = the mass of the crucible and the ash that remained after cooking the sample at 550 dC for 4+ hours (g)
 
- 
+* cpom = the dry mass of the CPOM collected from the Ekman samples collected from LPP (g)
+
+* sed = the dry mass of the sediment in the crucibles (g) 
+
+* ash = the mass of the ash remaining in the crucibles after ashing at 550 dC for 4+ h (g)
+
+* prop.OM = the proportion of organic matter in the samples determined as (sed - ash) / sed
+
+* prop.water = the proportion of water in the samples calculated as (wet mass - dry mass) / wet mass
