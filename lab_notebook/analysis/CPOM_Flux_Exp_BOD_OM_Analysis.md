@@ -14,4 +14,3 @@ This code complies and analyzes all of the data on the amount of organic matter 
 
     om <- read.delim("./data/cpom_flux_bod_om_initial.csv", header = T, sep = ",")
 
-   
