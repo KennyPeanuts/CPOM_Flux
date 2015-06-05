@@ -8,7 +8,7 @@ Modified:
 
 * 4 June 2015 - KF - calculated the amount of OM in the BOD bottles
 
-* 5 June 2015 - KF - 
+* 5 June 2015 - KF - calculated the amount of CPOM AFDM in the LPP Ekman samples
 
 
 ## Purpose
@@ -184,7 +184,7 @@ and between
 
 ~~~~
 
-[1] 11.33144 g of OM added in the CPOM treatments based on the min
+[1] 11.33144 g/m2 of OM added in the CPOM treatments based on the min
 
 ~~~~
 
@@ -192,12 +192,54 @@ and between
 
 ~~~~
 
-22.66289 g of OM added in the CPOM treatments based on the max
+22.66289 g/m2 of OM added in the CPOM treatments based on the max
 
 ~~~~
 
 ## Calculation of the Density of CPOM OM in LPP
 
-The dry mass of the CPOM in the sediments from LPP are tha mass of the leaf litter collected by the Ekmans. 
+The dry mass of the CPOM in the sediments from LPP are the mass of the leaf litter collected by the Ekmans.
 
-    summary
+    om$cpom[om$om == "cpom"]
+~~~~
+in grams
+
+[1] 1.4834 1.9426 4.3025 3.2010
+~~~~
+
+Note that the 2 samples with the greater CPOM mass came from 0.4 m water depth and the 2 samples with the lesser CPOM mass came from 1 m water dept (`metadata/LPP_CPOM_density_29May2014.md`).
+
+To convert these to density per square meter we divided each measurement by the square area of the Ekman, which is 0.0225 m2. 
+
+    om$cpom[om$om == "cpom"] / 0.0225
+
+~~~~
+
+CPOM g/m2
+
+[1]  65.92889  86.33778 191.22222 142.26667
+
+~~~~
+
+Converting this to OM with the perc.OM calculated from the LOI
+
+    (om$cpom[om$om == "cpom"] / 0.0225) * om$prop.OM[om$om == "cpom"]
+
+~~~~
+  
+CPOM OM in g/m2
+
+[1]  57.26220  76.95451 163.01445 122.92015
+
+~~~~
+  
+This means that the sediments of the lake had between `57.26` and `163.01` g CPOM AFDM per square meter.
+
+### Comparison of the BOD Bottles to LPP
+
+Based on these calculations the BOD bottles contained at most `40%` of the CPOM AFDM of the actual lake.
+
+    22.66 / 57.26 # the max estimate of the CPOM in the bottles and the min estimate of CPOM in LPP.
+
+This is likely reasonable because some of the CPOM collected with the Ekman was buried in the sediment.  We do not have a good estimate of the vertical distribution of the CPOM in the lake but it seems reasonable to assume that by the summer less than half of it would remain on the surface.
+
