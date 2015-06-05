@@ -65,11 +65,20 @@ The BOD bottles were filled with 100 ml of slurry. This slurry has a mean water 
 
 to calculate the dry mass of the sediment, we calculate the mean dry mass of 10 ml of sediment (the amount of sediment added to the crucible) * 10
 
-    mean(om$sed[om$om == "sed"], na.rm = T) * 10
+    mean(om$sed[om$om == "sed"] * 10, na.rm = T)
 
 ~~~~
 
 [1] 25.3492 g
+
+~~~~
+
+    summary(om$sed[om$om == "sed"] * 10, na.rm = T)    
+
+~~~~
+  
+ Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  24.87   25.30   25.32   25.35   25.41   25.85 
 
 ~~~~
 
@@ -83,9 +92,30 @@ this agrees well with the estimation we get with the wet mass and the proportion
 
 ~~~~
 
+To calculate the bulk density of the sediments I divided the dry mass of the sediments by the volumen of the sample (10 ml).
+
+    summary(om$sed[om$om == "sed"] / 10)
+
+~~~~
+Dry Bulk Density in g/ml
+
+  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.2487  0.2530  0.2532  0.2535  0.2541  0.2585 
+
+~~~~
 To calculate the mass of the organic matter in the bottles we multiply the mass of sediment by the proportion of organic matter. Note I did this on each sample and then took the mean.
 
+The proportion of OM in the sediments ranged:
+  
+    summary(om$prop.OM[om$om == "sed"])
      
+~~~~
+  
+ Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.1269  0.1275  0.1286  0.1282  0.1288  0.1290 
+
+~~~~
+
     summary((om$sed[om$om == "sed"] * 10) * om$prop.OM[om$om == "sed"])
 
 ~~~~
