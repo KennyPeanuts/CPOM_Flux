@@ -48,9 +48,9 @@ Modified: 6 June 2014, KF
 
 * prop.OM = the proportion of OM in the CPOM
 
-* CPOM = the mass of CPOM per m^2 (there are 0.0225 m^2 in an ekman)
+* CPOM = the mass of CPOM per m^2 (there are 0.0225 m^2 in an ekman) (g/m2)
 
-* AFDM = the ash-free dry mass of the sample
+* AFDM = the ash-free dry mass of the sample (g/m2)
 
 ## R Code
 
@@ -75,4 +75,4 @@ Modified: 6 June 2014, KF
 
     cpom <- data.frame(rep, depth, cruc, cruc.mass, cruc.CPOM, cruc.ash, CPOM.ekman, ash, prop.OM, CPOM, AFDM)
 
-    write.table(cpom, "./data/LPP_CPOM_density_for_CPOM_Flux_Exp_29May2014.txt", row.names = F, quote = F, sep = "\t")
+    write.table(cpom, "./data/LPP_CPOM_density_for_CPOM_Flux_Exp_29May2014.csv", row.names = F, quote = F, sep = ",")

@@ -18,7 +18,7 @@ Description:
 
 Compilation of the organic matter data collected at the beginning of the CPOM Flux experiment.  Details on the collection and processing can be found in:
 
-* `LPP_CPOM_Flux_Setup_Part3_29May2014.md` for the "cpom" samples
+* `LPP_CPOM_Flux_Setup_Part3_29May2014.md` in the `analysis` folder and `LPP_CPOM_density_29May2014.md` in the `metadata` folder for the "cpom" samples
 
 * `Leaf_OM_Content_Flux_Experiment_30May2014.md` for the "leaf.disc" samples
 

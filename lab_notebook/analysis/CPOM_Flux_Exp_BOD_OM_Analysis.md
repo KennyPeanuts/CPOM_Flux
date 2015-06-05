@@ -6,6 +6,11 @@ Code created: 3 June 2015
 
 Modified: 
 
+* 4 June 2015 - KF - calculated the amount of OM in the BOD bottles
+
+* 5 June 2015 - KF - 
+
+
 ## Purpose
 
 This code complies and analyzes all of the data on the amount of organic matter in the BOD bottles in the CPOM Flux Experiment.
@@ -42,6 +47,10 @@ Calculate the prop water in the lake sediments
 
     write.table(om, "./data/CPOM_Flux_BOD_OM_initial.csv", quote = F, row.names = F, sep = ",")
 
+** Begin here for reanalysis **
+
+    om <- read.table("./data/CPOM_Flux_BOD_OM_initial.csv", header = T, sep = ",")
+    
 ## Determine the mass of organic matter in the BOD bottles
 
 The BOD bottles were filled with 100 ml of slurry. This slurry has a mean water content of
@@ -156,44 +165,39 @@ to
 
 ## Determine how the amount of OM in the bottles compares to the amount in the lake
 
-The surface area of the bottles is
+The surface area of the bottles is `0.00353 m2` based on the calculations in `CPOM_flux_BOD_OM_input_calc_6Jun2014.md` in the `analysis` folder
 
-BOD bottle radius = 3 cm
-
-    (pi * 3^2) / 10000 # using 10000 cm^2 per m^2
-
-~~~~
-
-[1] 0.002827433 m^2
-
-~~~~
 
 This means that there are
 
-     3.268 / 0.00282
+     3.268 / 0.00353 
 
 ~~~~
 
-[1] 1158.865 g/m2 organic matter in the bottles without CPOM
+[1] 925.779 g/m2 organic matter in the bottles without CPOM
 
 ~~~~
 
 and between
 
-     0.04 / 0.00282
+     0.04 / 0.00353 
 
 ~~~~
 
-[1] 14.1844 g of OM added in the CPOM treatments based on the min
+[1] 11.33144 g of OM added in the CPOM treatments based on the min
 
 ~~~~
 
-    0.08 / 0.00282
+    0.08 / 0.00353 
 
 ~~~~
 
-[1] 28.36879 g of OM added in the CPOM treatments based on the max
+22.66289 g of OM added in the CPOM treatments based on the max
 
 ~~~~
 
+## Calculation of the Density of CPOM OM in LPP
 
+The dry mass of the CPOM in the sediments from LPP are tha mass of the leaf litter collected by the Ekmans. 
+
+    summary
