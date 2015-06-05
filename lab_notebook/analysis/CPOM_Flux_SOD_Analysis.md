@@ -22,6 +22,14 @@ Flux calculations can be found in `CPOM_Flux_Exp_SOD_flux_calc.md` in the `analy
     # convert bod from `int` to `Factor`
     sod$bod <- as.factor(sod$bod)
 
+### Summary Statistics
+
+    summary(sod$SOD)
+
+~~~~
+in mmol O2 m2 d  
+
+
 ### Repeated Measures Analysis
 #### Notes on repeated measures
 
