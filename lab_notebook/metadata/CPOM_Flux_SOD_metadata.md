@@ -26,4 +26,34 @@ Modified:
 
 ## Variables
 
-* 
+* date = the date that the bottle was sealed and the change in oxygen was measured
+
+* CPOM = the variable that identifies whether the bottle contained ("yes") or did not contain ("no") leaf discs.
+
+* bod = the identifying number of the BOD bottle
+
+* nutrient = the variable that identifies whether the bottle had DIN and DIP added ("yes") or was unamended lake water ("no").
+
+* temp = the temperature of the lab during the incubation (dC)
+
+* dDO = the change in oxygen concentration of the overlying water during the incubation (mmol O2)
+
+* DOpre = the DO concentration of the overlying water at the beginning of the incubation (mmol / L) 
+
+* DOpost = the DO concentration of the overlying water at the end of the incubation (mmol / L)
+
+* DO.T0 = the DO concentration of the overlying water after the replacement water was added (mmol /L). This is the DO concentration that began the next open bottle incubation period (i.e., between day 0 and day 2).
+
+* incubation.h = the number of hours that the bottle was sealed to measure the change in DO (h).
+
+* SOD = the flux of oxygen in the bottle (umol O2 / m2 / h). Note a positive flux indicates a loss of oxygen.
+
+* tot.OM = the total organic matter mass in the sediments of the bottle (g)
+
+* leaf.OM = the mass of organic matter in the leaf discs added to the CPOM = "yes" bottles (g).
+
+* sed.OM = the mass of the organic matter in the sediments without CPOM in the BOD bottles (g).
+
+* days.elap = the number of days that elapsed between sealing the bottles to measure change in DO (d).
+
+* sod.OM = the flux of oxygen in the bottle normalized to the organic matter content of the bottle (umol O2 / g OM / h)
