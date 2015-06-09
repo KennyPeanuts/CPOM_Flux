@@ -8,6 +8,7 @@
 * Modified 31 March 2015 - KF - corrected SOD units to per h instead of per d
 * Modified 7 May 2015 - KF - changed model designation of the repeated measures analysis
 * Modified 8 May 2015 - KF - alterd the repeated measures analysis
+* Modified 9 June 2015 - KF - reran all analyses based on the updated calculations of SOD with the more comprehensive bottle OM data.
 
 ## Purpose
 
@@ -23,13 +24,67 @@ Flux calculations can be found in `CPOM_Flux_Exp_SOD_flux_calc.md` in the `analy
     sod$bod <- as.factor(sod$bod)
 
 ### Summary Statistics
+#### Areal Flux
 
     summary(sod$SOD)
 
 ~~~~
-in mmol O2 m2 d  
+in mmol O2 / m2 / d  
 
+Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
+ 0.3567  0.7525  0.9226  1.0200  1.2210  2.0980       1 
 
+~~~~
+
+    stem(sod$SOD)
+
+~~~~
+in mmol O2 / m2 / d
+
+The decimal point is 1 digit(s) to the left of the |
+
+   2 | 67
+   4 | 224478
+   6 | 144678899555569
+   8 | 01122256677900112244889
+  10 | 012455594899
+  12 | 0401
+  14 | 01134015
+  16 | 139289
+  18 | 99
+  20 | 0
+
+~~~~
+
+#### OM Normalized Flux
+
+    summary(sod$sod.OM)
+
+~~~~
+in mmol O2 / g OM / d
+
+ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
+  7.335  15.400  18.970  20.800  25.000  42.540       1 
+
+~~~~
+  
+    stem(sod$sod.OM)
+
+~~~~
+in mmol O2 / g OM / d
+
+The decimal point is 1 digit(s) to the right of the |
+
+  0 | 789
+  1 | 11122233344444
+  1 | 55555666777777888899999999
+  2 | 0000111122234444
+  2 | 66789999
+  3 | 011334
+  3 | 56689
+  4 | 3
+
+~~~~
 ### Repeated Measures Analysis
 #### Notes on repeated measures
 
@@ -40,36 +95,33 @@ I initially approached the problem using `aov`. I used [http://ww2.coastal.edu/k
 
 ~~~~
 
-> summary(CPOM.aov)
-
-Error: as.factor(bod)
+Error: bod
                         Df Sum Sq Mean Sq F value   Pr(>F)    
-CPOM                     1 1047.1  1047.1  28.446 0.000473 ***
-nutrient                 1  218.0   218.0   5.924 0.037744 *  
-days.elap                1   70.7    70.7   1.921 0.199096    
-CPOM:nutrient            1    0.8     0.8   0.022 0.885383    
-CPOM:days.elap           1   20.9    20.9   0.569 0.469941    
-CPOM:nutrient:days.elap  1    0.0     0.0   0.001 0.982485    
-Residuals                9  331.3    36.8                     
+CPOM                     1 1088.2  1088.2  29.627 0.000409 ***
+nutrient                 1  217.4   217.4   5.919 0.037807 *  
+days.elap                1   70.9    70.9   1.929 0.198251    
+CPOM:nutrient            1    0.9     0.9   0.024 0.880784    
+CPOM:days.elap           1   21.1    21.1   0.575 0.467600    
+CPOM:nutrient:days.elap  1    0.0     0.0   0.001 0.978908    
+Residuals                9  330.6    36.7                     
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Error: as.factor(bod):days.elap
+Error: bod:days.elap
                         Df Sum Sq Mean Sq F value Pr(>F)
-CPOM                     1   5.32    5.32   0.245  0.632
-days.elap                1  63.48   63.48   2.920  0.118
-CPOM:nutrient            1  35.33   35.33   1.625  0.231
-CPOM:days.elap           1  13.79   13.79   0.634  0.444
-nutrient:days.elap       1   1.20    1.20   0.055  0.819
-CPOM:nutrient:days.elap  1   3.21    3.21   0.148  0.709
-Residuals               10 217.41   21.74               
+CPOM                     1   3.83    3.83   0.177  0.683
+days.elap                1  64.09   64.09   2.966  0.116
+CPOM:nutrient            1  34.54   34.54   1.599  0.235
+CPOM:days.elap           1  14.15   14.15   0.655  0.437
+nutrient:days.elap       1   1.22    1.22   0.056  0.817
+CPOM:nutrient:days.elap  1   3.18    3.18   0.147  0.709
+Residuals               10 216.05   21.60               
 
 Error: Within
               Df Sum Sq Mean Sq F value Pr(>F)
-CPOM           1    8.9    8.92   0.146  0.704
-CPOM:nutrient  1    0.0    0.01   0.000  0.989
-Residuals     45 2747.2   61.05       
-
+CPOM           1   10.9   10.85   0.178  0.675
+CPOM:nutrient  1    0.0    0.02   0.000  0.987
+Residuals     45 2749.2   61.09  
 
 ~~~~
   
@@ -102,21 +154,22 @@ The `lmerTest` package contains the `lmer` function and does calculate the type 
 Linear mixed model fit by REML ['merModLmerTest']
 Formula: sod.OM ~ 1 + days.elap * CPOM * nutrient + (1 + days.elap | bod)
    Data: sod
-REML criterion at convergence: 521.6457
+REML criterion at convergence: 521.6211
 Random effects:
  Groups   Name        Std.Dev.  Corr
  bod      (Intercept) 0.000e+00     
-          days.elap   6.218e-11  NaN
- Residual             7.177e+00     
+          days.elap   7.921e-08  NaN
+ Residual             7.176e+00     
 Number of obs: 79, groups:  bod, 16
 Fixed Effects:
-                  (Intercept)                      days.elap                        CPOMyes  
-                     15.85898                        0.02169                        8.28783  
-                  nutrientyes              days.elap:CPOMyes          days.elap:nutrientyes  
-                      3.22111                       -0.24410                        0.03422  
+                  (Intercept)                      days.elap  
+                     15.76774                        0.02156  
+                      CPOMyes                    nutrientyes  
+                      8.45375                        3.20258  
+            days.elap:CPOMyes          days.elap:nutrientyes  
+                     -0.24466                        0.03402  
           CPOMyes:nutrientyes  days.elap:CPOMyes:nutrientyes  
-                      0.86146                       -0.13663  
-> 
+                      0.89261                       -0.13675  
   
 ~~~~
   
@@ -130,14 +183,13 @@ The significance is shown with
 Analysis of Variance Table of type III  with  Satterthwaite 
 approximation for degrees of freedom
                         Sum Sq Mean Sq NumDF DenDF F.value    Pr(>F)    
-days.elap                66.09   66.09     1    71  1.2831 0.2611341    
-CPOM                    651.66  651.66     1    71 12.6507 0.0006734 ***
-nutrient                114.33  114.33     1    71  2.2195 0.1407093    
-days.elap:CPOM          116.99  116.99     1    71  2.2712 0.1362374    
-days.elap:nutrient        1.39    1.39     1    71  0.0271 0.8698197    
-CPOM:nutrient             1.59    1.59     1    71  0.0309 0.8610156    
-days.elap:CPOM:nutrient   5.59    5.59     1    71  0.1086 0.7427249    
----
+days.elap                66.70   66.70     1    71  1.2953 0.2589060    
+CPOM                    679.07  679.07     1    71 13.1875 0.0005285 ***
+nutrient                114.14  114.14     1    71  2.2166 0.1409578    
+days.elap:CPOM          117.46  117.46     1    71  2.2810 0.1354032    
+days.elap:nutrient        1.41    1.41     1    71  0.0275 0.8688258    
+CPOM:nutrient             1.71    1.71     1    71  0.0332 0.8560192    
+days.elap:CPOM:nutrient   5.60    5.60     1    71  0.1088 0.7424643    
 
 ~~~~
   

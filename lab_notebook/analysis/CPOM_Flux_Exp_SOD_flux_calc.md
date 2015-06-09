@@ -6,7 +6,7 @@ Code created: Summer 2014
 
 Modified:
 
-* 9 June 2015 - KF - changed the values in `CPOM_flux_bottleOM_initial.csv` to match the latest values calculated in `CPOM_Flux_Exp_BOD_OM_Analysis.md`
+* 9 June 2015 - KF - changed the values in `CPOM_flux_bottleOM_initial.csv` to match the latest values calculated in `CPOM_Flux_Exp_BOD_OM_Analysis.md`. Also removed all of the analysis that is not redundant with `CPOM_Flux_SOD_Analysis`.
 
 ## Purpose
 
