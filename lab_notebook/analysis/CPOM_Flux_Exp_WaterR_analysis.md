@@ -38,7 +38,7 @@ the elapsed days were calculated in `CPOM_Flux_Exp_SOD_flux_calc.md` so I used t
 
 ### Summary Statistics
 
-Summary of the water oxygen flux for all the samples 
+Summary of the water oxygen flux (mmol O2 / L / h) for all the samples 
 
      summary(wR.tot$waterR)
 
@@ -66,7 +66,7 @@ The decimal point is 3 digit(s) to the left of the |
 
 ~~~~
 
-Summary Statistics for water R (mmol O2/L/h) by days elapsed in the CPOM treatment
+Summary Statistics for water R (umol O2/L/h) by days elapsed in the CPOM treatment
   
     tapply(wR.tot$waterR[wR.tot$CPOM == "yes"]*1000, wR.tot$days.elap[wR.tot$CPOM == "yes"], summary)
 
@@ -94,7 +94,7 @@ $`21`
 
 ~~~~
   
-Summary Statistics for water R (mmol O2/L/h) in the NO CPOM treatment
+Summary Statistics for water R (umol O2/L/h) in the NO CPOM treatment
 
     tapply(wR.tot$waterR[wR.tot$CPOM == "no"]*1000, wR.tot$days.elap[wR.tot$CPOM == "no"], summary)
 
