@@ -4,7 +4,11 @@
 
 Code created: 25 June 2015 - KF
 
-Modified: 3 June 2015 - KF - added calculated water R from 2 Jul 2014 run 
+Modified:
+
+* 3 June 2015 - KF - added calculated water R from 2 Jul 2014 run
+
+* 11 June 2015 - KF - added code for display of figures
 
 ## Purpose
 
@@ -32,9 +36,13 @@ the elapsed days were calculated in `CPOM_Flux_Exp_SOD_flux_calc.md` so I used t
     wR.tot <- data.frame(wR.tot, date, days.elap)
 
 ### Create data file with these final modifications
-** Use these data for all re-analyses**
   
     write.table(wR.tot, "./data/CPOM_Flux_waterR.csv", quote = F, row.names = F, sep = ",")
+
+** Use these data for all re-analyses**
+
+    wR.tot <- read.table("./data/CPOM_Flux_waterR.csv", header = T, sep = ",")
+
 
 ### Summary Statistics
 
@@ -127,12 +135,24 @@ $`21`
 
 Plot of the water R by CPOM
 
-     plot(waterR*1000 ~ days.elap, data = wR.tot, subset = CPOM == "yes", ylim = c(-5, 5), pch = 16)
+     par(las = 1)
+     plot(waterR*1000 ~ days.elap, data = wR.tot, subset = CPOM == "yes", ylim = c(-5, 5), pch = 16, ylab = expression(paste("Oxygen Flux (", mu, "mol L"^{-1}, " h"^{-1}, ") " )), xlab = "Days of Incubation")
      points(waterR*1000 ~ days.elap, data = wR.tot, subset = CPOM == "no")
      abline(h = 0)
+     legend(10, 4, c("Leaf Litter Added", "No Leaf Litter Added"), pch = c(16, 1))
+     dev.copy(jpeg, "./output/plots/waterR_by_CPOM.jpg")
+     dev.off()
 
+![water R by CPOM on each day of incubation](../output/plots/waterR_by_CPOM.jpg)
+     
 Plot of the water R by nutrient
 
-     plot(waterR*1000 ~ days.elap, data = wR.tot, subset = nutrient == "yes", ylim = c(-5, 5), pch = 16)
+     par(las = 1)
+     plot(waterR*1000 ~ days.elap, data = wR.tot, subset = nutrient == "yes", ylim = c(-5, 5), pch = 16, ylab = expression(paste("Oxygen Flux (", mu, "mol L"^{-1}, " h"^{-1}, ") " )), xlab = "Days of Incubation")
      points(waterR*1000 ~ days.elap, data = wR.tot, subset = nutrient == "no")
      abline(h = 0)
+     legend(10, 4, c("Nutrients Added", "No Nutrients Added"), pch = c(16, 1))
+     dev.copy(jpeg, "./output/plots/waterR_by_NUT.jpg")
+     dev.off()
+
+![water R by Nutrients on each day of incubation](../output/plots/waterR_by_NUT.jpg)
