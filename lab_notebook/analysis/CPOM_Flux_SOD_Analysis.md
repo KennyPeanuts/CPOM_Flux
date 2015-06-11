@@ -29,7 +29,8 @@ Flux calculations can be found in `CPOM_Flux_Exp_SOD_flux_calc.md` in the `analy
     summary(sod$SOD)
 
 ~~~~
-in mmol O2 / m2 / d  
+
+in mmol O2 / m2 / h  
 
 Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
  0.3567  0.7525  0.9226  1.0200  1.2210  2.0980       1 
@@ -39,7 +40,7 @@ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs
     stem(sod$SOD)
 
 ~~~~
-in mmol O2 / m2 / d
+in mmol O2 / m2 / h
 
 The decimal point is 1 digit(s) to the left of the |
 
@@ -61,7 +62,7 @@ The decimal point is 1 digit(s) to the left of the |
     summary(sod$sod.OM)
 
 ~~~~
-in mmol O2 / g OM / d
+in mmol O2 / g OM / h
 
  Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
   7.335  15.400  18.970  20.800  25.000  42.540       1 
@@ -71,7 +72,7 @@ in mmol O2 / g OM / d
     stem(sod$sod.OM)
 
 ~~~~
-in mmol O2 / g OM / d
+in mmol O2 / g OM / h
 
 The decimal point is 1 digit(s) to the right of the |
 
