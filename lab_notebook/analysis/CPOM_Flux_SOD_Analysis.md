@@ -62,7 +62,7 @@ The decimal point is 1 digit(s) to the left of the |
     summary(sod$sod.OM)
 
 ~~~~
-in mmol O2 / g OM / h
+in umol O2 / g OM / h
 
  Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
   7.335  15.400  18.970  20.800  25.000  42.540       1 
@@ -72,7 +72,7 @@ in mmol O2 / g OM / h
     stem(sod$sod.OM)
 
 ~~~~
-in mmol O2 / g OM / h
+in umol O2 / g OM / h
 
 The decimal point is 1 digit(s) to the right of the |
 

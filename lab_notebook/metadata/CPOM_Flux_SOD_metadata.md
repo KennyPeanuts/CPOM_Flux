@@ -46,7 +46,7 @@ Modified:
 
 * incubation.h = the number of hours that the bottle was sealed to measure the change in DO (h).
 
-* SOD = the flux of oxygen in the bottle (umol O2 / m2 / h). Note a positive flux indicates a loss of oxygen.
+* SOD = the flux of oxygen in the bottle (mmol O2 / m2 / h). Note a positive flux indicates a loss of oxygen.
 
 * tot.OM = the total organic matter mass in the sediments of the bottle (g)
 
