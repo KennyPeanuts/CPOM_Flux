@@ -9,6 +9,7 @@
 * Modified 7 May 2015 - KF - changed model designation of the repeated measures analysis
 * Modified 8 May 2015 - KF - alterd the repeated measures analysis
 * Modified 9 June 2015 - KF - reran all analyses based on the updated calculations of SOD with the more comprehensive bottle OM data.
+* Modified 12 June 2015 - KF - added analysis of the DO concentration in the bottles.
 
 ## Purpose
 
@@ -130,7 +131,7 @@ The subset of low DO values all come from the T-0 incubation day
     dev.copy(jpeg, "./output/plots/DO_by_day.jpg")
     dev.off()
 
-![DO concentration in the bottles by incubation day](../../output/plots/DO_by_day.jpg)
+![DO concentration in the bottles by incubation day](../output/plots/DO_by_day.jpg)
 
 ### SOD Repeated Measures Analysis
 #### Notes on repeated measures
@@ -190,9 +191,9 @@ Using the `lmer` function from the `lme4` package does not allow for the calcula
 
 The `lmerTest` package contains the `lmer` function and does calculate the type III p-values using Satterwaite approximation for the df ([http://cran.r-project.org/web/packages/lmerTest//lmerTest.pdf](http://cran.r-project.org/web/packages/lmerTest//lmerTest.pdf).
 
-Load `lem4` package
+Load `lmeTest` package
 
-    require(lme4) # this isn't working yet
+    library("lmerTest", lib.loc="~/Library/R/3.1/library")
 
 Using this package, I specify the model where the `bod` is the random subject variable.
                                                                                                                                          
@@ -303,3 +304,49 @@ in umol / (g OM) / h
 
 ### DO Repeated measures
 
+The `lmerTest` package needs to be loaded from above.
+
+Specify the model for the DO
+
+    (do.mod <- lmer(DO.T0 ~ 1 + days.elap * CPOM * nutrient + (1 + days.elap|bod), sod)) # wrapping in () gives ouput
+
+~~~~
+
+Linear mixed model fit by REML ['lmerMod']
+Formula: DO.T0 ~ 1 + days.elap * CPOM * nutrient + (1 + days.elap | bod)
+   Data: sod
+REML criterion at convergence: -222.9481
+Random effects:
+ Groups   Name        Std.Dev.  Corr
+ bod      (Intercept) 0.000e+00     
+          days.elap   5.596e-11  NaN
+ Residual             3.790e-02     
+Number of obs: 79, groups:  bod, 16
+Fixed Effects:
+                  (Intercept)                      days.elap  
+                    0.1937176                      0.0025266  
+                      CPOMyes                    nutrientyes  
+                   -0.0424608                      0.0001275  
+            days.elap:CPOMyes          days.elap:nutrientyes  
+                    0.0023214                      0.0003024  
+          CPOMyes:nutrientyes  days.elap:CPOMyes:nutrientyes  
+                    0.0020678                     -0.0003849  
+                    
+~~~~
+
+    anova(do.mod)
+
+~~~~
+
+Analysis of Variance Table of type III  with  Satterthwaite 
+approximation for degrees of freedom
+                          Sum Sq  Mean Sq NumDF  DenDF F.value    Pr(>F)    
+days.elap               0.067146 0.067146     1 71.001  46.737 2.339e-09 ***
+CPOM                    0.014713 0.014713     1 71.001  10.241  0.002055 ** 
+nutrient                0.000012 0.000012     1 71.001   0.008  0.928763    
+days.elap:CPOM          0.005433 0.005433     1 71.001   3.782  0.055781 .  
+days.elap:nutrient      0.000014 0.000014     1 71.001   0.010  0.920313    
+CPOM:nutrient           0.000009 0.000009     1 71.001   0.006  0.936568    
+days.elap:CPOM:nutrient 0.000044 0.000044     1 71.001   0.031  0.860959  
+
+~~~~
