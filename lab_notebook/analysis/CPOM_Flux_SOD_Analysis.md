@@ -86,7 +86,53 @@ The decimal point is 1 digit(s) to the right of the |
   4 | 3
 
 ~~~~
-### Repeated Measures Analysis
+
+#### Oxygen Concentration
+
+     summary(sod$DO.T0 * 1000)
+
+~~~~
+
+in umol / L
+
+ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
+  80.09  202.10  224.80  206.10  235.70  275.80    1.00
+
+~~~~
+
+    stem(sod$DO.T0 * 1000)
+
+~~~~
+
+in umol / L
+
+The decimal point is 1 digit(s) to the right of the |
+
+   8 | 029115
+  10 | 00
+  12 | 45
+  14 | 013456
+  16 | 
+  18 | 99
+  20 | 023777903446899
+  22 | 0234445778999911234444455666667799
+  24 | 122355779
+  26 | 026
+
+~~~~
+
+The subset of low DO values all come from the T-0 incubation day
+
+    par(las = 1, cex = 1.5)
+    plot(DO.T0 * 1000 ~ days.elap, data = sod, subset = CPOM == "yes", pch = 1, ylim = c(0, 300), ylab = expression(paste("Oxygen Concentration (", mu, "mol L"^{-1}, ") ")), xlab = "Days of Incubation")
+    points(DO.T0 * 1000 ~ days.elap, data = sod, subset = CPOM == "no", pch = 2)
+    legend(10, 100, c("Leaf Litter", "No Leaf Litter"), pch = c(1, 2))
+    dev.copy(jpeg, "./output/plots/DO_by_day.jpg")
+    dev.off()
+
+![DO concentration in the bottles by incubation day](../../output/plots/DO_by_day.jpg)
+
+### SOD Repeated Measures Analysis
 #### Notes on repeated measures
 
 I initially approached the problem using `aov`. I used [http://ww2.coastal.edu/kingw/statistics/R-tutorials/repeated.html](http://ww2.coastal.edu/kingw/statistics/R-tutorials/repeated.html) to evaluate the models. The is resulted in the following code and output:
@@ -134,7 +180,7 @@ As a result I am investigating the use of linear mixed models for the analysis. 
 
 ##### Linear Mixed models.
 
-All of the notes below come draft chapters of from Douglas Bates book on the `lme4` package:
+All of the notes below come draft chapters of from Douglas Bates book on the `lme4` package
 
 Chapter 1 - Introduction [http://lme4.r-forge.r-project.org/book/Ch1.pdf](http://lme4.r-forge.r-project.org/book/Ch1.pdf)
 
@@ -144,7 +190,11 @@ Using the `lmer` function from the `lme4` package does not allow for the calcula
 
 The `lmerTest` package contains the `lmer` function and does calculate the type III p-values using Satterwaite approximation for the df ([http://cran.r-project.org/web/packages/lmerTest//lmerTest.pdf](http://cran.r-project.org/web/packages/lmerTest//lmerTest.pdf).
 
-                                                                                                                                         Using this package, I specify the model where the `bod` is the random subject variable.
+Load `lem4` package
+
+    require(lme4) # this isn't working yet
+
+Using this package, I specify the model where the `bod` is the random subject variable.
                                                                                                                                          
     (fm <- lmer(sod.OM ~ 1 + days.elap * CPOM * nutrient + (1 + days.elap|bod), sod))
 
@@ -196,6 +246,36 @@ days.elap:CPOM:nutrient   5.60    5.60     1    71  0.1088 0.7424643
   
 These results show that the only effect comes from CPOM.
 
+
+#### Comparison Summary Statistics
+
+Summary of the to oxygen flux in the bottles with leaf litter.
+                                                                                                                                         
+    summary(sod$sod.OM[sod$CPOM == "yes"])
+
+~~~~
+                                                                                                                                         
+in umol / (g OM) / h
+                                                                                                                                         
+  Min. 1st Qu.  Median    Mean    3rd Qu. Max. 
+  12.33   17.28   21.14   23.85   30.50   42.54
+
+~~~~                                                                                                                                         
+
+
+Summary of the to oxygen flux in the bottles without leaf litter.
+                                                                                                                                         
+    summary(sod$sod.OM[sod$CPOM == "no"])
+
+~~~~
+                                                                                                                                         
+in umol / (g OM) / h
+                                                                                                                                         
+  Min. 1st Qu.  Median    Mean   3rd Qu.  Max.    NAs 
+  7.335  13.980  17.460  17.670  20.380  38.860   1.000
+                                                                                                                                         
+~~~~                                                                                                                                         
+                                                                                                                                         
 ### Plots
 
     # Plot that shows the CPOM and Nut treatment effects 
@@ -219,3 +299,7 @@ These results show that the only effect comes from CPOM.
     dev.off()
 
 ![Area normalized SOD by days elapsed](../output/plots/SOD_OM_by_days.jpeg)
+
+
+### DO Repeated measures
+
