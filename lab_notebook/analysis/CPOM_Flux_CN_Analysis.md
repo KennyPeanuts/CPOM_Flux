@@ -55,6 +55,59 @@ To calculate the C:N I divided the C.mass by the N.mass
   
     cn <- read.table("./data/CPOM_Flux_CN.csv", header = T, sep = ",")
 
+### Summary Statistics
+
+#### %C content of the surface sediments
+
+    tapply(cn$percC[cn$Source == "surf"], cn$CPOM[cn$Source == "surf"], summary) 
+
+~~~~
+
+$N ** NO CPOM **
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  3.050   3.088   3.205   3.198   3.288   3.360 
+
+$Y ** CPOM **
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  3.050   3.135   3.180   3.215   3.325   3.410 
+
+~~~~
+
+    tapply(cn$percC[cn$Source == "surf"], cn$NUT[cn$Source == "surf"], summary)
+    
+~~~~
+
+$N ** NO CPOM **
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  3.090   3.148   3.225   3.236   3.318   3.410 
+
+$Y ** CPOM **
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  3.050   3.072   3.135   3.176   3.290   3.360 
+  
+~~~~
+
+    plot(surf ~ bulk, ylim = c(2.5, 4.5), xlim = c(2.5, 4.5), subset = cn$CPOM[cn$Source == "bulk"] == "Y")
+    points(surf ~ bulk, ylim = c(2.5, 4.5), xlim = c(2.5, 4.5), subset = cn$CPOM[cn$Source == "bulk"] == "N", pch = 2)
+    abline(0, 1)
+    
+#### % C in the Bulk sediment
+
+    tapply(cn$percC[cn$Source == "bulk"], cn$CPOM[cn$Source == "bulk"], summary) 
+
+~~~~
+
+$N ** NO CPOM **
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  3.120   3.230   3.275   3.375   3.300   4.270 
+
+$Y  ** CPOM **
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  3.200   3.242   3.320   3.373   3.427   3.720       1 
+
+~~~~
+
+
 ### Compare the CN by treatments
 
     tapply(cn$CN[cn$Source == "surf"], cn$CPOM[cn$Source == "surf"], summary) 
