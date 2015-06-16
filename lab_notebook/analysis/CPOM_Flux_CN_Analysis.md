@@ -77,11 +77,11 @@ $Y ** CPOM **
     
 ~~~~
 
-$N ** NO CPOM **
+$N ** NO Added DIP and DIN **
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   3.090   3.148   3.225   3.236   3.318   3.410 
 
-$Y ** CPOM **
+$Y ** Added DIP and DIN **
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   3.050   3.072   3.135   3.176   3.290   3.360 
   
@@ -132,7 +132,7 @@ Due to the fact that the Bulk samples were missing data from BOD bottle 1, I cre
     abline(0, 1) # 1:1 line for comparison of the variables
     legend(2.5, 4.5, c("Leaf Litter Added", "No Leaf Litter"), pch = c(1, 2))
     dev.copy(jpeg, "./output/plots/percC_bulk_surf_comp.jpg")
-    dev.off
+    dev.off()
 
 ![Comparison of the perc C in the Bulk and Surface Sediment](../output/plots/percC_bulk_surf_comp.jpg)
   
@@ -141,12 +141,102 @@ Correlation of the samples shows that there is limited correlation between the b
     cor(bulk, surf, use = "pairwise.complete.obs")
 
 ~~~~
-Correlation between the surface and bulk sediments
+Correlation between the surface and bulk sediment percent C
 
 [1] -0.1168136
 
 ~~~~
 
+#### Percent N content of the surface sediments
+
+    tapply(cn$percN[cn$Source == "surf"], cn$CPOM[cn$Source == "surf"], summary) 
+
+~~~~
+
+$N ** NO CPOM **
+  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.2800  0.2800  0.2950  0.2950  0.3025  0.3200 
+
+$Y ** CPOM **
+  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.2800  0.2900  0.2900  0.2975  0.3100  0.3200 
+
+~~~~
+
+    tapply(cn$percN[cn$Source == "surf"], cn$NUT[cn$Source == "surf"], summary)
+    
+~~~~
+
+$N ** No Added DIP and DIN **
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.2800  0.2900  0.2950  0.2975  0.3025  0.3200  
+
+$Y ** Added DIP and DIN **
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  0.280   0.280   0.290   0.295   0.310   0.320 
+  
+~~~~
+
+  
+#### Percent N in the Bulk sediment
+
+    tapply(cn$percN[cn$Source == "bulk"], cn$CPOM[cn$Source == "bulk"], summary) 
+
+~~~~
+
+$N ** NO CPOM **
+  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.2900  0.3075  0.3100  0.3175  0.3100  0.4000 
+
+$Y  ** CPOM **
+  Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
+ 0.3000  0.3000  0.3050  0.3117  0.3250  0.3300       1 
+
+~~~~
+
+    tapply(cn$percN[cn$Source == "bulk"], cn$NUT[cn$Source == "bulk"], summary)
+
+~~~~
+  
+$N ** NO Added DIP and DIN **
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
+ 0.3000  0.3025  0.3100  0.3250  0.3250  0.4000       1 
+
+
+$Y ** Added DIP and DIN **
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.2900  0.3000  0.3100  0.3075  0.3100  0.3300 
+
+~~~~
+
+### Comparison of Bulk and Surface Sediment Percent N
+Due to the fact that the Bulk samples were missing data from BOD bottle 1, I created a new set of objects `bulk` and `surf` where I remove the BOD 1 observation from the surface observations to align the surface and bulk observations so that they could be compared pairwise.
+
+    surfN <- cn$percN[cn$Source == "surf"]
+    surfN <- surfN[-1]
+
+    bulkN <- cn$percN[cn$Source == "bulk"]
+
+    par(las = 1)
+    plot(surfN ~ bulkN, ylim = c(.25, .45), xlim = c(.25, .45), subset = cn$CPOM[cn$Source == "bulk"] == "Y", ylab = "Percent N of the Surface Sediment", xlab = "Percent N of the Bulk Sediment")
+    points(surfN ~ bulkN, subset = cn$CPOM[cn$Source == "bulk"] == "N", pch = 2)
+    abline(0, 1) # 1:1 line for comparison of the variables
+    legend(.25, .45, c("Leaf Litter Added", "No Leaf Litter"), pch = c(1, 2))
+    dev.copy(jpeg, "./output/plots/percN_bulk_surf_comp.jpg")
+    dev.off()
+
+![Comparison of the perc N in the Bulk and Surface Sediment](../output/plots/percN_bulk_surf_comp.jpg)
+  
+Correlation of the samples shows that there is limited correlation between the bulk and surface sediments.
+
+    cor(bulkN, surfN, use = "pairwise.complete.obs")
+
+~~~~
+Correlation between the surface and bulk sediment percent N
+
+[1] -0.07858652
+
+~~~~
 
 
 ### Compare the CN by treatments
@@ -155,11 +245,11 @@ Correlation between the surface and bulk sediments
 
 ~~~~
   
-$N **NO CPOM**
+$N ** NO CPOM **
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   10.50   10.77   10.90   10.85   11.01   11.04 
 
-$Y **CPOM**
+$Y ** CPOM **
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   10.66   10.70   10.82   10.81   10.91   10.97 
 
