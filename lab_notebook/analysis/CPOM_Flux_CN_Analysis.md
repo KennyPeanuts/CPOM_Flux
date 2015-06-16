@@ -87,10 +87,7 @@ $Y ** CPOM **
   
 ~~~~
 
-    plot(surf ~ bulk, ylim = c(2.5, 4.5), xlim = c(2.5, 4.5), subset = cn$CPOM[cn$Source == "bulk"] == "Y")
-    points(surf ~ bulk, ylim = c(2.5, 4.5), xlim = c(2.5, 4.5), subset = cn$CPOM[cn$Source == "bulk"] == "N", pch = 2)
-    abline(0, 1)
-    
+  
 #### % C in the Bulk sediment
 
     tapply(cn$percC[cn$Source == "bulk"], cn$CPOM[cn$Source == "bulk"], summary) 
@@ -102,10 +99,54 @@ $N ** NO CPOM **
   3.120   3.230   3.275   3.375   3.300   4.270 
 
 $Y  ** CPOM **
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
   3.200   3.242   3.320   3.373   3.427   3.720       1 
 
 ~~~~
+
+    tapply(cn$percC[cn$Source == "bulk"], cn$NUT[cn$Source == "bulk"], summary)
+
+~~~~
+  
+$N ** NO Added DIP and DIN **
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
+  3.220   3.247   3.300   3.507   3.615   4.270       1 
+
+$Y ** Added DIP and DIN **
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  3.120   3.222   3.275   3.275   3.315   3.460
+
+~~~~
+
+### Comparison of Bulk and Surface Sediment % C
+Due to the fact that the Bulk samples were missing data from BOD bottle 1, I created a new set of objects `bulk` and `surf` where I remove the BOD 1 observation from the surface observations to align the surface and bulk observations so that they could be compared pairwise.
+
+    surf <- cn$percC[cn$Source == "surf"]
+    surf <- surf[-1]
+
+    bulk <- cn$percC[cn$Source == "bulk"]
+
+    par(las = 1)
+    plot(surf ~ bulk, ylim = c(2.5, 4.5), xlim = c(2.5, 4.5), subset = cn$CPOM[cn$Source == "bulk"] == "Y", ylab = "Percent C of the Surface Sediment", xlab = "Percent C of the Bulk Sediment")
+    points(surf ~ bulk, ylim = c(2.5, 4.5), xlim = c(2.5, 4.5), subset = cn$CPOM[cn$Source == "bulk"] == "N", pch = 2)
+    abline(0, 1) # 1:1 line for comparison of the variables
+    legend(2.5, 4.5, c("Leaf Litter Added", "No Leaf Litter"), pch = c(1, 2))
+    dev.copy(jpeg, "./output/plots/percC_bulk_surf_comp.jpg")
+    dev.off
+
+![Comparison of the perc C in the Bulk and Surface Sediment](../output/plots/percC_bulk_surf_comp.jpg)
+  
+Correlation of the samples shows that there is limited correlation between the bulk and surface sediments.
+
+    cor(bulk, surf, use = "pairwise.complete.obs")
+
+~~~~
+Correlation between the surface and bulk sediments
+
+[1] -0.1168136
+
+~~~~
+
 
 
 ### Compare the CN by treatments
