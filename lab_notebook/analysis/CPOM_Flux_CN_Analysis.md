@@ -59,6 +59,17 @@ To calculate the C:N I divided the C.mass by the N.mass
 
 #### %C content of the surface sediments
 
+    summary(cn$percC[cn$Source == "surf"])
+
+~~~~
+  
+Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  3.050   3.090   3.180   3.206   3.312   3.410 
+
+~~~~
+  
+##### Effect of CPOM and Nutrients
+
     tapply(cn$percC[cn$Source == "surf"], cn$CPOM[cn$Source == "surf"], summary) 
 
 ~~~~
@@ -90,6 +101,18 @@ $Y ** Added DIP and DIN **
   
 #### % C in the Bulk sediment
 
+    summary(cn$percC[cn$Source == "bulk"])
+
+~~~~
+Percent C in the bulk Sediment 
+
+Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
+  3.120   3.230   3.290   3.374   3.325   4.270       1
+
+~~~~
+
+##### Effect of CPOM and Nutrients
+  
     tapply(cn$percC[cn$Source == "bulk"], cn$CPOM[cn$Source == "bulk"], summary) 
 
 ~~~~
@@ -121,14 +144,14 @@ $Y ** Added DIP and DIN **
 ### Comparison of Bulk and Surface Sediment % C
 Due to the fact that the Bulk samples were missing data from BOD bottle 1, I created a new set of objects `bulk` and `surf` where I remove the BOD 1 observation from the surface observations to align the surface and bulk observations so that they could be compared pairwise.
 
-    surf <- cn$percC[cn$Source == "surf"]
-    surf <- surf[-1]
+    surfC <- cn$percC[cn$Source == "surf"]
+    surfC <- surfC[-1]
 
-    bulk <- cn$percC[cn$Source == "bulk"]
+    bulkC <- cn$percC[cn$Source == "bulk"]
 
     par(las = 1)
-    plot(surf ~ bulk, ylim = c(2.5, 4.5), xlim = c(2.5, 4.5), subset = cn$CPOM[cn$Source == "bulk"] == "Y", ylab = "Percent C of the Surface Sediment", xlab = "Percent C of the Bulk Sediment")
-    points(surf ~ bulk, ylim = c(2.5, 4.5), xlim = c(2.5, 4.5), subset = cn$CPOM[cn$Source == "bulk"] == "N", pch = 2)
+    plot(surfC ~ bulkC, ylim = c(2.5, 4.5), xlim = c(2.5, 4.5), subset = cn$CPOM[cn$Source == "bulk"] == "Y", ylab = "Percent C of the Surface Sediment", xlab = "Percent C of the Bulk Sediment")
+    points(surfC ~ bulkC, ylim = c(2.5, 4.5), xlim = c(2.5, 4.5), subset = cn$CPOM[cn$Source == "bulk"] == "N", pch = 2)
     abline(0, 1) # 1:1 line for comparison of the variables
     legend(2.5, 4.5, c("Leaf Litter Added", "No Leaf Litter"), pch = c(1, 2))
     dev.copy(jpeg, "./output/plots/percC_bulk_surf_comp.jpg")
