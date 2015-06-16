@@ -158,6 +158,18 @@ Due to the fact that the Bulk samples were missing data from BOD bottle 1, I cre
     dev.off()
 
 ![Comparison of the perc C in the Bulk and Surface Sediment](../output/plots/percC_bulk_surf_comp.jpg)
+
+##### Difference between the bulk and surface sediment % C
+
+    summary(bulkC - surfC)
+
+~~~~
+difference between bulk %C and surf %C
+
+Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
+-0.1300  0.0000  0.0900  0.1921  0.1875  1.1300       1
+
+~~~~
   
 Correlation of the samples shows that there is limited correlation between the bulk and surface sediments.
 
@@ -261,8 +273,28 @@ Correlation between the surface and bulk sediment percent N
 
 ~~~~
 
+### C:N Ratios
 
-### Compare the CN by treatments
+#### Correlation of %C and %N
+  
+    cor(cn$percC[cn$Source != "leaf"], cn$percN[cn$Source != "leaf"], use = "pairwise.complete.obs")
+
+~~~~
+correlation of %C and %N
+
+[1] 0.9682596
+
+~~~~
+
+    par(las = 1)
+    plot(cn$percC[cn$Source != "leaf"], cn$percN[cn$Source != "leaf"], ylab = "Percent N", xlab = "Percent C", ylim = c(0.2, 0.5), xlim = c(2, 5))
+    dev.copy(jpeg, "./output/plots/percN_by_percC_sed.jpg")
+    dev.off()
+
+![Sediment percent N by percent C](../output/plots/percN_by_percC_sed.jpg)
+
+  
+#### Compare the CN by treatments
 
     tapply(cn$CN[cn$Source == "surf"], cn$CPOM[cn$Source == "surf"], summary) 
 
