@@ -84,6 +84,25 @@ $Y ** CPOM **
 
 ~~~~
 
+##### Test of the effect of CPOM on %C in surface sediments
+
+    t.test(percC ~ CPOM, data = cn, subset = Source == "surf")
+
+~~~~
+  
+  Welch Two Sample t-test
+
+data:  percC by CPOM
+t = -0.2819, df = 13.952, p-value = 0.7821
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.1506697  0.1156697
+sample estimates:
+mean in group N mean in group Y 
+         3.1975          3.2150 
+
+~~~~
+  
     tapply(cn$percC[cn$Source == "surf"], cn$NUT[cn$Source == "surf"], summary)
     
 ~~~~
@@ -97,7 +116,25 @@ $Y ** Added DIP and DIN **
   3.050   3.072   3.135   3.176   3.290   3.360 
   
 ~~~~
+  
+##### Test of the effect of Nutrients on %C in surface sediments
 
+    t.test(percC ~ NUT, data = cn, subset = Source == "surf")
+
+~~~~
+  
+  Welch Two Sample t-test
+
+data:  percC by NUT
+t = 0.9976, df = 13.79, p-value = 0.3357
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.06918257  0.18918257
+sample estimates:
+mean in group N mean in group Y 
+        3.23625         3.17625 
+
+~~~~
   
 #### % C in the Bulk sediment
 
@@ -126,6 +163,25 @@ $Y  ** CPOM **
   3.200   3.242   3.320   3.373   3.427   3.720       1 
 
 ~~~~
+  
+##### Test of the effect of CPOM on the %C of bulk sediments
+  
+    t.test(percC ~ CPOM, data = cn, subset = Source == "bulk")
+
+~~~~
+  
+  Welch Two Sample t-test
+
+data:  percC by CPOM
+t = 0.011, df = 11.037, p-value = 0.9914
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.3320847  0.3354180
+sample estimates:
+mean in group N mean in group Y 
+       3.375000        3.373333 
+
+~~~~
 
     tapply(cn$percC[cn$Source == "bulk"], cn$NUT[cn$Source == "bulk"], summary)
 
@@ -140,7 +196,26 @@ $Y ** Added DIP and DIN **
   3.120   3.222   3.275   3.275   3.315   3.460
 
 ~~~~
+  
+##### Test of the effect of Nutrients on the %C of bulk sediments
+  
+    t.test(percC ~ NUT, data = cn, subset = Source == "bulk")
 
+~~~~
+
+  Welch Two Sample t-test
+
+data:  percC by NUT
+t = 1.3302, df = 5.433, p-value = 0.2366
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.2054972  0.6688306
+sample estimates:
+mean in group N mean in group Y 
+       3.506667        3.275000 
+
+~~~~
+  
 ### Comparison of Bulk and Surface Sediment % C
 Due to the fact that the Bulk samples were missing data from BOD bottle 1, I created a new set of objects `bulk` and `surf` where I remove the BOD 1 observation from the surface observations to align the surface and bulk observations so that they could be compared pairwise.
 
@@ -184,6 +259,19 @@ Correlation between the surface and bulk sediment percent C
 
 #### Percent N content of the surface sediments
 
+##### Summary Statistics
+  
+    summary(cn$percN[cn$Source == "surf"])
+
+~~~~
+Perc N in the Surface Sediments
+
+Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.2800  0.2875  0.2900  0.2962  0.3100  0.3200  
+
+~~~~
+  
+#### Effect of Leaf Litter and Nutrients on Perc N
     tapply(cn$percN[cn$Source == "surf"], cn$CPOM[cn$Source == "surf"], summary) 
 
 ~~~~
@@ -195,6 +283,25 @@ $N ** NO CPOM **
 $Y ** CPOM **
   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
  0.2800  0.2900  0.2900  0.2975  0.3100  0.3200 
+
+~~~~
+
+##### Effect of CPOM on %N of surface sediments
+  
+    t.test(percN ~ CPOM, data = cn, subset = Source == "surf")
+
+~~~~
+  
+Welch Two Sample t-test
+
+data:  percN by CPOM
+t = -0.3444, df = 13.9, p-value = 0.7357
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.01807736  0.01307736
+sample estimates:
+mean in group N mean in group Y 
+         0.2950          0.2975 
 
 ~~~~
 
@@ -212,9 +319,41 @@ $Y ** Added DIP and DIN **
   
 ~~~~
 
+##### Effect of Nutrients on %N of surface sediments
+
+    t.test(percN ~ NUT, data = cn, subset = Source == "surf")
+
+~~~~
+  
+Welch Two Sample t-test
+
+data:  percN by NUT
+t = 0.3444, df = 13.352, p-value = 0.7359
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.01313807  0.01813807
+sample estimates:
+mean in group N mean in group Y 
+         0.2975          0.2950 
+
+~~~~
   
 #### Percent N in the Bulk sediment
+  
+##### Summary Statistics
+  
+    summary(cn$percN[cn$Source == "bulk"])
 
+~~~~
+Percent N in the Bulk Sediments
+
+ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
+  0.290   0.300   0.310   0.315   0.310   0.400       1
+
+~~~~
+
+##### Effect of Leaf Litter and Nutrients on perc N
+  
     tapply(cn$percN[cn$Source == "bulk"], cn$CPOM[cn$Source == "bulk"], summary) 
 
 ~~~~
@@ -228,6 +367,26 @@ $Y  ** CPOM **
  0.3000  0.3000  0.3050  0.3117  0.3250  0.3300       1 
 
 ~~~~
+
+##### Test of the effect of CPOM on %N in the bulk sediment
+  
+    t.test(percN ~ CPOM, data = cn, subset = Source == "bulk")
+    
+~~~~
+
+  Welch Two Sample t-test
+
+data:  percN by CPOM
+t = 0.4328, df = 10.039, p-value = 0.6743
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.02418076  0.03584742
+sample estimates:
+mean in group N mean in group Y 
+      0.3175000       0.3116667 
+
+~~~~
+
 
     tapply(cn$percN[cn$Source == "bulk"], cn$NUT[cn$Source == "bulk"], summary)
 
@@ -244,6 +403,25 @@ $Y ** Added DIP and DIN **
 
 ~~~~
 
+##### Test of the effects of Nutrients on bulk sed %N
+  
+    t.test(percN ~ NUT, data = cn, subset = Source == "bulk")
+
+~~~~
+  
+  Welch Two Sample t-test
+
+data:  percN by NUT
+t = 1.0812, df = 5.697, p-value = 0.3232
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.02262048  0.05762048
+sample estimates:
+mean in group N mean in group Y 
+         0.3250          0.3075 
+
+~~~~
+  
 ### Comparison of Bulk and Surface Sediment Percent N
 Due to the fact that the Bulk samples were missing data from BOD bottle 1, I created a new set of objects `bulk` and `surf` where I remove the BOD 1 observation from the surface observations to align the surface and bulk observations so that they could be compared pairwise.
 
@@ -252,6 +430,31 @@ Due to the fact that the Bulk samples were missing data from BOD bottle 1, I cre
 
     bulkN <- cn$percN[cn$Source == "bulk"]
 
+#### Difference between % N in the surface and bulk sediments
+
+    summary(bulkN - surfN)
+
+~~~~
+difference between the %N of the bulk and surface sediment
+
+ Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NAs 
+-0.01000  0.01000  0.01000  0.02143  0.02750  0.11000        1 
+
+~~~~
+  
+    stem(bulkN - surfN)
+
+~~~~
+stem-leaf plot of the difference between the %N of the bulk and surface sediment
+
+The decimal point is 1 digit(s) to the left of the |
+
+  -0 | 11
+  0 | 0111112234
+  0 | 5
+  1 | 1
+
+~~~~
     par(las = 1)
     plot(surfN ~ bulkN, ylim = c(.25, .45), xlim = c(.25, .45), subset = cn$CPOM[cn$Source == "bulk"] == "Y", ylab = "Percent N of the Surface Sediment", xlab = "Percent N of the Bulk Sediment")
     points(surfN ~ bulkN, subset = cn$CPOM[cn$Source == "bulk"] == "N", pch = 2)
