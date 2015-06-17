@@ -166,20 +166,14 @@ $Y  ** CPOM **
   
 ##### Test of the effect of CPOM on the %C of bulk sediments
   
-    t.test(percC ~ CPOM, data = cn, subset = Source == "bulk")
+    kruskal.test(percC ~ CPOM, data = cn, subset = Source == "bulk")
 
 ~~~~
   
-  Welch Two Sample t-test
+Kruskal-Wallis rank sum test
 
 data:  percC by CPOM
-t = 0.011, df = 11.037, p-value = 0.9914
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -0.3320847  0.3354180
-sample estimates:
-mean in group N mean in group Y 
-       3.375000        3.373333 
+Kruskal-Wallis chi-squared = 0.6026, df = 1, p-value = 0.4376
 
 ~~~~
 
@@ -199,21 +193,15 @@ $Y ** Added DIP and DIN **
   
 ##### Test of the effect of Nutrients on the %C of bulk sediments
   
-    t.test(percC ~ NUT, data = cn, subset = Source == "bulk")
+    kruskal.test(percC ~ NUT, data = cn, subset = Source == "bulk")
 
 ~~~~
 
-  Welch Two Sample t-test
+Kruskal-Wallis rank sum test
 
 data:  percC by NUT
-t = 1.3302, df = 5.433, p-value = 0.2366
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -0.2054972  0.6688306
-sample estimates:
-mean in group N mean in group Y 
-       3.506667        3.275000 
-
+Kruskal-Wallis chi-squared = 0.7073, df = 1, p-value = 0.4003
+  
 ~~~~
   
 ### Comparison of Bulk and Surface Sediment % C
@@ -272,6 +260,7 @@ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
 ~~~~
   
 #### Effect of Leaf Litter and Nutrients on Perc N
+  
     tapply(cn$percN[cn$Source == "surf"], cn$CPOM[cn$Source == "surf"], summary) 
 
 ~~~~
@@ -288,21 +277,15 @@ $Y ** CPOM **
 
 ##### Effect of CPOM on %N of surface sediments
   
-    t.test(percN ~ CPOM, data = cn, subset = Source == "surf")
+    kruskal.test(percN ~ CPOM, data = cn, subset = Source == "surf")
 
 ~~~~
   
-Welch Two Sample t-test
+Kruskal-Wallis rank sum test
 
 data:  percN by CPOM
-t = -0.3444, df = 13.9, p-value = 0.7357
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -0.01807736  0.01307736
-sample estimates:
-mean in group N mean in group Y 
-         0.2950          0.2975 
-
+Kruskal-Wallis chi-squared = 0.1863, df = 1, p-value = 0.666
+  
 ~~~~
 
     tapply(cn$percN[cn$Source == "surf"], cn$NUT[cn$Source == "surf"], summary)
@@ -321,20 +304,14 @@ $Y ** Added DIP and DIN **
 
 ##### Effect of Nutrients on %N of surface sediments
 
-    t.test(percN ~ NUT, data = cn, subset = Source == "surf")
+    kruskal.test(percN ~ NUT, data = cn, subset = Source == "surf")
 
 ~~~~
   
-Welch Two Sample t-test
+Kruskal-Wallis rank sum test
 
 data:  percN by NUT
-t = 0.3444, df = 13.352, p-value = 0.7359
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -0.01313807  0.01813807
-sample estimates:
-mean in group N mean in group Y 
-         0.2975          0.2950 
+Kruskal-Wallis chi-squared = 0.2911, df = 1, p-value = 0.5895
 
 ~~~~
   
@@ -370,20 +347,14 @@ $Y  ** CPOM **
 
 ##### Test of the effect of CPOM on %N in the bulk sediment
   
-    t.test(percN ~ CPOM, data = cn, subset = Source == "bulk")
+    kruskal.test(percN ~ CPOM, data = cn, subset = Source == "bulk")
     
 ~~~~
 
-  Welch Two Sample t-test
+ Kruskal-Wallis rank sum test
 
 data:  percN by CPOM
-t = 0.4328, df = 10.039, p-value = 0.6743
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -0.02418076  0.03584742
-sample estimates:
-mean in group N mean in group Y 
-      0.3175000       0.3116667 
+Kruskal-Wallis chi-squared = 0.0185, df = 1, p-value = 0.8917
 
 ~~~~
 
@@ -405,20 +376,14 @@ $Y ** Added DIP and DIN **
 
 ##### Test of the effects of Nutrients on bulk sed %N
   
-    t.test(percN ~ NUT, data = cn, subset = Source == "bulk")
+    kruskal.test(percN ~ NUT, data = cn, subset = Source == "bulk")
 
 ~~~~
   
-  Welch Two Sample t-test
+    Kruskal-Wallis rank sum test
 
 data:  percN by NUT
-t = 1.0812, df = 5.697, p-value = 0.3232
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -0.02262048  0.05762048
-sample estimates:
-mean in group N mean in group Y 
-         0.3250          0.3075 
+Kruskal-Wallis chi-squared = 0.5609, df = 1, p-value = 0.4539
 
 ~~~~
   
@@ -544,7 +509,67 @@ $surf
   10.66   10.70   10.82   10.81   10.91   10.97 
 
 ~~~~
+#### Test of the differences in CN
+  
+    kruskal.test(CN ~ CPOM, data = cn, subset = Source == "surf")
 
+~~~~
+Surface Sediments
+
+  Kruskal-Wallis rank sum test
+
+data:  CN by CPOM
+Kruskal-Wallis chi-squared = 0.6222, df = 1, p-value = 0.4302
+
+~~~~
+  
+    kruskal.test(CN ~ NUT, data = cn, subset = Source == "surf")
+    
+~~~~
+Surface Sediments
+
+  Kruskal-Wallis rank sum test
+
+data:  CN by NUT
+Kruskal-Wallis chi-squared = 1.4629, df = 1, p-value = 0.2265
+
+~~~~
+
+  kruskal.test(CN ~ CPOM, data = cn, subset = Source == "bulk")
+  
+~~~~
+Bulk Sediments
+
+  Kruskal-Wallis rank sum test
+
+data:  CN by CPOM
+Kruskal-Wallis chi-squared = 1.6703, df = 1, p-value = 0.1962
+
+~~~~
+  
+  kruskal.test(CN ~ NUT, data = cn, subset = Source == "bulk")
+
+~~~~
+Bulk Sediment
+
+  Kruskal-Wallis rank sum test
+
+data:  CN by NUT
+Kruskal-Wallis chi-squared = 1.353, df = 1, p-value = 0.2448
+
+~~~~
+  
+    kruskal.test(CN ~ Source, data = cn)
+
+~~~~
+  
+    Kruskal-Wallis rank sum test
+
+data:  CN by Source
+Kruskal-Wallis chi-squared = 20.8685, df = 2, p-value = 2.941e-05
+
+~~~~
+  
 ## Conclusions 
   
 Neither nutrients or the addition of leaf litter had an effect on the sediment C:N.  Further, at the end of the experiment, the added leaf litter had a C:N 51.2% greater than the surface sediment. 
