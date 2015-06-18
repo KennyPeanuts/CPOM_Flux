@@ -78,6 +78,40 @@ Flux calculations can be found in `CPOM_Flux_Nutrient_Flux_Calc.md` in the `anal
 
 ~~~~
 
+Since the NOx flux showed significant differences on day 2, and possibly 7, I am separating out the flux on those days:
+
+##### Day 2
+  
+    tapply(nut$NOx[nut$day == 2], nut$CPOM[nut$day == 2], summary)
+
+~~~~
+  
+$`0` ** No Added Leaf Litter
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  37.47   44.25  146.10  119.60  179.80  181.10 
+
+$C ** Added Leaf Litter
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-2.3610 -0.7084  0.4460  0.5280  1.9610  2.8860 
+
+~~~~
+
+##### Day 7
+  
+    tapply(nut$NOx[nut$day == 7], nut$CPOM[nut$day == 7], summary)
+
+~~~~
+  
+$`0`
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-40.950 -34.290   2.125 -12.540   2.662   3.631 
+
+$C
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-20.400  -1.201  15.840  10.500  19.330  37.160 
+
+~~~~
+
 #### NH3
 ##### Total
     summary(nut$NH3)
