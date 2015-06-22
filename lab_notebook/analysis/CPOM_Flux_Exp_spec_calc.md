@@ -2,11 +2,8 @@
 
 ## Purpose
 
-This code it to calculate the ratio of the absorbance of the DOM at 254nm and 336nm the spec scan data from the treatments with and without CPOM and/or nutrients
+This code it to calculate the E2:E3, E4:E6, and S_R from the spec scan data from the treatments with and without CPOM and/or nutrients
 
-Analysis methods taken from:
-
-> Helms, J. R. A. Stubbins, J. D. Ritchie, E. C. Minor, D. J. Kieber, K. Mopper. 2008. Absorption spectral slopes and slope ratios as indicators of molecular weight, source, and photobleaching of chromophoric dissolved organic matter. Limnology and Oceanography 53:955-969.
 
 ## Import data
 
@@ -89,4 +86,21 @@ Reference
 
     write.table(Eratio, "./data/CPOM_Flux_Eratio.csv", quote = F, row.names = F, sep = ",")
 
+## Calculate Spectral Slope ratios
 
+The spectral slope ratio is the ratio of the slope of the change in absoption from 275- 295nm and 350 - 400nm.  The change is negative exponential so the linear slope is calculated from the log transformed absorption.
+
+Reference 
+
+> Helms, J. R. A. Stubbins, J. D. Ritchie, E. C. Minor, D. J. Kieber, K. Mopper. 2008. Absorption spectral slopes and slope ratios as indicators of molecular weight, source, and photobleaching of chromophoric dissolved organic matter. Limnology and Oceanography 53:955-969.
+
+
+Select data between 275 and 295 from the `spec` data.
+
+    spec275 <- spec[spec$wl >= 275 & spec$wl <=295, ]
+
+Select data between 350 and 400nm from `spec` data.
+
+    spec350 <- spec[spec$wl >=350 & spec$wl <= 400, ]
+
+### This is where I need to calculate the slopes for each of the bottles on each day
