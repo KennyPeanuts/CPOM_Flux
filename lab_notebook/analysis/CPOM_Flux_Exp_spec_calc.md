@@ -49,40 +49,44 @@ Add a to the data frame
 
 ## Data Analysis
 
-### Calculate E2E3
+### Calculate E-ratios  
 
-This is the ratio of the absorption at 250 to 365nm and is correlated with the molecular weight of the DOM 
+The E2:E3 is the ratio of the absorption at 250 to 365nm and is correlated with the molecular weight of the DOM 
 
 Reference
 
 > De Haan H. and T. De Boer. 1987. Applicability of light absorbance and fluorescence as measures of concentration and molecular size of dissolved organic carbon in humic Lake Tjeukemeer. Water Research 21: 731-734.
 
+The E4:E6 is the ratio of the absorption at 465 to 665nm and is shown to be correlated with the amount of humification in the sample.
+
+Reference
+
+> Sensei, N., T. M. Miano, M. R. Provenzano, and G. Brunetti. 1989. Spectroscopic and composition of I.H.S.S. reference and standard fulvic and humic acids of various origin. Science of the Total Environment 81/82: 143-156.
+
     E2E3.a <- spec$a[spec$wl == 250] / spec$a[spec$wl == 365]
+    E4E6.a <- spec$a[spec$wl == 465] / spec$a[spec$wl == 665]
     bod250 <- spec$bod[spec$wl == 250]
     CPOM250 <- spec$CPOM[spec$wl == 250]
     Nutrient250 <- spec$Nutrient[spec$wl == 250]
     day250 <- spec$day[spec$wl == 254]
-    E2E3 <- data.frame(bod250, day250, CPOM250, Nutrient250, E2E3.a)
-    names(E2E3) <- c("bod", "day", "CPOM", "nutrient", "E2E3")
+    Eratio <- data.frame(bod250, day250, CPOM250, Nutrient250, E2E3.a, E4E6.a)
     
-    E4E6.a <- spec$a[spec$wl == 465] / spec$a[spec$wl == 665]
-    
-    elapsed10 <- as.numeric(difftime(E2E3$day[E2E3$day == "2014-06-10"], E2E3$day[E2E3$day == "2014-06-10"], units = "days"))
-    elapsed12 <- as.numeric(difftime(E2E3$day[E2E3$day == "2014-06-12"], E2E3$day[E2E3$day == "2014-06-10"], units = "days"))
-    elapsed17 <- as.numeric(difftime(E2E3$day[E2E3$day == "2014-06-17"], E2E3$day[E2E3$day == "2014-06-10"], units = "days"))
-    elapsed24 <- as.numeric(difftime(E2E3$day[E2E3$day == "2014-06-24"], E2E3$day[E2E3$day == "2014-06-10"], units = "days"))
-    elapsed01 <- as.numeric(difftime(E2E3$day[E2E3$day == "2014-07-01"], E2E3$day[E2E3$day == "2014-06-10"], units = "days"))
+    elapsed10 <- as.numeric(difftime(Eratio$day[Eratio$day == "2014-06-10"], Eratio$day[Eratio$day == "2014-06-10"], units = "days"))
+    elapsed12 <- as.numeric(difftime(Eratio$day[Eratio$day == "2014-06-12"], Eratio$day[Eratio$day == "2014-06-10"], units = "days"))
+    elapsed17 <- as.numeric(difftime(Eratio$day[Eratio$day == "2014-06-17"], Eratio$day[Eratio$day == "2014-06-10"], units = "days"))
+    elapsed24 <- as.numeric(difftime(Eratio$day[Eratio$day == "2014-06-24"], Eratio$day[Eratio$day == "2014-06-10"], units = "days"))
+    elapsed01 <- as.numeric(difftime(Eratio$day[Eratio$day == "2014-07-01"], Eratio$day[Eratio$day == "2014-06-10"], units = "days"))
     elapsed.d <- c(elapsed10, elapsed12, elapsed17, elapsed24, elapsed01)
 
-#### Make Data Frame of E2E3 with elapsed time
+#### Make Data Frame of Eratio with elapsed time
 
-** This is not working yet.  I think the problem is with sorting the E4E6.a vector.  I am getting:  `Error in E4E6.a[order(as.Date(E2E3$day)), ] : 
-  incorrect number of dimensions` **
     
-    # the order stmnt is to sort E2E3 so that it matches the sort of elapsed.d
-    E.ratios <- data.frame(E2E3[order(as.Date(E2E3$day)), ], elapsed.d, E4E6.a[order(as.Date(E2E3$day)), ]) 
+    # the order stmnt is to sort E2E3 and E4E6 so that it matches the sort of elapsed.d
+    Eratio <- data.frame(Eratio[order(as.Date(Eratio$day)), ], elapsed.d)
+    names(Eratio) <- c("bod", "day", "CPOM", "nutrient", "E2E3", "E4E6", "elapsed.d")
 
 #### Make Data File for the Calculated Data
 
-    write.table(E2E3, "./data/CPOM_Flux_E2E3.csv", quote = F, row.names = F, sep = ",")
+    write.table(Eratio, "./data/CPOM_Flux_Eratio.csv", quote = F, row.names = F, sep = ",")
+
 
