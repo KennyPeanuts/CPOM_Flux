@@ -105,14 +105,14 @@ This plot shows some departure from normality but I will take it.
   
 Analysis of Variance Table of type III  with  Satterthwaite 
 approximation for degrees of freedom
-                        Sum Sq Mean Sq NumDF  DenDF F.value   Pr(>F)   
-elapsed.d               69.955  69.955     1 13.402 12.2015 0.003803 **
-CPOM                    34.872  34.872     1 12.243  6.0823 0.029344 * 
-nutrient                 0.946   0.946     1 12.243  0.1650 0.691607   
-elapsed.d:CPOM          23.136  23.136     1 13.402  4.0353 0.065144 . 
-elapsed.d:nutrient       1.865   1.865     1 13.402  0.3254 0.577844   
-CPOM:nutrient            0.613   0.613     1 12.243  0.1069 0.749203   
-elapsed.d:CPOM:nutrient  0.966   0.966     1 13.402  0.1684 0.688017   
+                        Sum Sq Mean Sq NumDF  DenDF F.value Pr(>F)
+elapsed.d               35.167  35.167     1 12.059 3.06569 0.1053
+CPOM                    33.601  33.601     1 14.380 2.92914 0.1085
+nutrient                 1.854   1.854     1 14.380 0.16165 0.6936
+elapsed.d:CPOM           7.476   7.476     1 12.059 0.65173 0.4351
+elapsed.d:nutrient       8.578   8.578     1 12.059 0.74775 0.4041
+CPOM:nutrient            0.551   0.551     1 14.380 0.04803 0.8296
+elapsed.d:CPOM:nutrient  0.163   0.163     1 12.059 0.01421 0.9071
 
 ~~~~
 
