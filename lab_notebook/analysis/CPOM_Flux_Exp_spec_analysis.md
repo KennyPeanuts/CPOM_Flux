@@ -138,7 +138,7 @@ Create elapsed day vectors offset by 1
      dev.copy(jpeg, "./output/plots/CPOM_Flux_E2E3_scatterplot.jpg")
      dev.off()
      
-![Scatterplot and means of E2E3 by elapsed day and CPOM](../ouput/plots/CPOM_Flux_E2E3_scatterplot.jpg)
+![Scatterplot and means of E2E3 by elapsed day and CPOM](../output/plots/CPOM_Flux_E2E3_scatterplot.jpg)
 
 Plots of E4:E6
 
@@ -158,7 +158,7 @@ Create elapsed day vectors offset by 1
      dev.copy(jpeg, "./output/plots/CPOM_Flux_E4E6_scatterplot.jpg")
      dev.off()
      
-![Scatterplot and means of E4E6 by elapsed day and CPOM](../ouput/plots/CPOM_Flux_E4E6_scatterplot.jpg)
+![Scatterplot and means of E4E6 by elapsed day and CPOM](../output/plots/CPOM_Flux_E4E6_scatterplot.jpg)
 
 ##### Boxplots  
 
