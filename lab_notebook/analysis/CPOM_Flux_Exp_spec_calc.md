@@ -103,4 +103,24 @@ Select data between 350 and 400nm from `spec` data.
 
     spec350 <- spec[spec$wl >=350 & spec$wl <= 400, ]
 
-### This is where I need to calculate the slopes for each of the bottles on each day
+Calculate the slopt for each day and bottle
+
+#### Create a function to calculate the slope for each day and bottle
+
+    s275.f <- function(s){
+        for (i in s$bod) 
+        y <- c(
+        x <- i
+        return(x)
+    }
+
+#### do this with tapply
+
+    tapply(log(spec275$a), spec275$bod, diff)
+
+    s275.1.0 <- lm(log(a) ~ wl, data = spec275, subset = bod == 1 & day == "2014-06-10")
+    
+Extract the slope from the linear model
+
+    s275.1.0.slope <- coef(s275.1.0)["wl"]
+        
