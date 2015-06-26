@@ -99,20 +99,47 @@ Select data between 275 and 295 from the `spec` data.
 
     spec275 <- spec[spec$wl >= 275 & spec$wl <=295, ]
 
+Create empty `elapsed.d` variable
+
+    elapsed.d <- rep(0, 1680)
+
+Add `elapsed.d` to the spec275 dataframe
+
+   spec275 <- data.frame(spec275, elapsed.d)
+
+Replace empty `elapsed.d` variables with correct days
+
+   spec275$elapsed.d[spec275$day == "2014-06-12"] <- 2
+   spec275$elapsed.d[spec275$day == "2014-06-17"] <- 7
+   spec275$elapsed.d[spec275$day == "2014-06-24"] <- 14
+   spec275$elapsed.d[spec275$day == "2014-07-01"] <- 21
+
 Select data between 350 and 400nm from `spec` data.
 
     spec350 <- spec[spec$wl >=350 & spec$wl <= 400, ]
 
-Calculate the slopt for each day and bottle
+
+Calculate the slope for each day and bottle
 
 #### Create a function to calculate the slope for each day and bottle
 
-    s275.f <- function(s){
-        for (i in s$bod) 
-        y <- c(
-        x <- i
-        return(x)
+The following code was provided by Gavin Simpson on Stack Overflow [http://stackoverflow.com/a/31059583/686481](http://stackoverflow.com/a/31059583/686481)
+
+    # create wrapper function tp calculate the slope
+    lm.slope <- function(x){
+      coef(lm(log(a) ~ wl, data = x))[2]
     }
+
+    # split the day and bod data
+    spl.data <- with(spec275, split(spec275, list(elapsed.d = elapsed.d, bod = bod)))
+
+    # get a list of the slopes
+    slopes <- sapply(spl.data, lm.slope)
+
+    # create data frame of the data with the slopes
+    ids.spec275 <- unique(spec275[, c("elapsed.d", "bod")])
+
+    ids.spec275 <- sort(ids.spec275, ids.spec275$elapsed.d)
 
 #### do this with tapply
 
