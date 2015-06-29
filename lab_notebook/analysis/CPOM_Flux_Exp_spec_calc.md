@@ -191,4 +191,4 @@ Merge with the treatments
 
     s.ratio <- merge(treat, s.ratio, by.x = "bod", by.y = "bod")
 
-    write.table(s.ratio, "./data/CPOM_Flux_sratio.csv", quote = F, row.names = F)
+    write.table(s.ratio, "./data/CPOM_Flux_sratio.csv", quote = F, row.names = F, sep = ",")

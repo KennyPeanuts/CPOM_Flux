@@ -7,8 +7,10 @@ This code it to analyze the spec scan data from the treatments with and without 
 ## Load Data
 
     Eratio <- read.table("./data/CPOM_Flux_Eratio.csv", header = T, sep = ",")
+    sratio <- read.table("./data/CPOM_Flux_sratio.csv", header = T, sep = ",")
 
-## Statistical Summary
+## E-ratio data
+### Statistical Summary
 
 Summary of the E2:E3 in all of the samples on all days
 
@@ -180,3 +182,31 @@ Create elapsed day vectors offset by 1
 ![E2E3 by day with CPOM](../output/plots/cpom_flux_E2E3_by_day_CPOM.png)
 
 _E2E3 by day with CPOM_
+
+## Sr data
+
+### Statistical Summary
+
+    summary(sratio$s.ratio)
+
+~~~~
+
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.8110  0.9718  1.0110  1.0270  1.0600  1.4790
+
+~~~~
+
+### Graphical Analysis
+
+Create vector of means for Sr
+
+    sratio.CPOM <- with(sratio, as.numeric(tapply(s.ratio[CPOM == "yes"], elapsed.d[CPOM == "yes"], mean)))
+    sratio.noCPOM <- with(sratio, as.numeric(tapply(s.ratio[CPOM == "no"], elapsed.d[CPOM == "no"], mean)))
+
+    elapsed.d.offset1 <- sratio$elapsed.d + 1
+
+    plot(s.ratio ~ elapsed.d, data = sratio, subset = CPOM == "yes", ylim = c(0.8, 1.5), xlim = c(0, 22), pch = 1)
+    points(sratio.CPOM ~ c(0, 2, 7, 14, 21), type = "b", pch = 16)
+    points(sratio.noCPOM ~ c(0, 2, 7, 14, 21), type = "b", pch = 17)
+    points(s.ratio ~ elapsed.d.offset1, data = sratio, subset = CPOM == "no", pch = 2)
+    
