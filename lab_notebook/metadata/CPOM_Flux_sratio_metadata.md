@@ -1,8 +1,8 @@
-# Metadata for the Calculated 245:365 analysis of the DOM 
+# Metadata for the Calculated Sr analysis of the DOM from the CPOM Flux Experiment, Summer 2014
 
 ## File
 
-`CPOM_Flux_r254.csv`
+`CPOM_Flux_sratio.csv`
 
 ## Metadata
 
@@ -16,9 +16,9 @@ Location: Longwood University
 
 Description:
 
-The calculated absorbence ratio at 245:365nm for the DOM in the CPOM Flux experiment.
+The calculated ratio of the slope of the absorption of the the DOM between 275 and 295 nm and between 350 and 400 nm. Water samples were collected from each BOD bottle and filtered through a GFF filter and then run on a nanopore spec.
 
-The data come from:
+Reference:
 
 > Helms, J. R. A. Stubbins, J. D. Ritchie, E. C. Minor, D. J. Kieber, K. Mopper. 2008. Absorption spectral slopes and slope ratios as indicators of molecular weight, source, and photobleaching of chromophoric dissolved organic matter. Limnology and Oceanography 53:955-969.
 
@@ -26,7 +26,7 @@ Calculation details and code in `CPOM_Flux_Exp_spec_calc.md` in the `analysis` f
 
 **These data should be used for all analyses**
  
-File Created: 18 June 2015
+File Created: 29 June 2015
 
 Modified: 
 
@@ -40,6 +40,10 @@ Modified:
 
 * nutrient = whether the bottles contained "yes" or did not contain "no" added DIN and DIP
 
-* ratio254 = the calculated ratio of the absorbence at 254 and 365nm. See `CPOM_Flux_Exp_spec_calc.md` for calculation code and details.
+* spec275.slope = the slope of the natural log of the DOM absorption by wavelength between 275 and 295 nm
+
+* spec350.slope = the slope of the natural log DOM absorption by wavelength between 350 and 400 nm
+
+* s.ratio = the ratio of the `spec275.slope` and `spec350.slope`
 
 * elapsed.d = the number of days elapsed during the incubation.

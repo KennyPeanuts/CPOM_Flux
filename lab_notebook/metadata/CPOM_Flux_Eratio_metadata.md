@@ -1,8 +1,8 @@
-# Metadata for the Calculated 245:365 analysis of the DOM 
+# Metadata for the Calculated E2:E3 and E4:E6 ratios of DOM absorbance from the CPOM Flux Experiment 
 
 ## File
 
-`CPOM_Flux_r254.csv`
+`CPOM_Flux_Eratio.csv`
 
 ## Metadata
 
@@ -16,17 +16,25 @@ Location: Longwood University
 
 Description:
 
-The calculated absorbence ratio at 245:365nm for the DOM in the CPOM Flux experiment.
+The calculated DOM E2:E3 and E4:E6 ratios for the DOM in the CPOM Flux experiment.
 
-The data come from:
+Samples of water from each BOD bottle were filtered through GFF and run on a Nanopore spec.
 
-> Helms, J. R. A. Stubbins, J. D. Ritchie, E. C. Minor, D. J. Kieber, K. Mopper. 2008. Absorption spectral slopes and slope ratios as indicators of molecular weight, source, and photobleaching of chromophoric dissolved organic matter. Limnology and Oceanography 53:955-969.
+The E2:E3 is the ratio of the DOM absorption at 275 nm and 365 nm and is a proxy for the molecular mass of the DOM.  
+
+Reference:
+
+> De Haan H. and T. De Boer. 1987. Applicability of light absorbance and fluorescence as measures of concentration and molecular size of dissolved organic carbon in humic Lake Tjeukemeer. Water Research 21: 731-734.
+
+The E4:E6 is the ratio of the DOM absorption at 350 nm and 665 nm and is a proxy of the humification of the DOM.
+
+> Sensei, N., T. M. Miano, M. R. Provenzano, and G. Brunetti. 1989. Spectroscopic and composition of I.H.S.S. reference and standard fulvic and humic acids of various origin. Science of the Total Environment 81/82: 143-156.
 
 Calculation details and code in `CPOM_Flux_Exp_spec_calc.md` in the `analysis` folder.
 
 **These data should be used for all analyses**
  
-File Created: 18 June 2015
+File Created: 29 June 2015
 
 Modified: 
 
@@ -40,6 +48,8 @@ Modified:
 
 * nutrient = whether the bottles contained "yes" or did not contain "no" added DIN and DIP
 
-* ratio254 = the calculated ratio of the absorbence at 254 and 365nm. See `CPOM_Flux_Exp_spec_calc.md` for calculation code and details.
+* E2E3 = the calculated ratio of the DOM absorption at 275 nm and 365 nm.
+
+* E4E6 = the calculated ratio of the DOM absorption at 350 nm and 665 nm.
 
 * elapsed.d = the number of days elapsed during the incubation.

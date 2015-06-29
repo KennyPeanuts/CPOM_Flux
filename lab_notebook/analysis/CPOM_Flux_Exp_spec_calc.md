@@ -1,4 +1,4 @@
-# Calculation of the ratio of DOM absorbance at 254nm and 336nm from the CPOM Flux Experiment - Summer 2014
+# Calculation of the Sr, E2:E3, and E4:E6 ratio of DOM absorbance from the CPOM Flux Experiment - Summer 2014
 
 ## Purpose
 
