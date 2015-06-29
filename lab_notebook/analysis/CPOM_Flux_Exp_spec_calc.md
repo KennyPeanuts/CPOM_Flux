@@ -118,6 +118,20 @@ Select data between 350 and 400nm from `spec` data.
 
     spec350 <- spec[spec$wl >=350 & spec$wl <= 400, ]
 
+Create empty `elapsed.d` variable
+
+    elapsed.d <- rep(0, 4080)
+
+Add `elapsed.d` to the spec350 dataframe
+
+   spec350 <- data.frame(spec350, elapsed.d)
+
+Replace empty `elapsed.d` variables with correct days
+
+   spec350$elapsed.d[spec350$day == "2014-06-12"] <- 2
+   spec350$elapsed.d[spec350$day == "2014-06-17"] <- 7
+   spec350$elapsed.d[spec350$day == "2014-06-24"] <- 14
+   spec350$elapsed.d[spec350$day == "2014-07-01"] <- 21
 
 Calculate the slope for each day and bottle
 
@@ -125,10 +139,13 @@ Calculate the slope for each day and bottle
 
 The following code was provided by Gavin Simpson on Stack Overflow [http://stackoverflow.com/a/31059583/686481](http://stackoverflow.com/a/31059583/686481)
 
+
     # create wrapper function tp calculate the slope
     lm.slope <- function(x){
       coef(lm(log(a) ~ wl, data = x))[2]
     }
+
+##### S 275 - 295
 
     # split the day and bod data
     spl.data <- with(spec275, split(spec275, list(elapsed.d = elapsed.d, bod = bod)))
@@ -137,17 +154,41 @@ The following code was provided by Gavin Simpson on Stack Overflow [http://stack
     slopes <- sapply(spl.data, lm.slope)
 
     # create data frame of the data with the slopes
-    ids.spec275 <- unique(spec275[, c("elapsed.d", "bod")])
+    # create a data frame of the elapsed day and bod
+    bod <- c(rep(1:16, 5))
+    bod <- sort(bod)
+    elapsed.d <- rep(c(0, 2, 7, 14, 21), 16)
 
-    ids.spec275 <- sort(ids.spec275, ids.spec275$elapsed.d)
+    spec275.slopes <- data.frame(bod, elapsed.d, slopes)
 
-#### do this with tapply
+##### S 350 - 400
 
-    tapply(log(spec275$a), spec275$bod, diff)
+    # split the day and bod data
+    spl.data <- with(spec350, split(spec350, list(elapsed.d = elapsed.d, bod = bod)))
 
-    s275.1.0 <- lm(log(a) ~ wl, data = spec275, subset = bod == 1 & day == "2014-06-10")
-    
-Extract the slope from the linear model
+    # get a list of the slopes
+    slopes <- sapply(spl.data, lm.slope)
 
-    s275.1.0.slope <- coef(s275.1.0)["wl"]
-        
+    # create data frame of the data with the slopes
+    # create a data frame of the elapsed day and bod
+    bod <- c(rep(1:16, 5))
+    bod <- sort(bod)
+
+    elapsed.d <- rep(c(0, 2, 7, 14, 21), 16)
+
+    spec350.slopes <- data.frame(bod, elapsed.d, slopes)
+
+#### Calculate the S-ratio
+
+    s.ratio.lst <- spec275.slopes$slopes / spec350.slopes$slopes
+
+##### Create data.frame of the S-ratio
+
+    s.ratio <- data.frame(spec275.slopes$bod, spec275.slopes$elapsed.d, spec275.slopes$slopes, spec350.slopes$slopes, s.ratio.lst)
+    names(s.ratio) <- c("bod", "elapsed.d", "spec275.slope", "spec350.slope", "s.ratio")
+
+Merge with the treatments
+
+    s.ratio <- merge(treat, s.ratio, by.x = "bod", by.y = "bod")
+
+    write.table(s.ratio, "./data/CPOM_Flux_sratio.csv", quote = F, row.names = F)
