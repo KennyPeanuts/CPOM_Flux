@@ -294,10 +294,15 @@ Create vector of means for Sr
     elapsed.d.offsetpos <- sratio$elapsed.d + 0.25
     elapsed.d.offsetneg <- sratio$elapsed.d -0.25 
 
-    par(las = 1)
-    plot(s.ratio ~ elapsed.d.offsetneg, data = sratio, subset = CPOM == "yes", ylim = c(0.8, 1.5), xlim = c(-1, 22), pch = 1)
+    par(las = 1, mar = c(5, 5, 2, 2))
+    plot(s.ratio ~ elapsed.d.offsetneg, data = sratio, subset = CPOM == "yes", ylim = c(0.5, 1.5), xlim = c(-1, 22), pch = 1, xlab = "Days of Incubation", ylab = expression(paste("S"[R])), cex.lab = 1.5, cex.axis = 1.3, cex = 1.5)
     points(sratio.CPOM ~ c(0, 2, 7, 14, 21), type = "b", pch = 16, cex = 1.5)
     points(sratio.noCPOM ~ c(0, 2, 7, 14, 21), type = "b", pch = 17, cex = 1.5)
-    points(s.ratio ~ elapsed.d.offsetpos, data = sratio, subset = CPOM == "no", pch = 2)
-    
+    points(s.ratio ~ elapsed.d.offsetpos, data = sratio, subset = CPOM == "no", pch = 2, cex = 1.5)
+    legend(10, 1.5, c("Leaf Litter", "No Leaf Litter"), pch = c(16, 17), cex =1)
+    dev.copy(jpeg, "./output/plots/sratio_by_days.jpg")
+    dev.off()
+
+![sratio by days and CPOM](../output/plots/sratio_by_days_jpg)
+
 
