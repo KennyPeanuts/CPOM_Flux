@@ -196,6 +196,94 @@ _E2E3 by day with CPOM_
 
 ~~~~
 
+### Repeated Measures
+ 
+ 
+    sratio.mod <- lmer(s.ratio ~ 1 + elapsed.d * CPOM * Nutrient + (1 + elapsed.d|bod), sratio)
+    summary(sratio.mod)
+
+
+~~~~
+ 
+Linear mixed model fit by REML t-tests use Satterthwaite approximations to degrees of
+  freedom [merModLmerTest]
+Formula: s.ratio ~ 1 + elapsed.d * CPOM * Nutrient + (1 + elapsed.d |      bod)
+   Data: sratio
+
+REML criterion at convergence: -107
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.2150 -0.5347 -0.0998  0.5315  4.0020 
+
+Random effects:
+ Groups   Name        Variance  Std.Dev.  Corr
+ bod      (Intercept) 0.000e+00 0.000e+00     
+          elapsed.d   4.705e-19 6.859e-10  NaN
+ Residual             7.563e-03 8.696e-02     
+Number of obs: 80, groups:  bod, 16
+
+Fixed effects:
+                               Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)                    0.977503   0.029354 72.000000  33.301  < 2e-16 ***
+elapsed.d                      0.004667   0.002499 72.000000   1.868 0.065867 .  
+CPOMyes                        0.153442   0.041513 72.000000   3.696 0.000424 ***
+Nutrientyes                    0.011422   0.041513 72.000000   0.275 0.783996    
+elapsed.d:CPOMyes             -0.012928   0.003534 72.000000  -3.659 0.000480 ***
+elapsed.d:Nutrientyes         -0.003969   0.003534 72.000000  -1.123 0.265120    
+CPOMyes:Nutrientyes           -0.057363   0.058708 72.000000  -0.977 0.331797    
+elapsed.d:CPOMyes:Nutrientyes  0.006797   0.004998 72.000000   1.360 0.178063    
+
+Correlation of Fixed Effects:
+            (Intr) elpsd. CPOMys Ntrnty el.:CPOM elp.:N CPOM:N
+elapsed.d   -0.749                                            
+CPOMyes     -0.707  0.530                                     
+Nutrientyes -0.707  0.530  0.500                              
+elpsd.:CPOM  0.530 -0.707 -0.749 -0.375                       
+elpsd.d:Ntr  0.530 -0.707 -0.375 -0.749  0.500                
+CPOMys:Ntrn  0.500 -0.375 -0.707 -0.707  0.530    0.530       
+elp.:CPOM:N -0.375  0.500  0.530  0.530 -0.707   -0.707 -0.749
+
+~~~~
+ 
+Test of the the significants of the fixed effects
+
+    anova(sratio.mod)
+
+~~~~
+ 
+Analysis of Variance Table of type III  with  Satterthwaite 
+approximation for degrees of freedom
+                          Sum Sq  Mean Sq NumDF DenDF F.value    Pr(>F)    
+elapsed.d               0.021009 0.021009     1    72  2.7780 0.0999123 .  
+CPOM                    0.136613 0.136613     1    72 18.0644 6.306e-05 ***
+Nutrient                0.002615 0.002615     1    72  0.3457 0.5583847    
+elapsed.d:CPOM          0.110004 0.110004     1    72 14.5458 0.0002862 ***
+elapsed.d:Nutrient      0.000394 0.000394     1    72  0.0521 0.8200693    
+CPOM:Nutrient           0.007220 0.007220     1    72  0.9547 0.3317969    
+elapsed.d:CPOM:Nutrient 0.013988 0.013988     1    72  1.8497 0.1780625  
+
+~~~~
+
+#### Check Assumptions
+ 
+Checking for homogeneity of variance
+
+    plot(sratio.mod, main = "sratio.mod")
+    dev.copy(jpeg, "./output/plots/sratio_resid_fitted.jpg")
+    dev.off()
+
+![residuals vs fitted for sratio lme](../output/plots/sratio_resid_fitted.jpg)
+
+Checking for normality of residuals with qqnorm plot
+
+    qqnorm(resid(sratio.mod), main = "sratio.mod")
+    dev.copy(jpeg, "./output/plots/sratio_qqnorm_resid.jpg")
+    dev.off()
+ 
+![qqnorm of the residuals of the sratio lme model](../output/plots/sratio_qqnorm_resid.jpg)
+
+
 ### Graphical Analysis
 
 Create vector of means for Sr
@@ -203,10 +291,13 @@ Create vector of means for Sr
     sratio.CPOM <- with(sratio, as.numeric(tapply(s.ratio[CPOM == "yes"], elapsed.d[CPOM == "yes"], mean)))
     sratio.noCPOM <- with(sratio, as.numeric(tapply(s.ratio[CPOM == "no"], elapsed.d[CPOM == "no"], mean)))
 
-    elapsed.d.offset1 <- sratio$elapsed.d + 1
+    elapsed.d.offsetpos <- sratio$elapsed.d + 0.25
+    elapsed.d.offsetneg <- sratio$elapsed.d -0.25 
 
-    plot(s.ratio ~ elapsed.d, data = sratio, subset = CPOM == "yes", ylim = c(0.8, 1.5), xlim = c(0, 22), pch = 1)
-    points(sratio.CPOM ~ c(0, 2, 7, 14, 21), type = "b", pch = 16)
-    points(sratio.noCPOM ~ c(0, 2, 7, 14, 21), type = "b", pch = 17)
-    points(s.ratio ~ elapsed.d.offset1, data = sratio, subset = CPOM == "no", pch = 2)
+    par(las = 1)
+    plot(s.ratio ~ elapsed.d.offsetneg, data = sratio, subset = CPOM == "yes", ylim = c(0.8, 1.5), xlim = c(-1, 22), pch = 1)
+    points(sratio.CPOM ~ c(0, 2, 7, 14, 21), type = "b", pch = 16, cex = 1.5)
+    points(sratio.noCPOM ~ c(0, 2, 7, 14, 21), type = "b", pch = 17, cex = 1.5)
+    points(s.ratio ~ elapsed.d.offsetpos, data = sratio, subset = CPOM == "no", pch = 2)
     
+
