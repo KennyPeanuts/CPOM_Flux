@@ -291,8 +291,12 @@ Create vector of means for Sr
     sratio.CPOM <- with(sratio, as.numeric(tapply(s.ratio[CPOM == "yes"], elapsed.d[CPOM == "yes"], mean)))
     sratio.noCPOM <- with(sratio, as.numeric(tapply(s.ratio[CPOM == "no"], elapsed.d[CPOM == "no"], mean)))
 
+Create x variables to offset scatter plot pts
+
     elapsed.d.offsetpos <- sratio$elapsed.d + 0.25
     elapsed.d.offsetneg <- sratio$elapsed.d -0.25 
+
+Plot
 
     par(las = 1, mar = c(5, 5, 2, 2))
     plot(s.ratio ~ elapsed.d.offsetneg, data = sratio, subset = CPOM == "yes", ylim = c(0.5, 1.5), xlim = c(-1, 22), pch = 1, xlab = "Days of Incubation", ylab = expression(paste("S"[R])), cex.lab = 1.5, cex.axis = 1.3, cex = 1.5)
@@ -303,6 +307,6 @@ Create vector of means for Sr
     dev.copy(jpeg, "./output/plots/sratio_by_days.jpg")
     dev.off()
 
-![sratio by days and CPOM](../output/plots/sratio_by_days_jpg)
+![sratio by days and CPOM](../output/plots/sratio_by_days.jpg)
 
 
