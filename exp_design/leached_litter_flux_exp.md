@@ -59,8 +59,43 @@ How do leached terrestrial detritus subsidies alter the decomposition of sedimen
 
 ### Bottle Set-up
 
-Sediments will be collected from near the littoral zone of LPP with an Ekman dredge.  The sediments will then be passed through a 250 &mu;m mesh to remove macroinvertebrates and CPOM.  The resultant sediment slurry will then be homogenized and 100 ml of slurry will be added to each bottle and allowed to settle.  Following settling, the overlying water will be siphoned off and replaced with pond water collected at the same time as the sediments.
+Sediments will be collected from near the littoral zone of LPP with an Ekman dredge.  The sediments will then be passed through a 250 &mu;m mesh to remove macroinvertebrates and CPOM.  The resultant sediment slurry will then be homogenized and 100 ml of slurry will be added to each bottle and allowed to settle.  Following settling, the overlying water will be siphoned off and replaced with pond water, collected at the same time as the sediments until the overlying water looks clear. Typically this is 2 - 3 replacements.
 
 The leaf litter added to the sediments will come from senecent tulip poplar leaves collected in 2013 and air dried. The leaves will be leached for 4 days in DI water prior to cutting into 10 mm discs.  Each bottle (except the sediment only bottle) will receive 20 leaf discs.
 
-Based on the timing of student access to work on the experiment, the sediments and bottle set-up 
+### Bottle Sampling Protocol
+
+#### First Sampling
+
+1) Fill bottles to full volume and cap
+
+2) Remove 15 ml from each bottle and fix for T0 oxygen measurement
+
+3) Remove 15 ml from each bottle and incubate for Water Respiration
+
+4) Remove 5 ml of water from each bottle and filter through GFF for spec scan
+
+5) Replace 35 ml of water in bottle and seal
+
+6) Incubate bottle in the dark for 4 - 6 h 
+
+7) Remove 15 ml from each bottle and fix fo T1 oxygen measurement
+
+8) Return bottles to dark uncovered
+
+#### Typical Sampling
+
+1) Remove 15 ml from each bottle and fix for T0 oxygen measurement
+
+2) Remove 15 ml from each bottle and incubate for Water Respiration
+
+3) Remove 5 ml of water from each bottle and filter through GFF for spec scan
+
+4) Replace 50 ml of water in bottle and seal
+
+5) Incubate bottle in the dark for 4 - 6 h 
+
+6) Remove 15 ml from each bottle and fix fo T1 oxygen measurement
+
+7) Return bottles to dark uncovered
+
