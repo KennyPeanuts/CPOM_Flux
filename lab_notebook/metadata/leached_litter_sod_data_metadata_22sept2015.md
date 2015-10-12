@@ -42,25 +42,23 @@ Modified:
     bod <- c(7, 10, 5, 9, 2, 6, 1, 12, 8, 3, 11, 4)
     vialT0 <- c(3, 39, 26, 40, 2, 32, 21, 13, 7, 4, 10, 11)
     vialTF <- c(19, 33, 18, 12, 22, 24, 15, 31, 20, 37, 6, 36)
-    temp <- 25.5
+    temp <- rep(25.5, 12)
     # pressure was not recorded at the time of the sampling, so it was retrieved from the Wunderground climate archive
-    pressure <- 767 
+    pressure <- rep(767, 12) 
     # only the beginnig and end time were recorded for this run, so the times were calcuated by divding the difference by the number of samples and assuming all the samples took approximately the same time. We didn't take breaks, so this is going to be pretty close.
-    time0 <- c(2015-09-22 12:42, 2015-09-22 12:47, 2015-09-22 12:53, 2015-09-22 12:58. 2015-09-22 13:04, 2015-09-22 13:09, 2015-09-22 13:15, 2015-09-22 13:20, 2015-09-22 13:26, 2015-09-22 13:31, 2015-09-22 13:37, 2015-09-22 13:47)  
+    time0 <- c("2015-09-22 12:42", "2015-09-22 12:47", "2015-09-22 12:53", "2015-09-22 12:58", "2015-09-22 13:04", "2015-09-22 13:09", "2015-09-22 13:15", "2015-09-22 13:20", "2015-09-22 13:26", "2015-09-22 13:31", "2015-09-22 13:37", "2015-09-22 13:47")  
     BeginBuretT0 <- c(2.20, 2.75, 3.4, 4.0, 5.255, 4.7, 6.00, 6.75, 7.35, 8.00, 8.75, 7.00)
     EndBuretT0 <- c(2.75, 3.4, 4.0, 4.7, 6.00, 5.255, 6.75, 7.35, 8.00, 8.75, 9.35, 7.755)
-    timeF <- c(2015-09-22 19:45, 2015-09-22 19:47, 2015-09-22 19:44, 2015-09-22 19:42. 2015-09-22 19:40, 2015-09-22 19:35, 2015-09-22 20;01, 2015-09-22 19:59, 2015-09-22 19:54, 2015-09-22 19:57, 2015-09-22 19:52, 2015-09-22 19:49)  
+    timeF <- c("2015-09-22 19:45", "2015-09-22 19:47", "2015-09-22 19:44", "2015-09-22 19:42", "2015-09-22 19:40", "2015-09-22 19:35", "2015-09-22 20:01", "2015-09-22 19:59", "2015-09-22 19:54", "2015-09-22 19:57", "2015-09-22 19:52", "2015-09-22 19:49")  
     BeginBuretTF <- c(4.70, 5.30, 4.025, 3.30, 2.40, 1.65, 7.25, 6.50, 7.625, 8.30, 6.70, 5.90)
     EndBuretTF <- c(5.30, 5.90, 4.70, 4.025, 3.30, 2.40, 8.15, 7.25, 8.30, 9.20, 7.625, 6.70)
     A <- rep(0.0028, 12)
     Replvol <- c(35, 37, 35, 37, 36, 35, 35, 35, 35, 36, 36, 37)
     RmeasT0 <- EndBuretT0 - BeginBuretT0    
     RmeasTF <- EndBuretTF - BeginBuretTF
+    # create data.frame
+    sod <- data.frame(bod, vialT0, vialTF, temp, pressure, A, time0, timeF, RmeasT0, RmeasTF, Replvol)
 
+## Output File 
 
-
-
-
-## Output File Name
-
-    leached_litter_sod_22sept2015.csv
+    write.table(sod, "data/leached_litter_sod_22sept2015.csv", sep = ",", row.names = F, quote = F) 
