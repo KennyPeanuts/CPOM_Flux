@@ -16,6 +16,8 @@ KF, JM, JA
 
 ### Modified:
 
+* 12 Oct 2015 - KF - added additionl winkler's standardization for TF
+
 ### Affiliation:
 
 Longwood University
@@ -30,7 +32,7 @@ The code for the calculation of sediment oxygen demand from the winkler titratio
 
 * sod = data frame with the raw winkler data (variable descriptions in "leached_litter_sod_data_metadata_DATE.md")
 
-* std = data frame with the variables for the winkler standardization (variable descriptions in "winkler_standardization_DATE.md")
+* std.DATE = data frame with the variables for the winkler standardization (variable descriptions in "winkler_standardization_DATE.md")
 
 * repl = the data frame with the raw winkler data for the replacement water (variable descriptions in "repl_water_DO_DATE.md")
 
@@ -125,7 +127,8 @@ All the below are used for the SOD calculations which were not completed due to 
 ### Import Data
 
     sod <- read.delim("./data/leached_litter_sod_22sept2015.csv", header = T, sep = ",")
-    std <- read.delim("./data/winkler_standardization_22sept2015.csv", header = T,  sep = ",")
+    std.22sept2015 <- read.delim("./data/winkler_standardization_22sept2015.csv", header = T,  sep = ",")
+    std.23sept2015 <- read.delim("./data/winkler_standardization_23sept2015.csv", header = T,  sep = ",")
     repl <- read.delim("./data/repl_water_22sept2015.csv", header = T,  sep = ",")
     vial <- read.delim("./data/vial_volume_summer_2014.csv", header = T,  sep = ",")
     treat <- read.delim("./data/leached_litter_treatments_fall2015.csv", header = T, sep = ",")
@@ -138,11 +141,11 @@ All the below are used for the SOD calculations which were not completed due to 
     ## Add vial vial volumes to the sod data.frame for T0
     sodT0 <- merge(sod, vial, by.x = "vialT0", by.y = "vial")
     ## Calculation of [DO] of T0 samples
-    DOvol.T0 <- (((sod$RmeasT0 - std$Rblk) * std$Vstd * std$Nstd * std$E) / ((std$Rstd - std$Rblk) * (sodT0$vol - std$Vreg))) - std$DOreg
+    DOvol.T0 <- (((sod$RmeasT0 - std.22sept2015$Rblk) * std.22sept2015$Vstd * std.22sept2015$Nstd * std.22sept2015$E) / ((std.22sept2015$Rstd - std.22sept2015$Rblk) * (sodT0$vol - std.22sept2015$Vreg))) - std.22sept2015$DOreg
     ## Add vial vial volumes to the sod data.dframe for T1
     sodTF <- merge(sod, vial, by.x = "vialTF", by.y = "vial")
     ## Calculation of [DO] of TF samples
-    DOvol.TF <- (((sod$RmeasTF - std$Rblk) * std$Vstd * std$Nstd * std$E) / ((std$Rstd - std$Rblk) * (sodTF$vol - std$Vreg))) - std$DOreg
+    DOvol.TF <- (((sod$RmeasTF - std.23sept2015$Rblk) * std.23sept2015$Vstd * std.23sept2015$Nstd * std.23sept2015$E) / ((std.23sept2015$Rstd - std.23sept2015$Rblk) * (sodTF$vol - std.23sept2015$Vreg))) - std.23sept2015$DOreg
     ## Add vial vial volumes to the sod data.dframe for T1
     repl <- merge(repl, vial, by.x = "vial", by.y = "vial")
     ## Calculation of replacement water [DO]
