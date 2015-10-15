@@ -1,6 +1,6 @@
 # Leached Litter Experiment Sediment Oxygen Demand Data
 
-## 22 Sept 2015
+## 01 Oct 2015
 
 ## Metadata
 
@@ -12,7 +12,7 @@ Description:
 
 These data were collected to measure sediment oxygen demand in the Leached Litter Flux Experiment. Experiment setup notes can be found [Leached_Litter_Set-up](githuburl). Briefly, 100 ml of sediments from Lancer Park Pond were incubated with or without 20 tulip poplar leaf disks that had been leached in DI water prior to being placed in 300 ml BOD bottles. To measure SOD, the DO concentration was measured at T0 and then the bottles were sealed without air and the DO concentration was measured at TF.  DO was measured using Winkler Titrations.
 
-File created on:  12 Oct 2015
+File created on:  15 Oct 2015
 
 Modified:
 
@@ -39,21 +39,20 @@ Modified:
 
 ## R Code
 
-    bod <- c(7, 10, 5, 9, 2, 6, 1, 12, 8, 3, 11, 4)
-    vialT0 <- c(3, 39, 26, 40, 2, 32, 21, 13, 7, 4, 10, 11)
-    vialTF <- c(19, 33, 18, 12, 22, 24, 15, 31, 20, 37, 6, 36)
-    temp <- rep(25.5, 12)
-    # pressure was not recorded at the time of the sampling, so it was retrieved from the Wunderground climate archive
-    pressure <- rep(767, 12) 
-    # only the beginnig and end time were recorded for this run, so the times were calcuated by divding the difference by the number of samples and assuming all the samples took approximately the same time. We didn't take breaks, so this is going to be pretty close.
-    time0 <- c("2015-09-22 12:42", "2015-09-22 12:47", "2015-09-22 12:53", "2015-09-22 12:58", "2015-09-22 13:04", "2015-09-22 13:09", "2015-09-22 13:15", "2015-09-22 13:20", "2015-09-22 13:26", "2015-09-22 13:31", "2015-09-22 13:37", "2015-09-22 13:47")  
-    BeginBuretT0 <- c(2.20, 2.75, 3.4, 4.0, 5.255, 4.7, 6.00, 6.75, 7.35, 8.00, 8.75, 7.00)
-    EndBuretT0 <- c(2.75, 3.4, 4.0, 4.7, 6.00, 5.255, 6.75, 7.35, 8.00, 8.75, 9.35, 7.755)
-    timeF <- c("2015-09-22 19:45", "2015-09-22 19:47", "2015-09-22 19:44", "2015-09-22 19:42", "2015-09-22 19:40", "2015-09-22 19:35", "2015-09-22 20:01", "2015-09-22 19:59", "2015-09-22 19:54", "2015-09-22 19:57", "2015-09-22 19:52", "2015-09-22 19:49")  
-    BeginBuretTF <- c(4.70, 5.30, 4.025, 3.30, 2.40, 1.65, 7.25, 6.50, 7.625, 8.30, 6.70, 5.90)
-    EndBuretTF <- c(5.30, 5.90, 4.70, 4.025, 3.30, 2.40, 8.15, 7.25, 8.30, 9.20, 7.625, 6.70)
+    bod <- c(9, 4, 5, 12, 3, 11, 2, 8, 6, 7, 10, 1) 
+    vialT0 <- c(4, 13, 33, 22, 40, 15, 39, 7, 29, 12, 26, 36)
+    vialTF <- c(25, 01, 16, 23, 5, 8, 34, 27, 30, 8, 9, 32)
+    temp <- rep(25.0, 12)
+    # pressure was not recorded at the time of the sampling, so I used what looks like about the average 
+    pressure <- rep(762, 12) 
+    time0 <- c("2015-10-01 09:29", "2015-10-01 09:33", "2015-10-01 09:42", "2015-10-01 09:45", "2015-10-01 09:52", "2015-10-01 09:58", "2015-10-01 10:05", "2015-10-01 10:10", "2015-10-01 10:18", "2015-10-01 10:22", "2015-10-01 10:28", "2015-10-01 10:30")  
+    BeginBuretT0 <- c(2.00, 2.90, 3.70, 4.60, 5.50, 6.25, 7.05, 8.00, 8.75, 0.00, 0.65, 1.70)
+    EndBuretT0 <- c(2.90, 3.70, 4.60, 5.50, 6.25, 7.05, 8.00, 8.75, 9.50, 0.65, 1.70, 2.60)
+    timeF <- c("2015-10-01 16:07", "2015-10-01 16:10", "2015-10-01 16:12", "2015-10-01 16:14", "2015-10-01 16:17", "2015-10-01 16:19", "2015-10-01 16:22", "2015-10-01 16:24", "2015-10-01 16:27", "2015-10-01 16:29", "2015-10-01 16:31", "2015-10-01 16:33")  
+    BeginBuretTF <- c(0.00, 0.60, 1.45, 1.90, 2.80, 3.45, 4.00, 4.65, 5.25, 5.85, 6.50, 7.00)
+    EndBuretTF <- c(0.60, 1.45, 1.90, 2.80, 3.45, 4.00, 4.65, 5.25, 5.80, 6.50, 7.00, 7.85)
     A <- rep(0.0028, 12)
-    Replvol <- c(35, 37, 35, 37, 36, 35, 35, 35, 35, 36, 36, 37)
+    Replvol <- c(54.5, 55.0, 55.0, 55.5, 54.5, 54.0, 59.0, 53.5, 54.5, 54.0, 53.5, 54.0)
     RmeasT0 <- EndBuretT0 - BeginBuretT0    
     RmeasTF <- EndBuretTF - BeginBuretTF
     # create data.frame
@@ -61,5 +60,4 @@ Modified:
 
 ## Output File 
 
-    write.table(sod, "data/leached_litter_sod_22sept2015.csv", sep = ",", row.names = F, quote = F) 
-
+    write.table(sod, "data/leached_litter_sod_1oct2015.csv", sep = ",", row.names = F, quote = F) 
