@@ -16,6 +16,8 @@ File created on:  15 Oct 2015
 
 Modified:
 
+* 15 Oct 2015 - KF - corrected the pressure value - I originally entered as mm HG but should be in Hg
+
 ### Variables:
 
 * bod = the identifying number of the BOD bottle
@@ -44,7 +46,7 @@ Modified:
     vialTF <- c(25, 01, 16, 23, 5, 8, 34, 27, 30, 8, 9, 32)
     temp <- rep(25.0, 12)
     # pressure was not recorded at the time of the sampling, so I used what looks like about the average 
-    pressure <- rep(762, 12) 
+    pressure <- rep(30, 12) 
     time0 <- c("2015-10-01 09:29", "2015-10-01 09:33", "2015-10-01 09:42", "2015-10-01 09:45", "2015-10-01 09:52", "2015-10-01 09:58", "2015-10-01 10:05", "2015-10-01 10:10", "2015-10-01 10:18", "2015-10-01 10:22", "2015-10-01 10:28", "2015-10-01 10:30")  
     BeginBuretT0 <- c(2.00, 2.90, 3.70, 4.60, 5.50, 6.25, 7.05, 8.00, 8.75, 0.00, 0.65, 1.70)
     EndBuretT0 <- c(2.90, 3.70, 4.60, 5.50, 6.25, 7.05, 8.00, 8.75, 9.50, 0.65, 1.70, 2.60)

@@ -16,6 +16,8 @@ File created on:  12 Oct 2015
 
 Modified:
 
+* 15 Oct 2015 - KF - corrected pressure variable to in Hg from mm Hg
+
 ### Variables:
 
 * bod = the identifying number of the BOD bottle
@@ -44,7 +46,7 @@ Modified:
     vialTF <- c(19, 33, 18, 12, 22, 24, 15, 31, 20, 37, 6, 36)
     temp <- rep(25.5, 12)
     # pressure was not recorded at the time of the sampling, so it was retrieved from the Wunderground climate archive
-    pressure <- rep(767, 12) 
+    pressure <- rep(30, 12) 
     # only the beginnig and end time were recorded for this run, so the times were calcuated by divding the difference by the number of samples and assuming all the samples took approximately the same time. We didn't take breaks, so this is going to be pretty close.
     time0 <- c("2015-09-22 12:42", "2015-09-22 12:47", "2015-09-22 12:53", "2015-09-22 12:58", "2015-09-22 13:04", "2015-09-22 13:09", "2015-09-22 13:15", "2015-09-22 13:20", "2015-09-22 13:26", "2015-09-22 13:31", "2015-09-22 13:37", "2015-09-22 13:47")  
     BeginBuretT0 <- c(2.20, 2.75, 3.4, 4.0, 5.255, 4.7, 6.00, 6.75, 7.35, 8.00, 8.75, 7.00)

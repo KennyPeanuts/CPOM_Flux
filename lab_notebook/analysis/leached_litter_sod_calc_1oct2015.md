@@ -126,29 +126,23 @@ All the below are used for the SOD calculations which were not completed due to 
 ### Import Data
 
     sod <- read.delim("./data/leached_litter_sod_1oct2015.csv", header = T, sep = ",")
-    std.22sept2015 <- read.delim("./data/winkler_standardization_22sept2015.csv", header = T,  sep = ",")
-    std.23sept2015 <- read.delim("./data/winkler_standardization_23sept2015.csv", header = T,  sep = ",")
-    repl <- read.delim("./data/repl_water_22sept2015.csv", header = T,  sep = ",")
+    std.02oct2015 <- read.delim("./data/winkler_standardization_02oct2015.csv", header = T,  sep = ",")
     vial <- read.delim("./data/vial_volume_summer_2014.csv", header = T,  sep = ",")
     treat <- read.delim("./data/leached_litter_treatments_fall2015.csv", header = T, sep = ",")
 
 ###Calculations
 
     ## Add treatments to sod data.frame for T0
-    sod <- merge(sod, treat, by.x = "bod", by.y = "bod")
+    sod <- merge(sod, treat, by = "bod" )
     # DO Calculations
     ## Add vial vial volumes to the sod data.frame for T0
     sodT0 <- merge(sod, vial, by.x = "vialT0", by.y = "vial")
     ## Calculation of [DO] of T0 samples
-    DOvol.T0 <- (((sod$RmeasT0 - std.22sept2015$Rblk) * std.22sept2015$Vstd * std.22sept2015$Nstd * std.22sept2015$E) / ((std.22sept2015$Rstd - std.22sept2015$Rblk) * (sodT0$vol - std.22sept2015$Vreg))) - std.22sept2015$DOreg
+    DOvol.T0 <- (((sod$RmeasT0 - std.02oct2015$Rblk) * std.02oct2015$Vstd * std.02oct2015$Nstd * std.02oct2015$E) / ((std.02oct2015$Rstd - std.02oct2015$Rblk) * (sodT0$vol - std.02oct2015$Vreg))) - std.02oct2015$DOreg
     ## Add vial vial volumes to the sod data.dframe for T1
     sodTF <- merge(sod, vial, by.x = "vialTF", by.y = "vial")
     ## Calculation of [DO] of TF samples
-    DOvol.TF <- (((sod$RmeasTF - std.23sept2015$Rblk) * std.23sept2015$Vstd * std.23sept2015$Nstd * std.23sept2015$E) / ((std.23sept2015$Rstd - std.23sept2015$Rblk) * (sodTF$vol - std.23sept2015$Vreg))) - std.23sept2015$DOreg
-    ## Add vial vial volumes to the sod data.dframe for T1
-    repl <- merge(repl, vial, by.x = "vial", by.y = "vial")
-    ## Calculation of replacement water [DO]
-    replDOvol <- (((repl$Rmeas - std$Rblk) * std$Vstd * std$Nstd * std$E) / ((std$Rstd - std$Rblk) * (repl$vol - std$Vreg))) - std$DOreg
+    DOvol.TF <- (((sod$RmeasTF - std.02oct2015$Rblk) * std.02oct2015$Vstd * std.02oct2015$Nstd * std.02oct2015$E) / ((std.02oct2015$Rstd - std.02oct2015$Rblk) * (sodTF$vol - std.02oct2015$Vreg))) - std.02oct2015$DOreg
     ## Convert from ml/L to mmol/L
     R <- 0.08205746 # ideal gas constant in (L atm)/(mol K)
     T <- sod$temp + 273.15 # convert C to K
@@ -161,7 +155,7 @@ All the below are used for the SOD calculations which were not completed due to 
     DO.conc <- data.frame(sod$bod, sod$treat, DOmmol.T0, DOmmol.TF)
     
     ## write a data table of the concentration data
-    write.table(DO.conc, "./data/leached_litter_DOconc_22sept2015.csv", row.names = F, quote = F, sep = ",")
+    write.table(DO.conc, "./data/leached_litter_DOconc_01oct2015.csv", row.names = F, quote = F, sep = ",")
 
 ################################################################
 
