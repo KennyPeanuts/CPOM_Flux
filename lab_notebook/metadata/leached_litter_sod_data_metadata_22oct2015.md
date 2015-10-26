@@ -45,7 +45,6 @@ Modified:
     vialT0 <- c(4, 10, 19, 28, 1, 34, 3, 24, 18, 21, 14, 23)
     vialTF <- c(36, 30, 39, 37, 15, 12, 25, 26, 9, 33, 13, 5)
     temp <- rep(23.5, 12)
-    # pressure was not recorded at the time of the sampling, so I used what looks like about the average 
     pressure <- rep(30.29, 12) 
     time0 <- c("2015-10-22 09:36", "2015-10-22 09:42", "2015-10-22 09:46", "2015-10-22 09:55", "2015-10-22 09:58", "2015-10-22 10:00", "2015-10-22 10:07", "2015-10-22 10:12", "2015-10-22 10:15", "2015-10-22 10:20", "2015-10-22 10:25", "2015-10-22 10:31")  
     BeginBuretT0 <- c(1.55, 2.425, 3.20, NA, 4.45, 5.15, 5.90, 6.60, 7.30, 8.00, 8.75, 5.75)
@@ -54,7 +53,7 @@ Modified:
     BeginBuretTF <- c(1.55, 2.25, 3.15, 3.95, 4.60, 5.30, 6.20, 7.20, 7.80, 8.65, 7.00, 7.75)
     EndBuretTF <- c(2.25, 3.15, 3.95, 4.60, 5.30, 6.20, 7.20, 7.80, 8.65, 7.00, 7.75, 8.15)
     A <- rep(0.0028, 12)
-    Replvol <- c(63, 60, 60, 60, 55, 62, 55, 60, 60, 60, 56)
+    Replvol <- c(63, 60, 60, 60, 55, 62, 55, 60, 60, 60, 56, 60) # relpacement volume for BOD bottle 10 was not recorded in the notebook, so I used the modal value
     RmeasT0 <- EndBuretT0 - BeginBuretT0    
     RmeasTF <- EndBuretTF - BeginBuretTF
     # create data.frame
@@ -62,4 +61,4 @@ Modified:
 
 ## Output File 
 
-    write.table(sod, "data/leached_litter_sod_1oct2015.csv", sep = ",", row.names = F, quote = F) 
+    write.table(sod, "data/leached_litter_sod_22oct2015.csv", sep = ",", row.names = F, quote = F) 

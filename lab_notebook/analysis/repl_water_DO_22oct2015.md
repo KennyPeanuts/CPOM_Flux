@@ -2,7 +2,7 @@
 
 ## Date of Run 
 
-22 Sept 2015
+22 Oct 2015
 
 ## Metadata
 
@@ -40,10 +40,10 @@ The code for the calculation of the DO in the replacement water in the CPOM Flux
 
 ### Data entry
 
-    date <- c("2015-09-22", "2015-09-22")
-    vial <- c(29, 17) 
-    BeginBuret <- c(7.775, 8.40)
-    EndBuret <- c(8.40, 8.95)
+    date <- c("2015-10-22", "2015-10-22")
+    vial <- c(7, 22) 
+    BeginBuret <- c(6.45, 7.20)
+    EndBuret <- c(7.20, 8.05)
     Rmeas <- EndBuret - BeginBuret
 
 
@@ -52,6 +52,6 @@ The code for the calculation of the DO in the replacement water in the CPOM Flux
     repl <- data.frame(date, vial, Rmeas)
 
     # replace date with date of run
-    write.table(repl, "./data/repl_water_22sept2015.csv", quote = F, row.names = F, sep = ",")
+    write.table(repl, "./data/repl_water_22oct2015.csv", quote = F, row.names = F, sep = ",")
 
 
