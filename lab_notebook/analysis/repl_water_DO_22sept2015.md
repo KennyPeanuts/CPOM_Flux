@@ -12,7 +12,7 @@ KF, JM, JA
 
 ### Created: 
 
-12 Oct 2015
+26 Oct 2015
 
 ### Modified:
 
@@ -40,10 +40,10 @@ The code for the calculation of the DO in the replacement water in the CPOM Flux
 
 ### Data entry
 
-    date <- c("2015-09-22", "2015-09-22")
-    vial <- c(29, 17) 
-    BeginBuret <- c(7.755, 8.40)
-    EndBuret <- c(8.40, 8.95)
+    date <- c("2015-10-22", "2015-10-22")
+    vial <- c(7, 22) 
+    BeginBuret <- c(6.45, 7.20)
+    EndBuret <- c(7.20, 8.05)
     Rmeas <- EndBuret - BeginBuret
 
 
