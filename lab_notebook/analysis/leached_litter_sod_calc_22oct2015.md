@@ -78,7 +78,7 @@ The SOD calculations were not completed due to problems with the titration data
 
 * DOvol.TF = the [DO] in the overlying water at TF (ml/L)
 
-* replDOvol = the [DO] in the replacement water 
+* replDOvol = the [DO] in the replacement water (ml/L) 
 
 * R = the ideal gas constant [(L atm)/(mol K)]
 
@@ -94,13 +94,7 @@ The SOD calculations were not completed due to problems with the titration data
 
 All the below are used for the SOD calculations which were not completed due to titration issues.
 
-* replDOmmol0 = the [DO] of the replacement water without added nutrients (mmol/L)
-
-* replDOmmolN = the [DO] of the replacement water with added nutrients (mmol/L)
-
-* DO.T0.0 = the [DO] of the BOD bottle once the replacement water was added to the bottle in the no-nutrient treatments (mmol/L)
-
-* DO.T0.N = the [DO] of the BOD bottle once the replacement water was added to the bottle in the added nutrient treatments (mmol/L)
+* replDOmmol = the [DO] of the replacement water (mmol/L)
 
 * DO.T0 = the [DO] of the BOD bottle once the replacement water was added to the bottles (mmol/L)
 
