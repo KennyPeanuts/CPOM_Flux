@@ -14,7 +14,9 @@ File created on:  19 Nov 2015
 
 Modified:
 
-3 Dec 2015 - KF - added data for PRE leaf discs
+* 3 Dec 2015 - KF - added data for PRE leaf discs
+
+* 11 Jan 2016 - KF - added calculations for AFDM
 
 ### Variables:
 
@@ -29,8 +31,14 @@ Modified:
 
 ### Calculated Variables:
 
+* sed.mass = the mass of the sediments or leaf matter in the crucible (g)
+* ash.mass = the mass of the material in the crucible after ashing for > 4 h at 550 dC (g)
+* propOM = the proportion of the sediment or leaf sample that is organic matter
+* AFDM.sample = the ash free dry mass of the whole sample in the crucible (g)
+* AFDM.leaf = the estimated ash free dry mass of an individual leaf disk (g)
 
 ## R Code
+### Entered Data
 
     bod <- c(1, 2, 3, 4, 5, 5, 6, 8, 9, 10, 6, 12, 7, 11, 7, 10, NA, NA)
     treat <- c("L", "L", "L", "L", "LS", "LS", "LS", "S", "S", "LS", "LS", "S", "LS", "S", "LS", "LS", "PRE", "PRE")
@@ -41,11 +49,17 @@ Modified:
     cruc.ash <- c(13.1366, 12.6373, 13.0684, 12.2457, 13.1246, 11.9934, 12.2523, 12.6684, 11.7397, 13.0638, 11.8947, 11.7872, 29.8470, 27.0937, 29.1427, 29.4091, 29.7281, 29.4380)
     leaf.num <- c(12, 12, 12, 12, NA, 9, NA, NA, NA, NA, 9, NA, NA, NA, 9, 12, 20, 20)
 
+### Calculations
+
     sed.mass <- cruc.sed - cruc.mass
     ash.mass <- cruc.ash - cruc.mass
     propOM <- (sed.mass - ash.mass) / sed.mass
+    AFDM.sample <- sed.mass * propOM
+    AFDM.leaf <- AFDM.sample / leaf.num    
 
-    leach.OM <- data.frame(bod, treat, sample, leaf.num, cruc, cruc.mass, cruc.sed, cruc.ash, sed.mass, ash.mass, propOM)
+## Data Frame
+
+    leach.OM <- data.frame(bod, treat, sample, leaf.num, cruc, cruc.mass, cruc.sed, cruc.ash, sed.mass, ash.mass, propOM, AFDM.sample, AFDM.leaf)
 
 ## Output File 
 
