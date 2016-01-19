@@ -18,7 +18,7 @@ Description:
 
 The collection of the sediment and leaf discs for %C and %N analysis is described in `CPOM_flux_break-down_notes.md` in the `lab_notes` folder.
 
-Briefly, 4 leaf discs and a surface sediment core (1 cm X 0.8 cm) were collected from each bottle and placed into a 20 ml glass scintillation vial and 10 ml of HPLC-grade methanol was added to each sample. The samples were then capped very tightly, wrapped in parafilm and placed in the freezer.
+Briefly, 4, 10 mm leaf discs and a surface sediment core (1 cm diam X 0.8 cm h) were collected from each bottle and placed into a 20 ml glass scintillation vial and 10 ml of HPLC-grade methanol was added to each sample. The samples were then capped very tightly, wrapped in parafilm and placed in the freezer.
 
 The analysis details are in `Fortino_ergosterol.xlsx` in the `Data` folder.
 
@@ -29,6 +29,8 @@ The calculation details and code are in `CPOM_Flux_Ergo_Analysis.md` in the `Ana
 File Created: 8 Jan 2016 
 
 Modified: 
+
+* 19 Jan 2016 - KF - clarified the variable descriptions to better indicate what "sample" means.
 
 ## Variables
 
@@ -42,7 +44,7 @@ Modified:
 
 * samp = the code indicating whether the sample is a leaf disc ("leaf") or a sediment core ("sed")
 
-* samp_AFDM = the ash-free-dry-mass of the sample (g) 
+* samp_AFDM = the ash-free-dry-mass of the sample (g) NOTE: in the case of the leaf discs, this is the mass of 4 leaf discs.
 
 * ml_MeOH = the volume of methanol (ml)
 
@@ -50,9 +52,9 @@ Modified:
 
 * ergo_conc = the concentration of ergosterol (&mu;g/ml)
 
-* ergo_samp = the mass of ergosterol in the sample (&mu;g)
+* ergo_samp = the mass of ergosterol in the sample (&mu;g / 4, 10 mm leaf discs)
 
-* fungal_mass_samp = the biomass of fungi in the sample (&mu;g)
+* fungal_mass_samp = the biomass of fungi in the sample (&mu;g / (1 cm diam X 0.8 cm h core))
 
 * ergo_per_OM = the ergosterol mass normalized to the AFDM of the sample (&mu;g / g AFDM)
 
