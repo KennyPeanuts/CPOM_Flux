@@ -18,7 +18,7 @@ Description:
 
 The collection of the sediment and leaf discs for %C and %N analysis is described in `CPOM_flux_break-down_notes.md` in the `lab_notes` folder.
 
-Briefly, 4, 10 mm leaf discs and a surface sediment core (1 cm diam X 0.8 cm h) were collected from each bottle and placed into a 20 ml glass scintillation vial and 10 ml of HPLC-grade methanol was added to each sample. The samples were then capped very tightly, wrapped in parafilm and placed in the freezer.
+Briefly, 4, 10 mm leaf discs and a surface sediment core (1 cm h X 0.8 cm diam) were collected from each bottle and placed into a 20 ml glass scintillation vial and 10 ml of HPLC-grade methanol was added to each sample. The samples were then capped very tightly, wrapped in parafilm and placed in the freezer.
 
 The analysis details are in `Fortino_ergosterol.xlsx` in the `Data` folder.
 
@@ -54,7 +54,7 @@ Modified:
 
 * ergo_samp = the mass of ergosterol in the sample (&mu;g / 4, 10 mm leaf discs)
 
-* fungal_mass_samp = the biomass of fungi in the sample (&mu;g / (1 cm diam X 0.8 cm h core))
+* fungal_mass_samp = the biomass of fungi in the sample (&mu;g / (1 cm h X 0.8 cm diam core))
 
 * ergo_per_OM = the ergosterol mass normalized to the AFDM of the sample (&mu;g / g AFDM)
 
