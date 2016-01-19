@@ -93,16 +93,40 @@ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
   2.296   2.489   2.694   2.670   2.818   3.021 
     
 ~~~~
-     
+    
+    #boxplot
+    #par(las = 1)
+    #boxplot(ergo.area[ergo$samp == "leaf"], ergo.area[ergo$samp == "sed"], ylim = c(0, 3), ylab = "Ergosterol (ug/ cm^2)")
+    #text(1, 0.5, "Leaf")
+    #text(2, 2, "Sediment")
+    #dev.copy(jpeg, "./output/plots/ergo_per_cm2.jpg")
+    #dev.off()
+
+    # points plot
     par(las = 1)
-    boxplot(ergo.area[ergo$samp == "leaf"], ergo.area[ergo$samp == "sed"], ylim = c(0, 3), ylab = "Ergosterol (ug/ cm^2)")
-    text(1, 0.5, "Leaf")
-    text(2, 2, "Sediment")
+    plot(ergo.area ~ jitter(as.numeric(samp), 1), data = ergo, xlim = c(0, 3), ylab = "Ergosterol (ug / cm^2)", xlab = " ", axes = F)
+    axis(2)
+    axis(1, at = c(1, 2), c("Leaf", "Sediment"))
+    box()
     dev.copy(jpeg, "./output/plots/ergo_per_cm2.jpg")
     dev.off()
 
 ![Ergosterol per cm^2 of leaf discs and sediment in CPOM Flux Exp.](../output/plots/ergo_per_cm2.jpg)
     
+#### Kruskal Test of difference between the medians
+    
+    kruskal.test(ergo.area ~ samp, data = ergo)
+    
+~~~~
+   
+Kruskal-Wallis rank sum test
+
+data:  ergo.area by samp
+Kruskal-Wallis chi-squared = 15.36, df = 1, p-value = 8.885e-05
+
+~~~~
+     
+
     
 ### Effect of Leaves on Sediment Ergosterol
     
