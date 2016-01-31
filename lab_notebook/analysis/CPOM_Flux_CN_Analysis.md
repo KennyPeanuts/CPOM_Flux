@@ -386,7 +386,6 @@ data:  percN by NUT
 Kruskal-Wallis chi-squared = 0.5609, df = 1, p-value = 0.4539
 
 ~~~~
-  
 ### Comparison of Bulk and Surface Sediment Percent N
 Due to the fact that the Bulk samples were missing data from BOD bottle 1, I created a new set of objects `bulk` and `surf` where I remove the BOD 1 observation from the surface observations to align the surface and bulk observations so that they could be compared pairwise.
 
@@ -586,3 +585,8 @@ Neither nutrients or the addition of leaf litter had an effect on the sediment C
 
 ` = 51.2%`
      
+## Compare CN Data to Ergosterol
+
+### load Ergosterol Data
+
+    erg <- read.table("./data/CPOM_Flux_Ergo.csv", header = T, sep = ",")
