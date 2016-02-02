@@ -1,4 +1,4 @@
-# Analysis of the C:N data for the Leached Litter Experiment
+# Analysis of the Leaf C:N data for the Leached Litter and CPOM Flux Experiment
 
 ## Fall 2015
 
@@ -253,6 +253,10 @@ Unlike for the percent C, the percent N of the leaves increased from the initial
 
 ### Leaf Analysis for CPOM Flux
 
+#### Effect of nutrient addition on leaf litter
+
+There was no effect of the nutrient addition on the leaf litter CN, perc C, or perc N
+
     plot(CN ~ jitter(as.numeric(NUT), 1), data = cn.cf, subset = Source == "leaf", ylim = c(0, 25), axes = F, xlab = " ")
     axis(2)
     axis(1, c("Ambient Nutrients", "Added Nutrients"), at = c(1, 2))
@@ -265,6 +269,73 @@ Unlike for the percent C, the percent N of the leaves increased from the initial
     axis(2)
     axis(1, c("Ambient Nutrients", "Added Nutrients"), at = c(1, 2))
 
-    plot(percN ~ percC, data = cn.cf, subset = Source == "leaf", main = "CPOM Flux Exp")
-    plot(percN ~ percC, data = cn.ll, subset = Type == "Leaf", main = "Leached Litter Exp")
+#### Relationship between perc C and perc N
 
+Interestingly there is a positive correlation between the perc N and perc C of the leaves in the CPOM Flux experiment.
+
+    summary(lm(percN ~ percC, data = cn.cf, subset = Source == "leaf"))
+
+~~~~
+ 
+> summary(lm(percN ~ percC, data = cn.cf, subset = Source == "leaf"))
+
+Call:
+lm(formula = percN ~ percC, data = cn.cf, subset = Source == 
+    "leaf")
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.09441 -0.07635 -0.01631  0.04021  0.15532 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 0.192349   0.182179   1.056    0.332    
+percC       0.055196   0.005347  10.322 4.83e-05 ***
+
+Residual standard error: 0.1029 on 6 degrees of freedom
+Multiple R-squared:  0.9467, Adjusted R-squared:  0.9378 
+F-statistic: 106.6 on 1 and 6 DF,  p-value: 4.832e-05
+
+~~~~
+    
+    par(las = 1)
+    plot(percN ~ percC, data = cn.cf, subset = Source == "leaf", main = "CPOM Flux Exp")
+    dev.copy(jpeg, "./output/plots/percC_by_percN_CPOM_Flux.jpg")
+    dev.off()
+
+![perc C by perc N in the CPOM Flux exp](../output/plots/percC_by_percN_CPOM_Flux.jpg)
+
+FIGURE: The relationship between percent C (percC) and percent N (percN) of the leaves in the CPOM Flux Experiment. Each point represents the homogenized leaves from a single bottle.
+
+This correlation was not found in the Leached Litter Experiment
+
+    summary(lm(percN ~ percC, data = cn.ll, subset = Type == "Leaf"))
+
+~~~~
+ 
+ Call:
+lm(formula = percN ~ percC, data = cn.ll, subset = Type == "Leaf")
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.56442 -0.09125  0.02883  0.22063  0.40401 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)  
+(Intercept)  2.03157    0.96865   2.097   0.0692 .
+percC       -0.01159    0.02261  -0.513   0.6220  
+
+Residual standard error: 0.3417 on 8 degrees of freedom
+Multiple R-squared:  0.03182, Adjusted R-squared:  -0.08921 
+F-statistic: 0.2629 on 1 and 8 DF,  p-value: 0.622
+
+~~~~
+    
+    par(las = 1)
+    plot(percN ~ percC, data = cn.ll, subset = Type == "Leaf", main = "Leached Litter Exp")
+    dev.copy(jpeg, "./output/plots/percC_by_percN_leached_litter.jpg")
+    dev.off()
+
+![perc C by perc N in the CPOM Flux exp](../output/plots/percC_by_percN_leached_litter.jpg)
+
+FIGURE: The relationship between percent C (percC) and percent N (percN) of the leaves in the Leached Litter. Each point represents the homogenized leaves from a single bottle.
