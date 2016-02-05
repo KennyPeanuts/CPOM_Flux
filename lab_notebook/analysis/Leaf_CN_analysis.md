@@ -19,6 +19,8 @@ This code creates calculated variables for the C:N data from the Leached Litter 
     # CPOM Flux exp
     cn.cf <- read.table("./data/CPOM_Flux_CN.csv", header = T, sep = ",")
 
+    # leached litter LOI
+    loi.ll <- read.table("./data/leached_litter_LOI_5nov2015.csv", header = T, sep = ",")
 
 ### Remove the QA QC repeat analyses from leached litter data
 
@@ -175,6 +177,14 @@ FIGURE Plot of the percent C (percC) of the leaf organic matter by the treatment
 #### Interpretation of percent C
 
 There is no difference in the CN of the leaves incubated with and without leaf sediments but the leaves incubated with sediments have lower percent C. One possibility is that this is due to sediment material that is stuck to the leaves, or it could be due to the greater mineralization of C from the leaves in the sediment environment.
+
+To test whether there is more sediment attached to the leaves that were incubated with the sediments, I am looking to see if there is a sig difference in the ash mass of the leaves from the LS treatment. This could indicate if there was more sediment material stuck to the leaves which would lower the C content.
+
+    plot(ash.mass ~ as.numeric(treat), data = loi.ll, subset = sample == "leaf", ylim = c(0, 0.015), xlim = c(0, 3), axes = F)
+    axis(2)
+    axis(1, c("S", "LS", "PRE"), at = c(1, 2, 3))
+    box()
+
 
 ### Effect of Treament on percent N
 #### Data Summary
