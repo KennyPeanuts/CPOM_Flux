@@ -31,37 +31,63 @@ A YSI sample was collected from another hole adjacent to where the water was col
 | --------- | ----- | ----- | ----  |
 | Temp (dC) | 4.69  | 4.73  | 4.95  |
 | Cond (uS) | 12.99 | 12.91 | 12.79 |
-| perc DO   | 
+| perc DO   | 66.7  | 70.4  | 76.1  |
+| DO (mg/L) | 8.17  | 8.66  | 9.32  |
 
 
+### 4 Feb 2016
 
+Water (6 L) was collected from LPP using the dip-collector and stored in the dark at room temperature. The pond at the time of collection was full of runoff from recent rain and the water was rather turbid with some suspended particulates.
 
-The bottles were then placed haphazardly on the rocker shakers in the dark with speed = 8 and tilt = 8
+### 10 Feb 2016
 
-## Treatments
+Water (10 L) was collected from LPP using the dip-collector and placed in the refrigerator
 
-The treatment levels were randomly assigned to the bottles
+## Lab Procedures
 
-~~~~~
+### 3 Feb 2016
 
-| Bottle_number | CPOM | Nutrients | Treatment_Code |
-|---------------+------+-----------+----------------|
-| 1             | Y    | N         | C0             |
-| 2             | N    | Y         | 0N             |
-| 3             | N    | N         | 00             |
-| 4             | Y    | Y         | CN             |
-| 5             | N    | N         | 00             |
-| 6             | Y    | N         | C0             |
-| 7             | N    | Y         | 0N             |
-| 8             | N    | N         | 00             |
-| 9             | N    | N         | 00             |
-| 10            | Y    | Y         | CN             |
-| 11            | Y    | Y         | CN             |
-| 12            | Y    | N         | C0             |
-| 13            | Y    | N         | C0             |
-| 14            | N    | Y         | 0N             |
-| 15            | N    | Y         | 0N             |
-| 16            | Y    | Y         | CN             |
-|               |      |           |                |
+Using a ladle the sediment slurry in the buckets was thoroughly mixed and then ladled into a graduated cylinder to add to the BOD bottles.
 
-~~~~
+150 ml of slurry was added to BOD bottles (300 ml) that had been randomly assigned to treatment levels.
+
+The BOD bottles were then filled to the top (approximately 200 ml) with the lake water collected on 29 Jan 2016.
+
+The bottles the placed on the dark and allowed to settle.
+
+The BOD bottle assignments are:
+
+| BOD Number | Treatment Level |
+| ---------- | --------------- |
+| 1          | Leaf            |
+| 2          | Leaf            |
+| 3          | No Leaf         |
+| 4          | Leaf            |
+| 5          | No Leaf         |
+| 6          | No Leaf         |
+| 7          | Leaf            |
+| 8          | Leaf            |
+| 9          | No Leaf         |
+| 10         | No Leaf         |
+
+### 2 Feb 2016
+
+The overlying water in all of the bottles was replaced with the lake water collected on 29 Jan 2016. The water was sucked off with a syringe down to within a few mm of the sediment-water interface and then water was very carefully added back so as not to disturb the sediments.
+
+| BOD Number | Water Vol Removed (ml) | Water Vol Replaced (ml) |
+| ---------  | ---------------------- | ----------------------- |
+| 7          | 220                    | 230                     |
+| 3          | 250                    | 245                     |
+| 4          | 230                    | 245                     |
+| 5          | 240                    | 240                     |
+| 9          | 210                    | 225                     |
+| 10         | 215                    | 223                     |
+| 2          | 240                    | 245                     |
+| 8          | 235                    | 240                     |
+| 6          | 240                    | 235                     |
+| 1          | 235                    | 240                     |
+
+### 5 Feb 2016
+
+The overlying water in the BOD bottle was partially changed again. About 100 ml of water was removed 
+
