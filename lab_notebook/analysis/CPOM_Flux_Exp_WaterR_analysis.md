@@ -10,6 +10,8 @@ Modified:
 
 * 11 June 2015 - KF - added code for display of figures
 
+* 22 March 2016 - KF - calculated the areal oxygen consumption
+
 ## Purpose
 
 This code it to analyze the water R data from the treatments with and without CPOM and/or nutrients
@@ -156,3 +158,48 @@ Plot of the water R by nutrient
      dev.off()
 
 ![water R by Nutrients on each day of incubation](../output/plots/waterR_by_NUT.jpg)
+
+# Calculation of the Areal Flux from the Water
+
+Each of the bottles received 100 ml of slurry and the BOD bottle are nominally 300 ml so each bottle should have approximately 200 ml of overlying water. This is likely a slight underestimate, since the sediments settled during the experiment. 
+
+If we assume these volumes are correct then the mass (mmol) of oxygen consumed per hour in the bottles would be:
+ 
+    dDO.mass.h <- wR.tot$waterR * 200 # mmol O2 / bottle / h
+
+This mass can then be converted to an areal measure (mmol O2/ m2 / h) by multiplying by the sediment area of the bottle (0.0028 m2):
+ 
+    waterR.m2.h <- dDO.mass.h * 0.0028 # mmol O2 / m2 / h
+
+## Summary 
+
+    summary(waterR.m2.h)
+
+~~~~
+Areal Oxygen Consumption of the Water (mmol O2 / m2 / h)
+
+      Min.    1st Qu.     Median       Mean    3rd Qu.       Max.       NAs 
+-0.0019490 -0.0001197  0.0003278  0.0002069  0.0007163  0.0017310          1 
+
+~~~~
+ 
+    stem(waterR.m2.h) 
+
+~~~~
+Areal Oxygen Consumption of the Water (mmol O2 / m2 / h)
+
+  The decimal point is 3 digit(s) to the left of the |
+
+  -1 | 98555
+  -1 | 410
+  -0 | 998655
+  -0 | 4222211100
+   0 | 00111122222223334444444444
+   0 | 555666677789999999
+   1 | 001222244
+   1 | 67
+
+~~~~
+ 
+ 
+ 
