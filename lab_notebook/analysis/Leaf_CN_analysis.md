@@ -96,7 +96,7 @@ LS-L  -6.339343 -14.13283   1.454143 0.1063607
 
 ![CN of Leaf by Treatment](../output/plots/cn_leaf_by_treatment.jpg)
 
-FIGURE Plot of the C:N of the leaf organic matter by the treatment conditions in the bottle. Initial refers to leaf samples before being added to the bottles. Leaf refers to leaves that were incubated with only lake water, and Leaf + Seds refers to leaves that were incubated with lake water and sediment. The open circles are from the leached litter experiment and the crosses are from the CPOM Flux experiment. Each point is from the homgenized leaves from a single bottle.
+FIGURE Plot of the C:N of the leaf organic matter by the treatment conditions in the bottle. Initial refers to leaf samples before being added to the bottles. Leaf refers to leaves that were incubated with only lake water, and Leaf + Seds refers to leaves that were incubated with lake water and sediment. The solid circles are from the leached litter experiment and the open circles are from the CPOM Flux experiment. Each point is from the homgenized leaves from a single bottle.
 
 #### Interpretation of CN
 
@@ -172,7 +172,7 @@ LS-L -9.4250 -14.181663 -4.668337 0.0015993
 
 ![Percent C of Leaf by Treatment](../output/plots/percC_leaf_by_treatment.jpg)
 
-FIGURE Plot of the percent C (percC) of the leaf organic matter by the treatment conditions in the bottle. Initial refers to leaf samples before being added to the bottles. Leaf refers to leaves that were incubated with only lake water, and Leaf + Seds refers to leaves that were incubated with lake water and sediment. The open circles are from the leached litter experiment and the crosses are from the CPOM Flux experiment. Each point is from the homgenized leaves from a single bottle.
+FIGURE Plot of the percent C (percC) of the leaf organic matter by the treatment conditions in the bottle. Initial refers to leaf samples before being added to the bottles. Leaf refers to leaves that were incubated with only lake water, and Leaf + Seds refers to leaves that were incubated with lake water and sediment. The solid circles are from the leached litter experiment and the open circles are from the CPOM Flux experiment. Each point is from the homgenized leaves from a single bottle.
 
 #### Interpretation of percent C
 
@@ -316,7 +316,7 @@ LS-L -0.0275 -0.378378 0.323378 0.9711771
 
 ![Percent N of Leaf by Treatment](../output/plots/percN_leaf_by_treatment.jpg)
 
-FIGURE Plot of the percent N (percN) of the leaf organic matter by the treatment conditions in the bottle. Initial refers to leaf samples before being added to the bottles. Leaf refers to leaves that were incubated with only lake water, and Leaf + Seds refers to leaves that were incubated with lake water and sediment. The open circles are from the leached litter experiment and the crosses are from the CPOM Flux experiment. Each point is from the homgenized leaves from a single bottle.
+FIGURE Plot of the percent N (percN) of the leaf organic matter by the treatment conditions in the bottle. Initial refers to leaf samples before being added to the bottles. Leaf refers to leaves that were incubated with only lake water, and Leaf + Seds refers to leaves that were incubated with lake water and sediment. The closed circles are from the leached litter experiment and the open circles are from the CPOM Flux experiment. Each point is from the homgenized leaves from a single bottle.
 
 #### Interpretation of percent N
 
