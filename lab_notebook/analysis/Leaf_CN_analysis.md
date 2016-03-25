@@ -91,8 +91,8 @@ LS-L  -6.339343 -14.13283   1.454143 0.1063607
     axis(1, c("Initial", "Leaf", "Leaf + Sed."), at = c(1, 2, 3))
     box()
     points(jitter(rep(3, 8), 1), cn.cf$CN[cn.cf$Source == "leaf"], pch = 3)
-    dev.copy(jpeg, "./output/plots/cn_leaf_by_treatment.jpg")
-    dev.off()
+    #dev.copy(jpeg, "./output/plots/cn_leaf_by_treatment.jpg")
+    #dev.off()
 
 ![CN of Leaf by Treatment](../output/plots/cn_leaf_by_treatment.jpg)
 
@@ -162,9 +162,9 @@ LS-L -9.4250 -14.181663 -4.668337 0.0015993
 #### Plot
  
     par(las = 1)
-    plot(percC ~ jitter(as.numeric(Treat), 1), data = cn.ll, subset = Type == "Leaf",    ylim = c(0, 50), xlim = c(0, 4), xlab = " ", axes = F)
+    plot(percC ~ jitter(as.numeric(Treat), 1), data = cn.ll, subset = Type == "Leaf",    ylim = c(0, 50), xlim = c(0, 4), xlab = " ", ylab = "Percent Carbon", axes = F, cex = 1.5, cex.lab = 1.2)
     axis(2)
-    axis(1, c("Initial", "Leaf", "Leaf + Seds."), at = c(1, 2, 3))
+    axis(1, c("Initial", "Leaf", "Leaf + Seds."), at = c(1, 2, 3), cex.axis = 1.2)
     box()
     points(jitter(rep(3, 8), 1), cn.cf$percC[cn.cf$Source == "leaf"], pch = 3)
     dev.copy(jpeg, "./output/plots/percC_leaf_by_treatment.jpg")
@@ -184,6 +184,67 @@ To test whether there is more sediment attached to the leaves that were incubate
     axis(2)
     axis(1, c("S", "LS", "PRE"), at = c(1, 2, 3))
     box()
+    dev.copy(jpeg, "./output/plots/ash_mass_by_treatment.jpg")
+    dev.off()
+
+![Ash Mass of Leaf by Treatment](../output/plots/ash_mass_by_treatment.jpg)
+
+It looks like the ash mass of the leaf treatments is greater, indicating that the lower percent C may be just due to dilution of the sample with inorganic material.
+
+### Analysis of C Mass
+
+I am calculating the mass of C as the product of the sediment mass * the percent C
+
+    # Merge the cn.ll with the loi.ll data
+    ll.cn.loi <- merge(cn.ll, loi.ll, by.x = "BOD", by.y = "bod")
+    # Calculate the mass of C 
+    c.mass <- ll.cn.loi$percC * (ll.cn.loi$sed.mass / ll.cn.loi$leaf.num)
+
+#### Data Summary
+
+    summary(c.mass[ll.cn.loi$Type == "Leaf"])
+
+~~~~
+Summary of the Leaf C Mass from Leached Litter
+(g)
+
+ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
+0.04067 0.05803 0.07068 0.07303 0.08542 0.10870       4 
+
+~~~~
+
+    tapply(c.mass[ll.cn.loi$Type == "Leaf"], ll.cn.loi$Treat[ll.cn.loi$Type == "Leaf"], summary)
+
+~~~~
+Summary of Leaf C Mass by Treatment (g)
+ 
+$I
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+0.08494 0.08638 0.09658 0.09670 0.10690 0.10870 
+
+$L
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+0.04067 0.05571 0.06253 0.06212 0.06894 0.08276 
+
+$LS
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
+0.04981 0.04990 0.05912 0.06028 0.06950 0.07305       4
+
+~~~~
+ 
+#### Plot 
+ 
+    par(las = 1)
+    plot(c.mass ~ jitter(as.numeric(Treat), 1), data = ll.cn.loi, subset = Type == "Leaf", ylim = c(0, 0.15), xlim = c(0, 4), xlab = " ", ylab = "Carbon Mass per leaf (g)", axes = F, pch = 1, cex = 1.5, cex.lab = 1.2)
+    axis(2)    
+    axis(1, c("Initial", "Leaf", "Leaf + Seds."), at = c(1, 2, 3), cex.axis = 1.2)
+    box()
+    dev.copy(jpeg, "./output/plots/C_mass_leaf_by_treatment.jpg")
+    dev.off()
+
+![C Mass of Leaf by Treatment](../output/plots/ash_mass_by_treatment.jpg)
+
+When calcualted as a mass, the loss of C from the leaves is similar in the sediments and non-sediment environments.
 
 
 ### Effect of Treament on percent N
@@ -245,9 +306,9 @@ LS-L -0.0275 -0.378378 0.323378 0.9711771
 #### Plot
  
     par(las = 1)     
-    plot(percN ~ jitter(as.numeric(Treat), 1), data = cn.ll, subset = Type == "Leaf", ylim = c(0, 3), xlim = c(0, 4), xlab = " ", axes = F)
+    plot(percN ~ jitter(as.numeric(Treat), 1), data = cn.ll, subset = Type == "Leaf", ylim = c(0, 3), xlim = c(0, 4), xlab = " ", ylab = "Percent Nitrogen", axes = F, cex = 1.5, cex.lab = 1.2)
     axis(2)
-    axis(1, c("Initial", "Leaf", "Leaf + Seds."), at = c(1, 2, 3))
+    axis(1, c("Initial", "Leaf", "Leaf + Seds."), at = c(1, 2, 3), cex.axis = 1.2)
     box()
     points(jitter(rep(3, 8), 1), cn.cf$percN[cn.cf$Source == "leaf"], pch = 3)
     dev.copy(jpeg, "./output/plots/percN_leaf_by_treatment.jpg")
@@ -260,6 +321,26 @@ FIGURE Plot of the percent N (percN) of the leaf organic matter by the treatment
 #### Interpretation of percent N
 
 Unlike for the percent C, the percent N of the leaves increased from the initial regardless of whether they were incubated with sediments or not. 
+
+I am calculating the mass of N as the product of the sediment mass * the percent N
+
+### Calcualtion of N mass of Leaves
+
+    # Calculate the mass of N
+    n.mass <- ll.cn.loi$percN * (ll.cn.loi$sed.mass / ll.cn.loi$leaf.num)
+
+#### Data Summary
+
+
+    par(las = 1)
+    plot(n.mass * 1000 ~ jitter(as.numeric(Treat), 1), data = ll.cn.loi, subset = Type == "Leaf", ylim = c(0, 4), xlim = c(0, 4), xlab = " ", ylab = "Nitrogen Mass per leaf (mg)", axes = F, pch = 1, cex = 1.5, cex.lab = 1.2)
+    axis(2)    
+    axis(1, c("Initial", "Leaf", "Leaf + Seds."), at = c(1, 2, 3), cex.axis = 1.2)
+    box()
+    dev.copy(jpeg, "./output/plots/N_mass_leaf_by_treatment.jpg")
+    dev.off()
+
+![N Mass of Leaf by Treatment](../output/plots/N_mass_leaf_by_treatment.jpg)
 
 ### Leaf Analysis for CPOM Flux
 
