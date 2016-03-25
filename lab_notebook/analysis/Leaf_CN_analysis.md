@@ -86,13 +86,13 @@ LS-L  -6.339343 -14.13283   1.454143 0.1063607
 #### Plot
     
     par(las = 1)
-    plot(CN ~ jitter(as.numeric(Treat), 1), data = cn.ll, subset = Type == "Leaf", ylim = c(0, 100), xlim = c(0, 4), axes = F, xlab = " ")
+    plot(CN ~ jitter(as.numeric(Treat), 1), data = cn.ll, subset = Type == "Leaf", ylim = c(0, 100), xlim = c(0, 4), axes = F, xlab = " ", ylab = "C:N", cex = 1.5, cex.lab = 1.2, pch = 19)
     axis(2)
-    axis(1, c("Initial", "Leaf", "Leaf + Sed."), at = c(1, 2, 3))
+    axis(1, c("Initial", "Leaf", "Leaf + Sed."), at = c(1, 2, 3), cex.axis = 1.2)
     box()
-    points(jitter(rep(3, 8), 1), cn.cf$CN[cn.cf$Source == "leaf"], pch = 3)
-    #dev.copy(jpeg, "./output/plots/cn_leaf_by_treatment.jpg")
-    #dev.off()
+    points(jitter(rep(3, 8), 1), cn.cf$CN[cn.cf$Source == "leaf"], pch = 1, cex = 1.5)
+    dev.copy(jpeg, "./output/plots/cn_leaf_by_treatment.jpg")
+    dev.off()
 
 ![CN of Leaf by Treatment](../output/plots/cn_leaf_by_treatment.jpg)
 
@@ -162,11 +162,11 @@ LS-L -9.4250 -14.181663 -4.668337 0.0015993
 #### Plot
  
     par(las = 1)
-    plot(percC ~ jitter(as.numeric(Treat), 1), data = cn.ll, subset = Type == "Leaf",    ylim = c(0, 50), xlim = c(0, 4), xlab = " ", ylab = "Percent Carbon", axes = F, cex = 1.5, cex.lab = 1.2)
+    plot(percC ~ jitter(as.numeric(Treat), 1), data = cn.ll, subset = Type == "Leaf",    ylim = c(0, 50), xlim = c(0, 4), xlab = " ", ylab = "Percent Carbon", axes = F, cex = 1.5, cex.lab = 1.2, pch = 19)
     axis(2)
     axis(1, c("Initial", "Leaf", "Leaf + Seds."), at = c(1, 2, 3), cex.axis = 1.2)
     box()
-    points(jitter(rep(3, 8), 1), cn.cf$percC[cn.cf$Source == "leaf"], pch = 3)
+    points(jitter(rep(3, 8), 1), cn.cf$percC[cn.cf$Source == "leaf"], pch = 1, cex = 1.5)
     dev.copy(jpeg, "./output/plots/percC_leaf_by_treatment.jpg")
     dev.off()
 
@@ -235,7 +235,7 @@ $LS
 #### Plot 
  
     par(las = 1)
-    plot(c.mass ~ jitter(as.numeric(Treat), 1), data = ll.cn.loi, subset = Type == "Leaf", ylim = c(0, 0.15), xlim = c(0, 4), xlab = " ", ylab = "Carbon Mass per leaf (g)", axes = F, pch = 1, cex = 1.5, cex.lab = 1.2)
+    plot(c.mass ~ jitter(as.numeric(Treat), 1), data = ll.cn.loi, subset = Type == "Leaf", ylim = c(0, 0.15), xlim = c(0, 4), xlab = " ", ylab = "Carbon Mass per leaf (g)", axes = F, pch = 19, cex = 1.5, cex.lab = 1.2)
     axis(2)    
     axis(1, c("Initial", "Leaf", "Leaf + Seds."), at = c(1, 2, 3), cex.axis = 1.2)
     box()
@@ -306,11 +306,11 @@ LS-L -0.0275 -0.378378 0.323378 0.9711771
 #### Plot
  
     par(las = 1)     
-    plot(percN ~ jitter(as.numeric(Treat), 1), data = cn.ll, subset = Type == "Leaf", ylim = c(0, 3), xlim = c(0, 4), xlab = " ", ylab = "Percent Nitrogen", axes = F, cex = 1.5, cex.lab = 1.2)
+    plot(percN ~ jitter(as.numeric(Treat), 1), data = cn.ll, subset = Type == "Leaf", ylim = c(0, 3), xlim = c(0, 4), xlab = " ", ylab = "Percent Nitrogen", axes = F, cex = 1.5, cex.lab = 1.2, pch = 19)
     axis(2)
     axis(1, c("Initial", "Leaf", "Leaf + Seds."), at = c(1, 2, 3), cex.axis = 1.2)
     box()
-    points(jitter(rep(3, 8), 1), cn.cf$percN[cn.cf$Source == "leaf"], pch = 3)
+    points(jitter(rep(3, 8), 1), cn.cf$percN[cn.cf$Source == "leaf"], pch = 1, cex = 1.5)
     dev.copy(jpeg, "./output/plots/percN_leaf_by_treatment.jpg")
     dev.off()
 
@@ -333,7 +333,7 @@ I am calculating the mass of N as the product of the sediment mass * the percent
 
 
     par(las = 1)
-    plot(n.mass * 1000 ~ jitter(as.numeric(Treat), 1), data = ll.cn.loi, subset = Type == "Leaf", ylim = c(0, 4), xlim = c(0, 4), xlab = " ", ylab = "Nitrogen Mass per leaf (mg)", axes = F, pch = 1, cex = 1.5, cex.lab = 1.2)
+    plot(n.mass * 1000 ~ jitter(as.numeric(Treat), 1), data = ll.cn.loi, subset = Type == "Leaf", ylim = c(0, 4), xlim = c(0, 4), xlab = " ", ylab = "Nitrogen Mass per leaf (mg)", axes = F, pch = 19, cex = 1.5, cex.lab = 1.2)
     axis(2)    
     axis(1, c("Initial", "Leaf", "Leaf + Seds."), at = c(1, 2, 3), cex.axis = 1.2)
     box()
