@@ -81,14 +81,16 @@ Residuals             6 604.38  100.73
 
 #### Plots
 
-    par(las = 1)
-    plot(perc.mass.rem ~ jitter(treatment, 0.5), ylim = c(0, 100), xlim = c(0, 3), axes = F, xlab = " ", ylab = "Percent Mass Remaining")
-    axis(2)
-    axis(1, c("No Sediment", "Sediment"), at = c(1, 2))
-    box()
+    par(las = 1, mar = c(5, 5, 5, 5), lwd = 2)
+    plot(perc.mass.rem ~ jitter(treatment, 0.5), ylim = c(0, 100), xlim = c(0.5, 2.5), axes = F, xlab = " ", ylab = "Percent Mass Remaining", cex.lab = 1.5, pch = 19)
+    axis(2, cex.axis = 1.2)
+    axis(1, c("No Sediment", "Sediment"), at = c(1, 2), cex.axis = 1.5)
+    box(lwd = 5)
+    text(1, mean(perc.mass.rem[treatment == 1]), "*", cex = 2, col = "red")
+    text(2, mean(perc.mass.rem[treatment == 2]), "*", cex = 2, col = "red")
     dev.copy(jpeg, "./output/plots/perc_mass_rem_by_treatment.jpg")
     dev.off()
 
 ![Plot of percent leaf mass remaining by sediment presence](../output/plots/perc_mass_rem_by_treatment.jpg)
 
-FIGURE: Plot of the percent leaf mass remaining by the presence of sediment in the bottles in the Leached Litter Experiment. Each point represents the average mass loss of a single leaf estimated from the change in mass of all of the leaves in the bottle.
+FIGURE: Plot of the percent leaf mass remaining by the presence of sediment in the bottles in the Leached Litter Experiment. Each point represents the average mass loss of a single leaf estimated from the change in mass of all of the leaves in the bottle. The red star indicates the mean.
