@@ -1,5 +1,9 @@
 # Analysis of the Ergosterol Data from the CPOM Flux Experiment
 
+## Modified
+
+* 17 May 2016 - KF - adjusted the calculations of the leaf surface area to only use one surface based on Vlads recommendtion, prepped figures for SFS talk
+
 ## Import Data
 
     ergo <- read.table("./data/CPOM_Flux_Ergo.csv", header = T, sep = ",")
@@ -12,9 +16,9 @@ Given that the sediments have a lot of volume that does not likely support fungi
     
     sed.area <- pi * ((0.8 / 2)^2) # sediment core = 0.8 cm diam. Units = cm^2
 
-The surface area of the leaf discs is multipled by 2 assuming that each leaf disc could be colonized on both sides.
+The surface area of the leaf discs is NOT multipled by 2 so colonization is assumed to only occur on the upper surface od the leaf.
     
-    leaf.area <- (pi * ((1 / 2)^2)) * 4 * 2 # leaf discs 1 cm diam and each sample = 4 leaf discs.  Units = cm^2
+    leaf.area <- (pi * ((1 / 2)^2)) * 4 # leaf discs 1 cm diam and each sample = 4 leaf discs.  Units = cm^2
 
     surf.area <- rep(NA, 32) # create empty object
     # fill in appropriate areas
@@ -27,7 +31,7 @@ The surface area of the leaf discs is multipled by 2 assuming that each leaf dis
 
 ## Calculated Variable Descriptions
     
-* surf.area = the surface area of the total sample material in the vial. For the sediment core it is the surface area of the sediment core in cm^2. For the leaf discs it is the total surface area of both sides of the 4 leaf discs in cm^2.
+* surf.area = the surface area of the total sample material in the vial. For the sediment core it is the surface area of the sediment core in cm^2. For the leaf discs it is the surface area of only one side of the 4 leaf discs in cm^2.
     
 * ergo.area = the mass of ergosterol per cm^2 of sediment or leaf disc in the sample (&mu;g / cm^2).
     
@@ -57,10 +61,12 @@ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
     
 ~~~~
 
-     par(las = 1)
-     boxplot(ergo$ergo_per_OM[ergo$samp == "leaf"], ergo$ergo_per_OM[ergo$samp == "sed"], ylim = c(0, 200), ylab = "Ergosterol (ug/ g AFDM)")
-    text(1, 10, "Leaf")
-    text(2, 10, "Sediment")
+    # points plot
+    par(las = 1, mar=c(5, 6, 3, 3))
+    plot(ergo_per_OM ~ jitter(as.numeric(samp), 0.5), data = ergo, xlim = c(0.5, 2.5), ylim = c(0, 200), ylab = expression(paste("Ergosterol (", mu, "g (g AFDM)"^{-1}, ")")), xlab = " ", axes = F, cex = 1.5, cex.lab = 1.5, pch = 19)
+    axis(2, cex.axis = 1.5)
+    axis(1, at = c(1, 2), c("Leaf", "Sediment"), cex.axis = 1.5)
+    box()
     dev.copy(jpeg, "./output/plots/ergo_per_OM_by_samp.jpg")
     dev.off()
     
@@ -79,8 +85,8 @@ For the leaf samples (&mu;g ergosterol / cm^2 leaf):
 ~~~~
      
  Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
-0.07512 0.10370 0.13750 0.14610 0.18260 0.23350       8 
-    
+ 0.1502  0.2075  0.2751  0.2921  0.3651  0.4671       8 
+
 ~~~~
      
 For the sediment samples (&mu;g ergosterol / cm^2 sediments):
@@ -103,10 +109,10 @@ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
     #dev.off()
 
     # points plot
-    par(las = 1)
-    plot(ergo.area ~ jitter(as.numeric(samp), 1), data = ergo, xlim = c(0, 3), ylab = "Ergosterol (ug / cm^2)", xlab = " ", axes = F)
-    axis(2)
-    axis(1, at = c(1, 2), c("Leaf", "Sediment"))
+    par(las = 1, mar=c(5, 6, 3, 3))
+    plot(ergo.area ~ jitter(as.numeric(samp), 0.5), data = ergo, xlim = c(0.5, 2.5), ylim = c(0, 3), ylab = expression(paste("Ergosterol (", mu, "g cm"^{-2}, ")")), xlab = " ", axes = F, cex = 1.5, cex.lab = 1.5, pch = 19)
+    axis(2, cex.axis = 1.5)
+    axis(1, at = c(1, 2), c("Leaf", "Sediment"), cex.axis = 1.5)
     box()
     dev.copy(jpeg, "./output/plots/ergo_per_cm2.jpg")
     dev.off()
