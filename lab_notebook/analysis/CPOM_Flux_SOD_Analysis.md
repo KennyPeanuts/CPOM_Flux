@@ -10,6 +10,7 @@
 * Modified 8 May 2015 - KF - alterd the repeated measures analysis
 * Modified 9 June 2015 - KF - reran all analyses based on the updated calculations of SOD with the more comprehensive bottle OM data.
 * Modified 12 June 2015 - KF - added analysis of the DO concentration in the bottles.
+* Modified 17 May 2016 - KF - created figure of area normalized SOD.
 
 ## Purpose
 
@@ -124,10 +125,10 @@ The decimal point is 1 digit(s) to the right of the |
 
 The subset of low DO values all come from the T-0 incubation day
 
-    par(las = 1, cex = 1.5)
-    plot(DO.T0 * 1000 ~ days.elap, data = sod, subset = CPOM == "yes", pch = 1, ylim = c(0, 300), ylab = expression(paste("Oxygen Concentration (", mu, "mol L"^{-1}, ") ")), xlab = "Days of Incubation")
-    points(DO.T0 * 1000 ~ days.elap, data = sod, subset = CPOM == "no", pch = 2)
-    legend(10, 100, c("Leaf Litter", "No Leaf Litter"), pch = c(1, 2))
+    par(las = 1, cex = 1, mar=c(5, 5, 3, 2))
+    plot(DO.T0 * 1000 ~ jitter(days.elap, 1), data = sod, subset = CPOM == "yes", pch = 19, ylim = c(0, 300), ylab = expression(paste("Oxygen Concentration (", mu, "mol L"^{-1}, ") ")), xlab = "Days of Incubation")
+    points(DO.T0 * 1000 ~ jitter(days.elap, 1), data = sod, subset = CPOM == "no", pch = 1)
+    legend(10, 100, c("Leaf Litter", "No Leaf Litter"), pch = c(19, 1))
     dev.copy(jpeg, "./output/plots/DO_by_day.jpg")
     dev.off()
 
@@ -278,6 +279,7 @@ in umol / (g OM) / h
 ~~~~                                                                                                                                         
                                                                                                                                          
 ### Plots
+#### Plot of OM Normalized SOD
 
     # Plot that shows the CPOM and Nut treatment effects 
     plot(sod.OM ~ days.elap, data = sod, subset = CPOM == "yes" & nutrient == "yes", ylim = c(0, 50), pch = 16, xlab = "Days of Incubation", ylab = expression(paste("SOD (", mu, "mol (g OM)"^{-1}, " h"^{-1}, ")")))
@@ -299,7 +301,23 @@ in umol / (g OM) / h
     dev.copy(jpeg, "./output/plots/SOD_OM_by_days.jpg")
     dev.off()
 
-![Area normalized SOD by days elapsed](../output/plots/SOD_OM_by_days.jpeg)
+![OM normalized SOD by days elapsed](../output/plots/SOD_OM_by_days.jpeg)
+
+#### Plot of Area-Normalized SOD
+
+    # Calculation of mean SOD by day and CPOM treatment for plot
+    sod.mean.CPOM <- c(mean(sod$sod.OM[sod$days.elap == 0 & sod$CPOM == "yes"]), mean(sod$sod.OM[sod$days.elap == 2 & sod$CPOM == "yes"]), mean(sod$sod.OM[sod$days.elap == 7 & sod$CPOM == "yes"]), mean(sod$sod.OM[sod$days.elap == 14 & sod$CPOM == "yes"]), mean(sod$sod.OM[sod$days.elap == 21 & sod$CPOM == "yes"])) 
+    sod.mean.ctl <- c(mean(sod$sod.OM[sod$days.elap == 0 & sod$CPOM == "no"]), mean(sod$sod.OM[sod$days.elap == 2 & sod$CPOM == "no"], na.rm = T), mean(sod$sod.OM[sod$days.elap == 7 & sod$CPOM == "no"]), mean(sod$sod.OM[sod$days.elap == 14 & sod$CPOM == "no"]), mean(sod$sod.OM[sod$days.elap == 21 & sod$CPOM == "no"])) 
+
+    # Plot of Area-normalized SOD by days of incubation 
+    par(las = 1, mar = c(6, 6, 3, 3))
+    plot(SOD ~ jitter(days.elap, 1), data = sod, subset = CPOM == "yes", ylim = c(0, 2.5), xlab = "Days of Incubation", ylab = expression(paste("SOD (m"^{-2}, " h"^{-1}, ")")), pch = 19, cex.axis = 1.5, cex.lab = 1.5, cex = 2)
+    points(SOD ~ jitter(days.elap, 1), data = sod, subset = CPOM == "no", pch = 1, cex = 2)
+    legend(12, 2.5, c("Leaf Litter  ", "No Leaf Litter  "), pch = c(19, 1), cex = 1)
+    dev.copy(jpeg, "./output/plots/SOD_by_days.jpg")
+    dev.off()
+
+![Area normalized SOD by days elapsed](../output/plots/SOD_by_days.jpeg)
 
 
 ### DO Repeated measures
