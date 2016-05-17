@@ -317,7 +317,7 @@ in umol / (g OM) / h
     dev.copy(jpeg, "./output/plots/SOD_by_days.jpg")
     dev.off()
 
-![Area normalized SOD by days elapsed](../output/plots/SOD_by_days.jpeg)
+![Area normalized SOD by days elapsed](../output/plots/SOD_by_days.jpg)
 
 
 ### DO Repeated measures
