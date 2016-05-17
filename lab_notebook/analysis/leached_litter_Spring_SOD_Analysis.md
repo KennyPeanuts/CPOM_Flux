@@ -42,4 +42,4 @@ Flux calculations can be found in [leached_litter_Spring_sod_calc_11feb2016.md](
     dev.off()
 
 
-![Area normalized SOD by days elapsed](../output/plots/leached_litter_SOD_by_days.jpeg)
+![Area normalized SOD by days elapsed](../output/plots/leached_litter_SOD_by_days.jpg)
