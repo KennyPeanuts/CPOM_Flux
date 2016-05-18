@@ -35,7 +35,7 @@ Flux calculations can be found in [leached_litter_Spring_sod_calc_11feb2016.md](
 ## Analysis
     
     par(las = 1, mar = c(6, 6, 3, 3))
-    plot(SOD ~ jitter(days.elap, 0.7), data = sod, subset = treatment == "LS", ylim = c(0, 2.5), xlim = c(0, 21), xlab = "Days of Incubation", ylab = expression(paste("SOD (m"^{-2}, " h"^{-1}, ")")), pch = 19, cex.axis = 1.5, cex.lab = 1.5, cex = 2)
+    plot(SOD ~ jitter(days.elap, 0.7), data = sod, subset = treatment == "LS", ylim = c(0, 2.5), xlim = c(0, 21), xlab = "Days of Incubation", ylab = expression(paste("SOD (mmol ", O[2], " m"^{-2}, " h"^{-1}, ")")), pch = 19, cex.axis = 1.2, cex.lab = 1.5, cex = 2)
     points(SOD ~ jitter(days.elap, 0.7), data = sod, subset = treatment == "S", pch = 1, cex = 2)
     legend(12, 2.5, c("Leaf Litter  ", "No Leaf Litter  "), pch = c(19, 1), cex = 1)
     dev.copy(jpeg, "./output/plots/leached_litter_SOD_by_days.jpg")
