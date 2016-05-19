@@ -64,7 +64,7 @@ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
     # points plot
     par(las = 1, mar=c(5, 6, 3, 3))
     plot(ergo_per_OM ~ jitter(as.numeric(samp), 0.5), data = ergo, xlim = c(0.5, 2.5), ylim = c(0, 200), ylab = expression(paste("Ergosterol (", mu, "g (g AFDM)"^{-1}, ")")), xlab = " ", axes = F, cex = 1.5, cex.lab = 1.5, pch = 19)
-    axis(2, cex.axis = 1.5)
+    axis(2, cex.axis = 1.0)
     axis(1, at = c(1, 2), c("Leaf", "Sediment"), cex.axis = 1.5)
     box()
     dev.copy(jpeg, "./output/plots/ergo_per_OM_by_samp.jpg")
@@ -111,7 +111,7 @@ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
     # points plot
     par(las = 1, mar=c(5, 6, 3, 3))
     plot(ergo.area ~ jitter(as.numeric(samp), 0.5), data = ergo, xlim = c(0.5, 2.5), ylim = c(0, 3), ylab = expression(paste("Ergosterol (", mu, "g cm"^{-2}, ")")), xlab = " ", axes = F, cex = 1.5, cex.lab = 1.5, pch = 19)
-    axis(2, cex.axis = 1.5)
+    axis(2, cex.axis = 1.0)
     axis(1, at = c(1, 2), c("Leaf", "Sediment"), cex.axis = 1.5)
     box()
     dev.copy(jpeg, "./output/plots/ergo_per_cm2.jpg")
