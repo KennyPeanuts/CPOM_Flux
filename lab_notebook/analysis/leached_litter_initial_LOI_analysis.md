@@ -136,7 +136,7 @@ Mass of 20 leached leaf discs
 
 ~~~~
  
-The surface area of the sediments in the microcosms is 0.00353 m2 (ref)[//github.com/KennyPeanuts/CPOM_Flux/blob/master/lab_notebook/analysis/CPOM_flux_BOD_OM_input_calc_6Jun2014.md] so the mass per m^2 would be:
+The surface area of the sediments in the microcosms is 0.00353 m2 [ref](//github.com/KennyPeanuts/CPOM_Flux/blob/master/lab_notebook/analysis/CPOM_flux_BOD_OM_input_calc_6Jun2014.md) so the mass per m^2 would be:
  
     loi$AFDM.sample[loi$sample == "leaf"] / 0.00353
 
