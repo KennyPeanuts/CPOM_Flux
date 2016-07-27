@@ -61,4 +61,4 @@ Modified:
 
 ## Output File 
 
-    write.table(leach.initial.OM, "data/leached_litter_iniitial_LOI_17Sept2015.csv", sep = ",", row.names = F, quote = F) 
+    write.table(leach.initial.OM, "data/leached_litter_initial_LOI_17Sept2015.csv", sep = ",", row.names = F, quote = F) 
