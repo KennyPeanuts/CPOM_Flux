@@ -6,6 +6,8 @@
 
 * Code created 27 July 2016
 
+* Modified - 8 Aug 2016 - KF - changed the way that I calculated the range of OM in the bottles to use the range or actual mass of OM in the samples rather than the min and max propOM and bulk density.
+
 ## Purpose
 
 This code analyzes the LOI data from the initial organic matter added to the microcosms in the Leached Litter experiment
@@ -101,26 +103,14 @@ The volume of slurry added to each of the microcosms was 100 ml in the leached l
  
 The range of sediment organic matter mass can be estimated as:
  
-minimum = the minimum sediment mass in the bottle * the minimum proportion of organic matter:
- 
-    min(loi$dry.bulk[loi$sample == "sed"] * 100) * min(loi$propOM[loi$sample == "sed"])
+    summary((loi$dry.bulk[loi$sample == "sed"] * 100) * (loi$propOM[loi$sample == "sed"]))
 
 ~~~~
-minimum g of organic matter in the microcosm
+Summary of the organic matter mass in the microcosms (g)
 
-1.215832
-
-~~~~
- 
-maximum = the maximum sediment mass in the bottle * the maximum proportion of organic matter:
- 
-    max(loi$dry.bulk[loi$sample == "sed"] * 100) * max(loi$propOM[loi$sample == "sed"])
-
-~~~~
-maximum of organic matter in the microcosm
-
-1.386729
-
+Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  1.236   1.299   1.331   1.314   1.346   1.356 
+  
 ~~~~
  
 ### Calculate the mass of leaf litter in the microcosms
