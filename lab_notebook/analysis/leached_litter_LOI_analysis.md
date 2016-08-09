@@ -6,6 +6,8 @@
 
 * Code created 2 Feb 2016 - KF
 
+* Modfied - 9 Aug 2016 - KF - expanded the analysis to include the sediments as well as the leaves.
+
 ## Purpose
 
 This code analyzes the LOI data from the Leached Litter experiment and evaluates differences in the treatments
@@ -14,9 +16,9 @@ This code analyzes the LOI data from the Leached Litter experiment and evaluates
 ### Import Data
 
     loi <- read.table("./data/leached_litter_LOI_5nov2015.csv", header = T, sep = ",")
+    loi.init <- read.table("./data/leached_litter_initial_LOI_17Sept2015.csv", header = T, sep = ",")
 
-
-### Compare Mass Loss
+### Compare Leaf Mass Loss
     
     initial.leaf.mean <- (mean(loi$AFDM.leaf[loi$treat == "PRE"]))
     
@@ -32,7 +34,7 @@ This code analyzes the LOI data from the Leached Litter experiment and evaluates
     tapply(mass.loss, loi$treat[loi$sample == "leaf" & loi$treat != "PRE"], summary)
 
 ~~~~
-# mass loss (g)
+# mass loss of a single leaf over the duration of the experiment (g)
 
 $L
      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
@@ -48,7 +50,7 @@ $LS
     tapply(perc.mass.rem, loi$treat[loi$sample == "leaf" & loi$treat != "PRE"], summary)
  
 ~~~~
-# Percent Mass Remaining
+# Percent Mass Remaining of a Single Leaf after the duration of the experiment
 
 $L
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
@@ -59,7 +61,37 @@ $LS
   47.14   47.53   53.10   54.16   59.73   63.33 
 ~~~~
 
-### Test Treatment Effect
+ 
+    tapply((100 - perc.mass.rem), loi$treat[loi$sample == "leaf" & loi$treat != "PRE"], summary)
+
+
+    tapply((100 - perc.mass.rem), loi$treat[loi$sample == "leaf" & loi$treat != "PRE"], sd)
+
+~~~~
+# Percent AFDM Mass lost from a single leaf during the experiment in the treatments
+ 
+$L
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  19.58   20.16   29.88   30.07   39.78   40.95 
+
+$LS
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  36.67   40.27   46.90   45.84   52.47   52.86 
+
+$PRE
+NULL
+
+$S
+NULL
+
+## SD
+
+       L       LS      PRE        S 
+11.68519  8.05707       NA       NA 
+
+~~~~
+ 
+### Test Treatment Effect on the mass loss of the leaves
 
     # Create treatment vector
     treatment <- loi$treat[loi$sample == "leaf" & loi$treat != "PRE"]    
@@ -94,3 +126,28 @@ Residuals             6 604.38  100.73
 ![Plot of percent leaf mass remaining by sediment presence](../output/plots/perc_mass_rem_by_treatment.jpg)
 
 FIGURE: Plot of the percent leaf mass remaining by the presence of sediment in the bottles in the Leached Litter Experiment. Each point represents the average mass loss of a single leaf estimated from the change in mass of all of the leaves in the bottle. The red star indicates the mean.
+
+### Sediment LOI
+
+Summarize the percent organic matter at the end of the experiment
+
+    tapply(loi$propOM[loi$sample == "sed"], loi$treat[loi$sample == "sed"], summary)
+
+~~~~
+# The proportion of organic matter in the sediments of the different treatments at the conclusion of the experiment.
+
+$L
+NULL
+
+$LS
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.1181  0.1212  0.1238  0.1265  0.1291  0.1403 
+
+$PRE
+NULL
+
+$S
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.1312  0.1319  0.1334  0.1709  0.1725  0.2857 
+
+~~~~
