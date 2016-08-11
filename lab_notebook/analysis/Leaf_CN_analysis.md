@@ -7,6 +7,8 @@
 
 * Code created 2 Feb 2016 - KF
 
+* Modified - 11 Aug 2016 - KF - added anova tests to the N and C mass
+
 ## Purpose
 
 This code creates calculated variables for the C:N data from the Leached Litter experiment and evaluates differences in the treatments
@@ -243,10 +245,44 @@ $LS
     dev.copy(jpeg, "./output/plots/C_mass_leaf_by_treatment.jpg")
     dev.off()
 
-![C Mass of Leaf by Treatment](../output/plots/C_mass_by_treatment.jpg)
+![C Mass of Leaf by Treatment](../output/plots/C_mass_leaf_by_treatment.jpg)
 
 When calcualted as a mass, the loss of C from the leaves is similar in the sediments and non-sediment environments.
 
+#### Test of the treatment effect on C mass
+
+    c.mass.anova <- aov(c.mass ~ Treat, data = ll.cn.loi, subset = Type == "Leaf")
+    summary(c.mass.anova)
+    
+~~~~
+ANOVA of C Mass by Treatment
+
+            Df   Sum Sq   Mean Sq F value  Pr(>F)   
+Treat        2 0.003367 0.0016834   8.378 0.00881 **
+Residuals    9 0.001808 0.0002009                   
+---
+4 observations deleted due to missingness
+
+~~~~
+
+##### Tukey Test of Treatments vs C Mass
+
+    TukeyHSD(c.mass.anova)
+    
+~~~~
+
+ Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = c.mass ~ Treat, data = ll.cn.loi, subset = Type == "Leaf")
+
+$Treat
+             diff         lwr          upr     p adj
+L-I  -0.034571937 -0.06255728 -0.006586591 0.0180353
+LS-I -0.036420194 -0.06440554 -0.008434848 0.0136128
+LS-L -0.001848257 -0.02983360  0.026137089 0.9814685
+
+~~~~
 
 ### Effect of Treament on percent N
 #### Data Summary
@@ -332,6 +368,30 @@ I am calculating the mass of N as the product of the sediment mass * the percent
 
 #### Data Summary
 
+    tapply(n.mass, ll.cn.loi$Treat, summary)
+
+~~~~
+N Mass of the leaves by treatment in the leached litter exp (g)
+
+$I
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+0.001795 0.001924 0.002107 0.002118 0.002300 0.002462 
+
+$L
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+0.001641 0.001854 0.002014 0.002248 0.002409 0.003323 
+
+$LS
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NA's 
+0.000185 0.000251 0.001240 0.001469 0.002534 0.003462        8 
+
+$S
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+     NA      NA      NA     NaN      NA      NA       4 
+     
+~~~~
+
+#### Plot
 
     par(las = 1, lwd = 2, mar = c(5, 5, 5, 5))
     plot(n.mass * 1000 ~ jitter(as.numeric(Treat), 0.6), data = ll.cn.loi, subset = Type == "Leaf", ylim = c(0, 4), xlim = c(0.5, 3.5), xlab = " ", ylab = "Nitrogen Mass per Leaf (mg)", axes = F, pch = 19, cex = 1.5, cex.lab = 1.5)
@@ -342,6 +402,21 @@ I am calculating the mass of N as the product of the sediment mass * the percent
     dev.off()
 
 ![N Mass of Leaf by Treatment](../output/plots/N_mass_leaf_by_treatment.jpg)
+
+#### Test of Treatment effect
+
+    n.mass.anova <- aov(n.mass ~ Treat, data = ll.cn.loi, subset = Type == "Leaf")
+    summary(n.mass.anova)
+
+~~~~
+ANOVA of N Mass by treatments
+
+            Df    Sum Sq   Mean Sq F value Pr(>F)
+Treat        2 7.152e-07 3.576e-07   1.132  0.364
+Residuals    9 2.843e-06 3.159e-07               
+4 observations deleted due to missingness
+
+~~~~~
 
 ### Leaf Analysis for CPOM Flux
 
