@@ -368,6 +368,16 @@ I am calculating the mass of N as the product of the sediment mass * the percent
 
 #### Data Summary
 
+    summary(n.mass)
+    
+~~~~
+N mass of the leaves across all treatments (g)
+
+   Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NA's 
+0.000185 0.001314 0.002036 0.001826 0.002470 0.003462       12 
+
+~~~~
+
     tapply(n.mass, ll.cn.loi$Treat, summary)
 
 ~~~~
