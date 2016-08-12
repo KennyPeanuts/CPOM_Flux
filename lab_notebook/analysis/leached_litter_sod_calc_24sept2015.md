@@ -2,7 +2,7 @@
 
 ## Date of Run 
 
-22 Oct 2015
+24 Sept 2015
 
 ## Metadata
 
@@ -12,9 +12,10 @@ KF, JM, JA
 
 ### Created on:
 
-27 Oct 2015
+12 Aug 2016
 
 ### Modified:
+
 
 ### Affiliation:
 
@@ -22,7 +23,7 @@ Longwood University
 
 ### Description: 
 
-The code for the calculation of sediment oxygen demand from the winkler titration data from the  Leached Litter Experiment
+The code for the calculation of sediment oxygen demand from the winkler titration data from the Leached Litter Experiment
 
 ## Variable Descriptions
 
@@ -78,7 +79,7 @@ The SOD calculations were not completed due to problems with the titration data
 
 * DOvol.TF = the [DO] in the overlying water at TF (ml/L)
 
-* replDOvol = the [DO] in the replacement water (ml/L) 
+* replDOvol = the [DO] in the replacement water 
 
 * R = the ideal gas constant [(L atm)/(mol K)]
 
@@ -94,8 +95,13 @@ The SOD calculations were not completed due to problems with the titration data
 
 All the below are used for the SOD calculations which were not completed due to titration issues.
 
-* replDOmmol = the [DO] of the replacement water (mmol/L)
+* replDOmmol0 = the [DO] of the replacement water without added nutrients (mmol/L)
 
+* replDOmmolN = the [DO] of the replacement water with added nutrients (mmol/L)
+
+* DO.T0.0 = the [DO] of the BOD bottle once the replacement water was added to the bottle in the no-nutrient treatments (mmol/L)
+
+* DO.T0.N = the [DO] of the BOD bottle once the replacement water was added to the bottle in the added nutrient treatments (mmol/L)
 
 * DO.T0 = the [DO] of the BOD bottle once the replacement water was added to the bottles (mmol/L)
 
@@ -119,29 +125,25 @@ All the below are used for the SOD calculations which were not completed due to 
 
 ### Import Data
 
-    sod <- read.delim("./data/leached_litter_sod_22oct2015.csv", header = T, sep = ",")
-    std.22oct2015 <- read.delim("./data/winkler_standardization_22oct2015.csv", header = T,  sep = ",")
-    std.23oct2015 <- read.delim("./data/winkler_standardization_23oct2015.csv", header = T,  sep = ",")
+    sod <- read.delim("./data/leached_litter_sod_24sept2015.csv", header = T, sep = ",")
+    std.24sept2015 <- read.delim("./data/winkler_standardization_24sept2015.csv", header = T,  sep = ",")
+    std.25sept2015 <- read.delim("./data/winkler_standardization_25sept2015.csv", header = T,  sep = ",")
     vial <- read.delim("./data/vial_volume_summer_2014.csv", header = T,  sep = ",")
     treat <- read.delim("./data/leached_litter_treatments_fall2015.csv", header = T, sep = ",")
-    repl <- read.delim("./data/repl_water_22oct2015.csv", header = T, sep = ",")
-    BODwatervol <- 200
-        
+
 ###Calculations
 
     ## Add treatments to sod data.frame for T0
-    sod <- merge(sod, treat, by = "bod" )
+    sod <- merge(sod, treat, by.x = "bod", by.y = "bod")
     # DO Calculations
     ## Add vial vial volumes to the sod data.frame for T0
     sodT0 <- merge(sod, vial, by.x = "vialT0", by.y = "vial")
     ## Calculation of [DO] of T0 samples
-    DOvol.T0 <- (((sod$RmeasT0 - std.22oct2015$Rblk) * std.22oct2015$Vstd * std.22oct2015$Nstd * std.22oct2015$E) / ((std.22oct2015$Rstd - std.22oct2015$Rblk) * (sodT0$vol - std.22oct2015$Vreg))) - std.22oct2015$DOreg
+    DOvol.T0 <- (((sod$RmeasT0 - std.24sept2015$Rblk) * std.24sept2015$Vstd * std.24sept2015$Nstd * std.24sept2015$E) / ((std.24sept2015$Rstd - std.24sept2015$Rblk) * (sodT0$vol - std.24sept2015$Vreg))) - std.24sept2015$DOreg
     ## Add vial vial volumes to the sod data.dframe for T1
     sodTF <- merge(sod, vial, by.x = "vialTF", by.y = "vial")
     ## Calculation of [DO] of TF samples
-    DOvol.TF <- (((sod$RmeasTF - std.23oct2015$Rblk) * std.23oct2015$Vstd * std.23oct2015$Nstd * std.23oct2015$E) / ((std.23oct2015$Rstd - std.23oct2015$Rblk) * (sodTF$vol - std.23oct2015$Vreg))) - std.23oct2015$DOreg
-    ## Calculation of the [DO] of the replacement water
-    replDOvol <- (((repl$Rmeas - std.23oct2015$Rblk) * std.23oct2015$Vstd * std.23oct2015$Nstd * std.23oct2015$E) / ((std.23oct2015$Rstd - std.23oct2015$Rblk) * (sodTF$vol - std.23oct2015$Vreg))) - std.23oct2015$DOreg
+    DOvol.TF <- (((sod$RmeasTF - std.25sept2015$Rblk) * std.25sept2015$Vstd * std.25sept2015$Nstd * std.25sept2015$E) / ((std.25sept2015$Rstd - std.25sept2015$Rblk) * (sodTF$vol - std.25sept2015$Vreg))) - std.25sept2015$DOreg
     ## Convert from ml/L to mmol/L
     R <- 0.08205746 # ideal gas constant in (L atm)/(mol K)
     T <- sod$temp + 273.15 # convert C to K
@@ -154,5 +156,5 @@ All the below are used for the SOD calculations which were not completed due to 
     DO.conc <- data.frame(sod$bod, sod$treat, DOmmol.T0, DOmmol.TF)
     
     ## write a data table of the concentration data
-    write.table(DO.conc, "./data/leached_litter_DOconc_22oct2015.csv", row.names = F, quote = F, sep = ",")
+    write.table(DO.conc, "./data/leached_litter_DOconc_24sept2015.csv", row.names = F, quote = F, sep = ",")
 

@@ -2,7 +2,7 @@
 
 ## Date of Run
  
-29 Sept 2015
+24 Sept 2015
 
 ## Metadata
 
@@ -70,12 +70,12 @@ The code for the calculation of the standardization variables for the winkler ti
 
 ### Data entry
     
-    std.begin.buret <- c(0.15, 0.35, 0.55)
-    std.end.buret <- c(0.35, 0.55, 0.65)
-    blank.begin1 <- c(0.65, 1.45, 1.75, 2.20)
-    blank.end1 <- c(1.10, 1.65, 2.05, 2.45)
-    blank.begin2 <- c(1.10, 1.65, 2.05, 2.45)
-    blank.end2 <- c(1.25, 1.75, 2.20, 2.60)
+    std.begin.buret <- c(0.00, 0.20, 0.30)
+    std.end.buret <- c(0.20, 0.30, 0.525)
+    blank.begin1 <- c(0.70, 1.05)
+    blank.end1 <- c(0.90, 1.25)
+    blank.begin2 <- c(0.90, 1.25)
+    blank.end2 <- c(1.05, 1.40)
     Vstd <- 0.2
     MnCl.vol <- 0.085
     NaI.vol <- 0.085
@@ -99,7 +99,7 @@ The code for the calculation of the standardization variables for the winkler ti
 
     std <- data.frame(Rstd, Rblk, Vstd, Nstd, E, Vreg, DOreg)
     
-    write.table(std, file = "./data/winkler_standardization_23sept2015.csv", quote = F, row.names = F, sep = ",")
+    write.table(std, file = "./data/winkler_standardization_24sept2015.csv", quote = F, row.names = F, sep = ",")
 
 
 
