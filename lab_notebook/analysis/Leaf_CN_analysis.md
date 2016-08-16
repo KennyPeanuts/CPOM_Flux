@@ -9,6 +9,8 @@
 
 * Modified - 11 Aug 2016 - KF - added anova tests to the N and C mass
 
+* Modified - 16 Aug 2016 - KF - analyze C and N correlation in the sediments
+
 ## Purpose
 
 This code creates calculated variables for the C:N data from the Leached Litter experiment and evaluates differences in the treatments
@@ -19,7 +21,7 @@ This code creates calculated variables for the C:N data from the Leached Litter 
     #leached litter exp
     cn.ll <- read.table("./data/leached_litter_CN.csv", header = T, sep = ",")
 
-    # CPOM Flux exp
+    # CPOM Flux exp (Litter Exp)
     cn.cf <- read.table("./data/CPOM_Flux_CN.csv", header = T, sep = ",")
 
     # leached litter LOI
@@ -373,7 +375,7 @@ I am calculating the mass of N as the product of the sediment mass * the percent
 ~~~~
 N mass of the leaves across all treatments (g)
 
-   Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NA's 
+   Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NAs 
 0.000185 0.001314 0.002036 0.001826 0.002470 0.003462       12 
 
 ~~~~
@@ -392,11 +394,11 @@ $L
 0.001641 0.001854 0.002014 0.002248 0.002409 0.003323 
 
 $LS
-    Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NA's 
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NAs 
 0.000185 0.000251 0.001240 0.001469 0.002534 0.003462        8 
 
 $S
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
      NA      NA      NA     NaN      NA      NA       4 
      
 ~~~~
@@ -516,3 +518,58 @@ F-statistic: 0.2629 on 1 and 8 DF,  p-value: 0.622
 ![perc C by perc N in the CPOM Flux exp](../output/plots/percC_by_percN_leached_litter.jpg)
 
 FIGURE: The relationship between percent C (percC) and percent N (percN) of the leaves in the Leached Litter. Each point represents the homogenized leaves from a single bottle.
+
+
+## Sediment Analysis
+### Litter Experiment
+
+    summary(lm(percN ~ percC, data = cn.cf, subset = Source == "surf"))
+
+~~~~
+Regression of percent N by percent C in the surface sediments of the litter exp
+
+Call:
+lm(formula = percN ~ percC, data = cn.cf, subset = Source == 
+    "surf")
+
+Residuals:
+       Min         1Q     Median         3Q        Max 
+-0.0079053 -0.0032181  0.0004649  0.0013031  0.0068095 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -0.063941   0.028322  -2.258   0.0405 *  
+percC        0.112340   0.008828  12.726 4.38e-09 ***
+---
+
+Residual standard error: 0.004112 on 14 degrees of freedom
+Multiple R-squared:  0.9204, Adjusted R-squared:  0.9148 
+F-statistic:   162 on 1 and 14 DF,  p-value: 4.384e-09
+
+~~~~
+
+### Leached Litter Exp
+ 
+    summary(lm(percN ~ percC, data = cn.ll, subset = Type == "Sed"))
+
+~~~~
+Regression of percent N by percent C in the sediment of the leached litter experiment
+
+Call:
+lm(formula = percN ~ percC, data = cn.ll, subset = Type == "Sed")
+
+Residuals:
+       Min         1Q     Median         3Q        Max 
+-0.0105661 -0.0026178 -0.0009391  0.0026489  0.0088122 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)  
+(Intercept)  0.13104    0.03992   3.282   0.0168 *
+percC        0.01243    0.02452   0.507   0.6302  
+---
+
+Residual standard error: 0.006778 on 6 degrees of freedom
+Multiple R-squared:  0.04109, Adjusted R-squared:  -0.1187 
+F-statistic: 0.2571 on 1 and 6 DF,  p-value: 0.6302
+
+~~~~
