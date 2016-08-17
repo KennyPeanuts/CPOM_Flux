@@ -8,6 +8,8 @@
 
 * 16 Aug 2016 - KF - added calculations of DO concentration 
 
+* 17 Aug 2016 - KF - converted DO to umol/L to match litter exp results
+
 ## Purpose
 
 This code is to analyze the effect of the leached litter addition treatments on SOD. 
@@ -42,47 +44,52 @@ These data still need to be entered - KF - 16 Aug 2016
     #loi <- read.table("./data/
 
 ## Analysis
+
+#### Convert DO from mmol/L to umol/L
+
+    DO.T0.umol <- sod$DO.T0 * 1000
+
 ### Analyze DO concentrations
 
-    tapply(sod$DO.T0, sod$days.elap, summary) 
-    tapply(sod$DO.T0, sod$days.elap, sd)
+    tapply(DO.T0.umol, sod$days.elap, summary) 
+    tapply(DO.T0.umol, sod$days.elap, sd)
 
 ~~~~
-Dissolved oxygen in the bottles (mmol /L) by days elapsed
+Dissolved oxygen in the bottles (umol /L) by days elapsed
 
 $`2`
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. SD
- 0.2253  0.2264  0.2271  0.2344  0.2410  0.2657 0.013698528
+  225.3   226.4   227.1   234.4   241.0   265.7 13.698528 
 
 $`9`
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. SD
- 0.2890  0.2900  0.2908  0.2940  0.2915  0.3124 0.007928689
+  289.0   290.0   290.8   294.0   291.5   312.4 7.928689
 
 ~~~~
+
+    tapply(DO.T0.umol, sod$treatment, summary) 
+    tapply(DO.T0.umol, sod$treatment, sd)
+
+~~~~
+Dissolved oxygen in the bottles (umol/L) by treatment
+
+$LS
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. SD
+  225.3   231.9   267.8   265.8   290.4   312.4 34.65816
+
+$S
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. SD
+  226.1   226.7   277.8   262.6   290.8   291.7 31.93086
+
+~~~~~
  
-    anova(lm(DO.T0 ~ treatment * days.elap, data = sod))
-
-~~~~
-ANOVA on the DO conc of the bottles by time and treatment
-
-Analysis of Variance Table
-
-Response: DO.T0
-                    Df    Sum Sq   Mean Sq  F value    Pr(>F)    
-treatment            1 0.0000522 0.0000522   0.3883    0.5420    
-days.elap            1 0.0177844 0.0177844 132.3840 3.775e-09 ***
-treatment:days.elap  1 0.0000530 0.0000530   0.3947    0.5387    
-Residuals           16 0.0021494 0.0001343                       
----
- 
-~~~~
  
 #### Plot of the DO concentration of the bottles by time and treatment
     
     par(las = 1, mar = c(6, 6, 3, 3))
-    plot(DO.T0 ~ days.elap, data = sod, subset = treatment == "LS", ylim = c(0, 0.5), xlim = c(0, 21), xlab = "Days of Incubation", ylab = expression(paste("Dissolved Oxygen Conc. (mmol ", O[2], " L"^{-1}, ")")), pch = 4, cex.axis = 1.2, cex.lab = 1, cex = 1.5)
-    points(DO.T0 ~ days.elap, data = sod, subset = treatment == "S", pch = 1, cex = 1.5)
-    legend(12, 0.5, c("Leaf Litter", "No Leaf Litter"), pch = c(4, 1), cex = 1)
+    plot(DO.T0.umol ~ days.elap, data = sod, subset = treatment == "LS", ylim = c(0, 500), xlim = c(0, 21), xlab = "Days of Incubation", ylab = expression(paste("Dissolved Oxygen Conc. (", mu, "mol ",O[2], " L"^{-1}, ")")), pch = 4, cex.axis = 1.2, cex.lab = 1, cex = 1.5)
+    points(DO.T0.umol ~ days.elap, data = sod, subset = treatment == "S", pch = 1, cex = 1.5)
+    legend(12, 500, c("Leaf Litter", "No Leaf Litter"), pch = c(4, 1), cex = 1)
     dev.copy(jpeg, "./output/plots/leached_litter_DO_by_days.jpg")
     dev.off()
 
@@ -90,7 +97,11 @@ Residuals           16 0.0021494 0.0001343
 
 Dissolved Oxygen by days elapsed for bottles with and without leaf litter
 
-### Plot Effect of Treatment on Area Norm SOD    
+
+### Area Normalized SOD
+
+    
+#### Plot Effect of Treatment on Area Norm SOD    
     par(las = 1, mar = c(6, 6, 3, 3))
     plot(SOD ~ days.elap, data = sod, subset = treatment == "LS", ylim = c(0, 2.5), xlim = c(0, 21), xlab = "Days of Incubation", ylab = expression(paste("SOD (mmol ", O[2], " m"^{-2}, " h"^{-1}, ")")), pch = 4, cex.axis = 1.2, cex.lab = 1.5, cex = 1.5)
     points(SOD ~ days.elap, data = sod, subset = treatment == "S", pch = 1, cex = 1.5)
