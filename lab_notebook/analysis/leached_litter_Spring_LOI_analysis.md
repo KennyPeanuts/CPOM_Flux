@@ -1,4 +1,4 @@
-# Analysis of the Organic Content of the Microcosma from the leached litter SOD exp. 
+# Analysis of the Organic Content of the Microcosma from the leached litter SOD exp 
 
 ## Spring 2016
 
@@ -20,8 +20,8 @@ This code analyzes the LOI data from the initial organic matter added to the mic
 ### Summary Statistics
 #### Initial Sediment Samples
 
+ 
     summary(loi[loi$sample == "sed" & loi$time == "init",])
-   
 
 ~~~~
 Sediment Samples
@@ -173,7 +173,74 @@ Summary of the Final LOI data for the sediments from the leached litter SOD exp.
                                                      NAs   :10  
 
 ~~~~
+
+#### Comparison of Treatment Final Sediment LOI 
+#### Sediment Only
+
+    summary(loi[loi$sample == "sed" & loi$time == "final" & loi$treatment == "S", 6:16])
+
+~~~~
+Summary of LOI Data for the Sediments in the sediment - only treatment at the end of the leached litter SOD exp.
+
+    sed.vol          cruc        cruc.mass        cruc.sed        cruc.ash    
+ Min.   :0.90   Min.   : 6.0   Min.   :26.99   Min.   :27.19   Min.   :27.15  
+ 1st Qu.:1.10   1st Qu.:15.0   1st Qu.:28.87   1st Qu.:29.03   1st Qu.:29.00  
+ Median :1.20   Median :16.0   Median :29.14   Median :29.35   Median :29.32  
+ Mean   :1.14   Mean   :16.2   Mean   :29.18   Mean   :29.39   Mean   :29.35  
+ 3rd Qu.:1.20   3rd Qu.:20.0   3rd Qu.:29.40   3rd Qu.:29.66   3rd Qu.:29.62  
+ Max.   :1.30   Max.   :24.0   Max.   :31.52   Max.   :31.72   Max.   :31.68  
+                                                                              
+    sed.mass         ash.mass          propOM        AFDM.sample        AFDM.leaf  
+ Min.   :0.1599   Min.   :0.1263   Min.   :0.1693   Min.   :0.03360   Min.   : NA  
+ 1st Qu.:0.1933   1st Qu.:0.1566   1st Qu.:0.1737   1st Qu.:0.03630   1st Qu.: NA  
+ Median :0.2041   Median :0.1636   Median :0.1899   Median :0.03670   Median : NA  
+ Mean   :0.2067   Mean   :0.1682   Mean   :0.1883   Mean   :0.03852   Mean   :NaN  
+ 3rd Qu.:0.2144   3rd Qu.:0.1781   3rd Qu.:0.1984   3rd Qu.:0.04050   3rd Qu.: NA  
+ Max.   :0.2620   Max.   :0.2165   Max.   :0.2101   Max.   :0.04550   Max.   : NA  
+                                                                      NAs   :5    
+    dry.bulk     
+ Min.   :0.1487  
+ 1st Qu.:0.1777  
+ Median :0.1787  
+ Mean   :0.1818  
+ 3rd Qu.:0.1855  
+ Max.   :0.2183 
  
+~~~~~
+
+#### Sediment and Leaves
+
+    summary(loi[loi$sample == "sed" & loi$time == "final" & loi$treatment == "LS", 6:16])
+
+~~~~
+Summary of LOI Data for the Sediments in the sediment and leaf treatment at the end of the leached litter SOD exp.
+
+   sed.vol         cruc        cruc.mass        cruc.sed        cruc.ash    
+ Min.   :0.8   Min.   : 8.0   Min.   :27.08   Min.   :27.26   Min.   :27.22  
+ 1st Qu.:1.0   1st Qu.: 9.0   1st Qu.:28.82   1st Qu.:29.01   1st Qu.:28.97  
+ Median :1.0   Median :13.0   Median :28.97   Median :29.13   Median :29.11  
+ Mean   :1.0   Mean   :14.8   Mean   :29.12   Mean   :29.29   Mean   :29.26  
+ 3rd Qu.:1.1   3rd Qu.:21.0   3rd Qu.:29.73   3rd Qu.:29.87   3rd Qu.:29.85  
+ Max.   :1.1   Max.   :23.0   Max.   :31.01   Max.   :31.20   Max.   :31.16  
+                                                                             
+    sed.mass         ash.mass          propOM        AFDM.sample       AFDM.leaf  
+ Min.   :0.1465   Min.   :0.1193   Min.   :0.1758   Min.   :0.0272   Min.   : NA  
+ 1st Qu.:0.1672   1st Qu.:0.1378   1st Qu.:0.1805   1st Qu.:0.0294   1st Qu.: NA  
+ Median :0.1768   Median :0.1407   Median :0.1857   Median :0.0338   Median : NA  
+ Mean   :0.1740   Mean   :0.1415   Mean   :0.1867   Mean   :0.0325   Mean   :NaN  
+ 3rd Qu.:0.1873   3rd Qu.:0.1535   3rd Qu.:0.1873   3rd Qu.:0.0360   3rd Qu.: NA  
+ Max.   :0.1922   Max.   :0.1562   Max.   :0.2042   Max.   :0.0361   Max.   : NA  
+                                                                     NA's   :5    
+    dry.bulk     
+ Min.   :0.1607  
+ 1st Qu.:0.1672  
+ Median :0.1703  
+ Mean   :0.1747  
+ 3rd Qu.:0.1831  
+ Max.   :0.1922  
+ 
+ ~~~~
+
 ### Summary of Final Leaf LOI
  
     summary(loi[loi$time == "final" & loi$sample == "leaf", ])
