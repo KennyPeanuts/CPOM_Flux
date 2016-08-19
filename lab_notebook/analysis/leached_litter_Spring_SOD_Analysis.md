@@ -10,6 +10,8 @@
 
 * 17 Aug 2016 - KF - converted DO to umol/L to match litter exp results
 
+* 19 Aug 2016 - KF - normalized SOD by LOI and performed analysis
+
 ## Purpose
 
 This code is to analyze the effect of the leached litter addition treatments on SOD. 
@@ -39,9 +41,45 @@ Flux calculations can be found in [leached_litter_Spring_sod_calc_11feb2016.md](
 #### Normalize the SOD by organic matter content
 ##### Import LOI data
 
-These data still need to be entered - KF - 16 Aug 2016
- 
-    #loi <- read.table("./data/
+    loi <- read.table("./data/leached_litter_Spring_LOI_sp2016.csv", header = T, sep = ",")
+
+##### Remove the initial data
+
+    loi.final <- loi[loi$time == "final", ]
+
+##### Calculate the total organic matter in the bottle
+
+To to this I need to split out the leaf and sediment data and then merge it by BOD bottle
+
+    leaf.AFDM <- loi.final$AFDM.leaf[loi.final$sample == "leaf"]
+    leaf.bod <- loi.final$bod[loi.final$sample == "leaf"]
+
+    leaf.OM <- data.frame(leaf.bod, leaf.AFDM)
+    names(leaf.OM) <- c("bod", "leaf.AFDM")
+
+    #data frame with a new column of the leaf AFDM
+    loi.final.tot <- merge(loi.final, leaf.OM, by = "bod")
+    loi.final.sed <- loi.final.tot[loi.final.tot$sample == "sed", ]
+    
+Now that I have a data frame (`loi.final.tot`) that has the leaf.AFDM and sediment AFDM in different columns, I can add them for the LS bottles
+
+     AFDM.tot.LS <- loi.final.sed$AFDM.sample + loi.final.sed$leaf.AFDM
+
+##### Create data frame of the total organic matter and the BOD number to merge with the SOD data
+
+    LS.OM <- data.frame(loi.final.sed$bod, AFDM.tot.LS)
+    names(LS.OM) <- c("bod", "AFDM.tot")
+
+    S.OM <- data.frame(loi.final$bod[loi.final$treatment == "S"], loi.final$AFDM.sample[loi.final$treatment == "S"])
+    names(S.OM) <- c("bod", "AFDM.tot")
+    
+    OM.tot <- rbind(S.OM, LS.OM)
+
+The `OM.tot` data frame contains the total organic matter (leaf + sediment) (g AFDM) for each of the BOD bottles.
+
+##### Merge the total OM to the SOD data
+
+    sod.om <- merge(sod, OM.tot, by = "bod")
 
 ## Analysis
 
@@ -103,8 +141,8 @@ Dissolved Oxygen by days elapsed for bottles with and without leaf litter
     
 #### Plot Effect of Treatment on Area Norm SOD    
     par(las = 1, mar = c(6, 6, 3, 3))
-    plot(SOD ~ days.elap, data = sod, subset = treatment == "LS", ylim = c(0, 2.5), xlim = c(0, 21), xlab = "Days of Incubation", ylab = expression(paste("SOD (mmol ", O[2], " m"^{-2}, " h"^{-1}, ")")), pch = 4, cex.axis = 1.2, cex.lab = 1.5, cex = 1.5)
-    points(SOD ~ days.elap, data = sod, subset = treatment == "S", pch = 1, cex = 1.5)
+    plot(SOD ~ days.elap, data = sod.om, subset = treatment == "LS", ylim = c(0, 2.5), xlim = c(0, 21), xlab = "Days of Incubation", ylab = expression(paste("SOD (mmol ", O[2], " m"^{-2}, " h"^{-1}, ")")), pch = 4, cex.axis = 1.2, cex.lab = 1.5, cex = 1.5)
+    points(SOD ~ days.elap, data = sod.om, subset = treatment == "S", pch = 1, cex = 1.5)
     legend(12, 2.5, c("Leaf Litter", "No Leaf Litter"), pch = c(4, 1), cex = 1)
     dev.copy(jpeg, "./output/plots/leached_litter_SOD_by_days.jpg")
     dev.off()
@@ -114,3 +152,16 @@ Dissolved Oxygen by days elapsed for bottles with and without leaf litter
 
 Area normalized SOD by days elapsed for bottles with and without leaf litter
 
+### OM Normalized SOD
+
+#### Normalize the change in O2 by AFDM
+
+    dDO.OM <- sod.om$dDO / sod.om$AFDM.tot 
+
+#### Normalize to h of incubation
+
+    SOD.OM <- dDO.OM / sod.om$incubation.h #SOD in mmol O2 / (g AFDM) / h
+
+#### Add to OM normalized data to sod data.frame
+
+    sod.om <- data.frame(sod.om, SOD.OM)

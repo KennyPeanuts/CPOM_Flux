@@ -311,9 +311,9 @@ in umol / (g OM) / h
 
     # Plot of Area-normalized SOD by days of incubation 
     par(las = 1, mar = c(6, 6, 3, 3))
-    plot(SOD ~ jitter(days.elap, 1), data = sod, subset = CPOM == "yes", ylim = c(0, 2.5), xlab = "Days of Incubation", ylab = expression(paste("SOD (mmol O"[2], " m"^{-2}, " h"^{-1}, ")")), pch = 19, cex.axis = 1.2, cex.lab = 1.5, cex = 2)
-    points(SOD ~ jitter(days.elap, 1), data = sod, subset = CPOM == "no", pch = 1, cex = 2)
-    legend(12, 2.5, c("Leaf Litter  ", "No Leaf Litter  "), pch = c(19, 1), cex = 1)
+    plot(SOD ~ days.elap, data = sod, subset = CPOM == "yes", ylim = c(0, 2.5), xlab = "Days of Incubation", ylab = expression(paste("SOD (mmol O"[2], " m"^{-2}, " h"^{-1}, ")")), pch = 4, cex.axis = 1.2, cex.lab = 1.5, cex = 2)
+    points(SOD ~ days.elap, data = sod, subset = CPOM == "no", pch = 1, cex = 2)
+    legend(12, 2.5, c("Leaf Litter  ", "No Leaf Litter  "), pch = c(4, 1), cex = 1)
     dev.copy(jpeg, "./output/plots/SOD_by_days.jpg")
     dev.off()
 
