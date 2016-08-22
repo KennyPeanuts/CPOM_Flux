@@ -198,7 +198,7 @@ Load `lmeTest` package
 
 Using this package, I specify the model where the `bod` is the random subject variable.
                                                                                                                                          
-    (fm <- lmer(sod.OM ~ 1 + days.elap * CPOM * nutrient + (1 + days.elap|bod), sod))
+    (fm <- lmer(sod.OM ~ 1 + days.elap * CPOM * nutrient + (1|bod), sod))
 
 
 ~~~~
@@ -326,19 +326,17 @@ The `lmerTest` package needs to be loaded from above.
 
 Specify the model for the DO
 
-    (do.mod <- lmer(DO.T0 ~ 1 + days.elap * CPOM * nutrient + (1 + days.elap|bod), sod)) # wrapping in () gives ouput
+    (do.mod <- lmer(DO.T0 ~ 1 + days.elap * CPOM * nutrient + (1|bod), sod)) # wrapping in () gives ouput
 
 ~~~~
-
-Linear mixed model fit by REML ['lmerMod']
-Formula: DO.T0 ~ 1 + days.elap * CPOM * nutrient + (1 + days.elap | bod)
+Linear mixed model fit by REML ['merModLmerTest']
+Formula: DO.T0 ~ 1 + days.elap * CPOM * nutrient + (1 | bod)
    Data: sod
 REML criterion at convergence: -222.9481
 Random effects:
- Groups   Name        Std.Dev.  Corr
- bod      (Intercept) 0.000e+00     
-          days.elap   5.596e-11  NaN
- Residual             3.790e-02     
+ Groups   Name        Std.Dev.
+ bod      (Intercept) 0.0000  
+ Residual             0.0379  
 Number of obs: 79, groups:  bod, 16
 Fixed Effects:
                   (Intercept)                      days.elap  

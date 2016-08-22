@@ -10,7 +10,9 @@
 
 * 17 Aug 2016 - KF - converted DO to umol/L to match litter exp results
 
-* 19 Aug 2016 - KF - normalized SOD by LOI and performed analysis
+* 19 Aug 2016 - KF - normalized SOD by LOI 
+
+* 22 Aug 2016 - KF - Performed repeated measures analysis of LOI normalized and area normalized data
 
 ## Purpose
 
@@ -141,9 +143,9 @@ Dissolved Oxygen by days elapsed for bottles with and without leaf litter
     
 #### Plot Effect of Treatment on Area Norm SOD    
     par(las = 1, mar = c(6, 6, 3, 3))
-    plot(SOD ~ days.elap, data = sod.om, subset = treatment == "LS", ylim = c(0, 2.5), xlim = c(0, 21), xlab = "Days of Incubation", ylab = expression(paste("SOD (mmol ", O[2], " m"^{-2}, " h"^{-1}, ")")), pch = 4, cex.axis = 1.2, cex.lab = 1.5, cex = 1.5)
-    points(SOD ~ days.elap, data = sod.om, subset = treatment == "S", pch = 1, cex = 1.5)
-    legend(12, 2.5, c("Leaf Litter", "No Leaf Litter"), pch = c(4, 1), cex = 1)
+    plot(SOD * 1000 ~ days.elap, data = sod.om, subset = treatment == "LS", ylim = c(0, 1000), xlim = c(0, 21), xlab = "Days of Incubation", ylab = expression(paste("SOD (", mu, "mol ", O[2], " m"^{-2}, " h"^{-1}, ")")), pch = 4, cex.axis = 1.2, cex.lab = 1.5, cex = 1.5)
+    points(SOD * 1000 ~ days.elap, data = sod.om, subset = treatment == "S", pch = 1, cex = 1.5)
+    legend(12, 1000, c("Leaf Litter", "No Leaf Litter"), pch = c(4, 1), cex = 1)
     dev.copy(jpeg, "./output/plots/leached_litter_SOD_by_days.jpg")
     dev.off()
 
@@ -165,3 +167,63 @@ Area normalized SOD by days elapsed for bottles with and without leaf litter
 #### Add to OM normalized data to sod data.frame
 
     sod.om <- data.frame(sod.om, SOD.OM)
+
+### Repeated measures analysis of the OM normalized SOD
+
+#### Load the `lmerTest` package
+
+    library("lmerTest", lib.loc="~/Library/R/3.1/library")  
+
+#### Specify Model
+
+I am using `bod` as the random subject variable.
+
+I changed the model specification from `(days.elap|bod)` to `(1|bod)` because I was getting the error in this Cross Validated question: [http://stats.stackexchange.com/questions/140038/lme4-random-effects](http://stats.stackexchange.com/questions/140038/lme4-random-effects)
+
+
+    (fm <- lmer(SOD.OM ~ 1 + days.elap * treatment + (1|bod), sod.om))
+
+~~~~
+ Linear mixed model fit by REML ['merModLmerTest']
+Formula: SOD.OM ~ 1 + days.elap * treatment + (1 | bod)
+   Data: sod.om
+REML criterion at convergence: -81.4431
+Random effects:
+ Groups   Name        Std.Dev.
+ bod      (Intercept) 0.005395
+ Residual             0.011042
+Number of obs: 20, groups:  bod, 10
+Fixed Effects:
+         (Intercept)     days.elap            treatmentS  days.elap:treatmentS  
+           0.0371089     0.0017893            -0.0012155            -0.0009088  
+
+~~~~
+ 
+    anova(fm)
+
+~~~~
+ 
+Analysis of Variance Table of type III  with  Satterthwaite 
+approximation for degrees of freedom
+                        Sum Sq    Mean Sq NumDF   DenDF F.value  Pr(>F)  
+days.elap           0.00043659 0.00043659     1  8.0003  3.5808 0.09509 .
+treatment           0.00000187 0.00000187     1 15.0522  0.0154 0.90304  
+days.elap:treatment 0.00005058 0.00005058     1  8.0003  0.4149 0.53753  
+
+~~~~
+ 
+#### Plot of the OM Normalized SOD 
+
+    par(las = 1, mar = c(6, 6, 3, 3))
+    plot(SOD.OM * 1000 ~ days.elap, data = sod.om, subset = treatment == "LS", ylim = c(0, 100), xlim = c(0, 21), xlab = "Days of Incubation", ylab = expression(paste("SOD (",mu, "mol ", O[2], "(g AFDM)"^{-1}, ")")), pch = 4, cex.axis = 1.2, cex.lab = 1.5, cex = 1.5)
+    points(SOD.OM * 1000 ~ days.elap, data = sod.om, subset = treatment == "S", pch = 1, cex = 1.5)
+    legend(12, 100, c("Leaf Litter", "No Leaf Litter"), pch = c(4, 1), cex = 1)
+    dev.copy(jpeg, "./output/plots/leached_litter_SOD.OM_by_days.jpg")
+    dev.off()
+
+
+
+
+![Area normalized SOD by days elapsed](../output/plots/leached_litter_SOD.OM_by_days.jpg)
+
+Area normalized SOD by days elapsed for bottles with and without leaf litter
