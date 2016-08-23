@@ -14,6 +14,8 @@
 
 * 22 Aug 2016 - KF - Performed repeated measures analysis of LOI normalized and area normalized data
 
+* 23 Aug 2016 - KF - Added summary information on SOD
+
 ## Purpose
 
 This code is to analyze the effect of the leached litter addition treatments on SOD. 
@@ -139,7 +141,34 @@ Dissolved Oxygen by days elapsed for bottles with and without leaf litter
 
 
 ### Area Normalized SOD
+#### Summary of Area Normalized SOD
 
+    summary(sod.om$SOD * 1000) # the multiplication by 1000 is to convert to umol
+    sd(sod.om$SOD * 1000) 
+
+~~~~
+Summary of Area Normalized SOD across all bottles (umol O2 / m2 / h)
+
+Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     SD
+  360.3   417.2   567.9   561.3   665.4   788.4  141.5882
+
+~~~~
+
+    tapply((sod.om$SOD * 1000), sod.om$treatment, summary)
+    tapply((sod.om$SOD * 1000), sod.om$treatment, sd)
+
+~~~~
+Summary of Area Normalized SOD by treatment (umol O2 / m2 / h)
+
+$LS
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. SD
+  405.1   425.7   578.7   563.7   643.2   771.9 140.4408
+
+$S
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. SD
+  360.3   419.9   561.0   558.8   667.0   788.4 150.2825 
+
+~~~~
     
 #### Plot Effect of Treatment on Area Norm SOD    
     par(las = 1, mar = c(6, 6, 3, 3))
@@ -168,6 +197,36 @@ Area normalized SOD by days elapsed for bottles with and without leaf litter
 
     sod.om <- data.frame(sod.om, SOD.OM)
 
+### Summary of OM Normalized SOD
+
+    summary(sod.om$SOD.OM * 1000) # multiplication by 1000 converts to umol
+    sd(sod.om$SOD.OM * 1000)
+
+~~~~
+Summary of OM Normalized SOD across all microcosms (umol O2 / m2 / h)
+
+ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.   SD
+  27.49   33.74   41.56   43.84   55.83   68.02 12.76679
+
+~~~~
+
+    tapply(sod.om$SOD.OM * 1000, sod.om$treatment, summary)
+    tapply(sod.om$SOD.OM * 1000, sod.om$treatment, sd)
+
+~~~~
+Summary of OM Normalized SOD by treatment (umol O2 / m2 / h)
+
+$LS
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. SD
+  30.02   35.90   42.99   46.95   59.99   68.02 14.29411 
+
+$S
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. SD
+  27.49   33.30   40.20   40.74   44.29   60.82 10.87750 
+
+~~~~
+ 
+ 
 ### Repeated measures analysis of the OM normalized SOD
 
 #### Load the `lmerTest` package
