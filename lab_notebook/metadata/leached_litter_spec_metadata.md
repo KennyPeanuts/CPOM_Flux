@@ -34,7 +34,10 @@ Modified:
     * wl = the wavelength (nm)
     * abs = the absorbance
 
-## Data Import
+## Data Processing and Data File Creation
+### 22 Sept 2015 Sampling
+
+#### Data Import
 
      bod1 <- read.table("./data/spec_scans/leached_litter_22_sept_2015_bod1.csv", header = T, sep = ",")
      bod2 <- read.table("./data/spec_scans/leached_litter_22_sept_2015_bod2.csv", header = T, sep = ",")
@@ -49,24 +52,200 @@ Modified:
      bod11 <- read.table("./data/spec_scans/leached_litter_22_sept_2015_bod11.csv", header = T, sep = ",")
      bod12 <- read.table("./data/spec_scans/leached_litter_22_sept_2015_bod12.csv", header = T, sep = ",")
 
+#### Combine all BOD bottles into 1 file
 
+     spec.all <- rbind(bod1, bod2, bod3, bod4, bod5, bod6, bod7, bod8, bod9, bod10, bod11, bod12)
 
-
-
-
-## Combine all BOD bottles into 1 file
-
-     spec.all <- rbind(bod1, bod2, bod3, bod4, bod5, bod6, bod7, bod8, bod9, bod10, bod11, bod12, bod13, bod14, bod15, bod16, bod17, bod18)
-
-     ## Create Labels for bod bottles
-     bod <- rep(1:18, 651)
+#### Create Labels for bod bottles
+     bod <- rep(1:12, 531)
      bod <- sort(bod)
 
-     ## Create new data.frame with bod lables and only abs and wavelength columns
+#### Create new data.frame with bod lables and only abs and wavelength columns
      spec.trunk <- spec.all[, 1:2]
      spec <- data.frame(bod, spec.trunk)
      names(spec) <- c("bod", "wl", "abs")
 
-## Make Data Table
+#### Make Data Table
 
-    write.table(spec, "./data/cpom_flux_spec_10jun2014.csv", row.names = F, quote = F, sep = ",")
+    write.table(spec, "./data/leached_litter_spec_22sept2015.csv", row.names = F, quote = F, sep = ",")
+
+
+## Data Processing and Data File Creation
+### 24 Sept 2015 Sampling
+
+#### Data Import
+
+     bod1 <- read.table("./data/spec_scans/leached_litter_24_sept_2015_bod1.csv", header = T, sep = ",")
+     bod2 <- read.table("./data/spec_scans/leached_litter_24_sept_2015_bod2.csv", header = T, sep = ",")
+     bod3 <- read.table("./data/spec_scans/leached_litter_24_sept_2015_bod3.csv", header = T, sep = ",")
+     bod4 <- read.table("./data/spec_scans/leached_litter_24_sept_2015_bod4.csv", header = T, sep = ",")
+     bod5 <- read.table("./data/spec_scans/leached_litter_24_sept_2015_bod5.csv", header = T, sep = ",")
+     bod6 <- read.table("./data/spec_scans/leached_litter_24_sept_2015_bod6.csv", header = T, sep = ",")
+     bod7 <- read.table("./data/spec_scans/leached_litter_24_sept_2015_bod7.csv", header = T, sep = ",")
+     bod8 <- read.table("./data/spec_scans/leached_litter_24_sept_2015_bod8.csv", header = T, sep = ",")
+     bod9 <- read.table("./data/spec_scans/leached_litter_24_sept_2015_bod9.csv", header = T, sep = ",")
+     bod10 <- read.table("./data/spec_scans/leached_litter_24_sept_2015_bod10.csv", header = T, sep = ",")
+     bod11 <- read.table("./data/spec_scans/leached_litter_24_sept_2015_bod11.csv", header = T, sep = ",")
+     bod12 <- read.table("./data/spec_scans/leached_litter_24_sept_2015_bod12.csv", header = T, sep = ",")
+
+#### Combine all BOD bottles into 1 file
+
+     spec.all <- rbind(bod1, bod2, bod3, bod4, bod5, bod6, bod7, bod8, bod9, bod10, bod11, bod12)
+
+#### Create Labels for bod bottles
+     bod <- rep(1:12, 651)
+     bod <- sort(bod)
+
+#### Create new data.frame with bod lables and only abs and wavelength columns
+     spec.trunk <- spec.all[, 1:2]
+     spec <- data.frame(bod, spec.trunk)
+     names(spec) <- c("bod", "wl", "abs")
+
+#### Make Data Table
+
+    write.table(spec, "./data/leached_litter_spec_24sept2015.csv", row.names = F, quote = F, sep = ",")
+
+
+## Data Processing and Data File Creation
+### 1 Oct 2015 Sampling
+
+#### Data Import
+
+     bod1 <- read.table("./data/spec_scans/leached_litter_01_oct_2015_bod1.csv", header = T, sep = ",")
+     bod2 <- read.table("./data/spec_scans/leached_litter_01_oct_2015_bod2.csv", header = T, sep = ",")
+     bod3 <- read.table("./data/spec_scans/leached_litter_01_oct_2015_bod3.csv", header = T, sep = ",")
+     bod4 <- read.table("./data/spec_scans/leached_litter_01_oct_2015_bod4.csv", header = T, sep = ",")
+     bod5 <- read.table("./data/spec_scans/leached_litter_01_oct_2015_bod5.csv", header = T, sep = ",")
+     bod6 <- read.table("./data/spec_scans/leached_litter_01_oct_2015_bod6.csv", header = T, sep = ",")
+     bod7 <- read.table("./data/spec_scans/leached_litter_01_oct_2015_bod7.csv", header = T, sep = ",")
+     bod8 <- read.table("./data/spec_scans/leached_litter_01_oct_2015_bod8.csv", header = T, sep = ",")
+     bod9 <- read.table("./data/spec_scans/leached_litter_01_oct_2015_bod9.csv", header = T, sep = ",")
+     bod10 <- read.table("./data/spec_scans/leached_litter_01_oct_2015_bod10.csv", header = T, sep = ",")
+     bod11 <- read.table("./data/spec_scans/leached_litter_01_oct_2015_bod11.csv", header = T, sep = ",")
+     bod12 <- read.table("./data/spec_scans/leached_litter_01_oct_2015_bod12.csv", header = T, sep = ",")
+
+#### Combine all BOD bottles into 1 file
+
+     spec.all <- rbind(bod1, bod2, bod3, bod4, bod5, bod6, bod7, bod8, bod9, bod10, bod11, bod12)
+
+#### Create Labels for bod bottles
+     bod <- rep(1:12, 651)
+     bod <- sort(bod)
+
+#### Create new data.frame with bod lables and only abs and wavelength columns
+     spec.trunk <- spec.all[, 1:2]
+     spec <- data.frame(bod, spec.trunk)
+     names(spec) <- c("bod", "wl", "abs")
+
+#### Make Data Table
+
+    write.table(spec, "./data/leached_litter_spec_1oct2015.csv", row.names = F, quote = F, sep = ",")
+
+
+## Data Processing and Data File Creation
+### 8 Oct 2015 Sampling
+
+#### Data Import
+
+     bod1 <- read.table("./data/spec_scans/leached_litter_08_oct_2015_bod1.csv", header = T, sep = ",")
+     bod2 <- read.table("./data/spec_scans/leached_litter_08_oct_2015_bod2.csv", header = T, sep = ",")
+     bod3 <- read.table("./data/spec_scans/leached_litter_08_oct_2015_bod3.csv", header = T, sep = ",")
+     bod4 <- read.table("./data/spec_scans/leached_litter_08_oct_2015_bod4.csv", header = T, sep = ",")
+     bod5 <- read.table("./data/spec_scans/leached_litter_08_oct_2015_bod5.csv", header = T, sep = ",")
+     bod6 <- read.table("./data/spec_scans/leached_litter_08_oct_2015_bod6.csv", header = T, sep = ",")
+     bod7 <- read.table("./data/spec_scans/leached_litter_08_oct_2015_bod7.csv", header = T, sep = ",")
+     bod8 <- read.table("./data/spec_scans/leached_litter_08_oct_2015_bod8.csv", header = T, sep = ",")
+     bod9 <- read.table("./data/spec_scans/leached_litter_08_oct_2015_bod9.csv", header = T, sep = ",")
+     bod10 <- read.table("./data/spec_scans/leached_litter_08_oct_2015_bod10.csv", header = T, sep = ",")
+     bod11 <- read.table("./data/spec_scans/leached_litter_08_oct_2015_bod11.csv", header = T, sep = ",")
+     bod12 <- read.table("./data/spec_scans/leached_litter_08_oct_2015_bod12.csv", header = T, sep = ",")
+
+#### Combine all BOD bottles into 1 file
+
+     spec.all <- rbind(bod1, bod2, bod3, bod4, bod5, bod6, bod7, bod8, bod9, bod10, bod11, bod12)
+
+#### Create Labels for bod bottles
+     bod <- rep(1:12, 651)
+     bod <- sort(bod)
+
+#### Create new data.frame with bod lables and only abs and wavelength columns
+     spec.trunk <- spec.all[, 1:2]
+     spec <- data.frame(bod, spec.trunk)
+     names(spec) <- c("bod", "wl", "abs")
+
+#### Make Data Table
+
+    write.table(spec, "./data/leached_litter_spec_8oct2015.csv", row.names = F, quote = F, sep = ",")
+
+
+## Data Processing and Data File Creation
+### 22 Oct 2015 Sampling
+
+#### Data Import
+
+     bod1 <- read.table("./data/spec_scans/leached_litter_22_oct_2015_bod1.csv", header = T, sep = ",")
+     bod2 <- read.table("./data/spec_scans/leached_litter_22_oct_2015_bod2.csv", header = T, sep = ",")
+     bod3 <- read.table("./data/spec_scans/leached_litter_22_oct_2015_bod3.csv", header = T, sep = ",")
+     bod4 <- read.table("./data/spec_scans/leached_litter_22_oct_2015_bod4.csv", header = T, sep = ",")
+     bod5 <- read.table("./data/spec_scans/leached_litter_22_oct_2015_bod5.csv", header = T, sep = ",")
+     bod6 <- read.table("./data/spec_scans/leached_litter_22_oct_2015_bod6.csv", header = T, sep = ",")
+     bod7 <- read.table("./data/spec_scans/leached_litter_22_oct_2015_bod7.csv", header = T, sep = ",")
+     bod8 <- read.table("./data/spec_scans/leached_litter_22_oct_2015_bod8.csv", header = T, sep = ",")
+     bod9 <- read.table("./data/spec_scans/leached_litter_22_oct_2015_bod9.csv", header = T, sep = ",")
+     bod10 <- read.table("./data/spec_scans/leached_litter_22_oct_2015_bod10.csv", header = T, sep = ",")
+     bod11 <- read.table("./data/spec_scans/leached_litter_22_oct_2015_bod11.csv", header = T, sep = ",")
+     bod12 <- read.table("./data/spec_scans/leached_litter_22_oct_2015_bod12.csv", header = T, sep = ",")
+
+#### Combine all BOD bottles into 1 file
+
+     spec.all <- rbind(bod1, bod2, bod3, bod4, bod5, bod6, bod7, bod8, bod9, bod10, bod11, bod12)
+
+#### Create Labels for bod bottles
+     bod <- rep(1:12, 651)
+     bod <- sort(bod)
+
+#### Create new data.frame with bod lables and only abs and wavelength columns
+     spec.trunk <- spec.all[, 1:2]
+     spec <- data.frame(bod, spec.trunk)
+     names(spec) <- c("bod", "wl", "abs")
+
+#### Make Data Table
+
+    write.table(spec, "./data/leached_litter_spec_22oct2015.csv", row.names = F, quote = F, sep = ",")
+
+
+## Data Processing and Data File Creation
+### 5 Nov 2015 Sampling
+
+#### Data Import
+
+     bod1 <- read.table("./data/spec_scans/leached_litter_05_nov_2015_bod1.csv", header = T, sep = ",")
+     bod2 <- read.table("./data/spec_scans/leached_litter_05_nov_2015_bod2.csv", header = T, sep = ",")
+     bod3 <- read.table("./data/spec_scans/leached_litter_05_nov_2015_bod3.csv", header = T, sep = ",")
+     bod4 <- read.table("./data/spec_scans/leached_litter_05_nov_2015_bod4.csv", header = T, sep = ",")
+     bod5 <- read.table("./data/spec_scans/leached_litter_05_nov_2015_bod5.csv", header = T, sep = ",")
+     bod6 <- read.table("./data/spec_scans/leached_litter_05_nov_2015_bod6.csv", header = T, sep = ",")
+     bod7 <- read.table("./data/spec_scans/leached_litter_05_nov_2015_bod7.csv", header = T, sep = ",")
+     bod8 <- read.table("./data/spec_scans/leached_litter_05_nov_2015_bod8.csv", header = T, sep = ",")
+     bod9 <- read.table("./data/spec_scans/leached_litter_05_nov_2015_bod9.csv", header = T, sep = ",")
+     bod10 <- read.table("./data/spec_scans/leached_litter_05_nov_2015_bod10.csv", header = T, sep = ",")
+     bod11 <- read.table("./data/spec_scans/leached_litter_05_nov_2015_bod11.csv", header = T, sep = ",")
+     bod12 <- read.table("./data/spec_scans/leached_litter_05_nov_2015_bod12.csv", header = T, sep = ",")
+
+#### Combine all BOD bottles into 1 file
+
+     spec.all <- rbind(bod1, bod2, bod3, bod4, bod5, bod6, bod7, bod8, bod9, bod10, bod11, bod12)
+
+#### Create Labels for bod bottles
+     bod <- rep(1:12, 651)
+     bod <- sort(bod)
+
+#### Create new data.frame with bod lables and only abs and wavelength columns
+     spec.trunk <- spec.all[, 1:2]
+     spec <- data.frame(bod, spec.trunk)
+     names(spec) <- c("bod", "wl", "abs")
+
+#### Make Data Table
+
+    write.table(spec, "./data/leached_litter_spec_5nov2015.csv", row.names = F, quote = F, sep = ",")
+
