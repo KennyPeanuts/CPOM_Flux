@@ -188,11 +188,12 @@ _E2E3 by day with CPOM_
 ### Statistical Summary
 
     summary(sratio$s.ratio)
+    sd(sratio$s.ratio)
 
 ~~~~
 
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.8110  0.9718  1.0110  1.0270  1.0600  1.4790
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. SD
+ 0.8110  0.9718  1.0110  1.0270  1.0600  1.4790 0.09634501
 
 ~~~~
 
@@ -296,7 +297,7 @@ Create x variables to offset scatter plot pts
     elapsed.d.offsetpos <- sratio$elapsed.d + 0.25
     elapsed.d.offsetneg <- sratio$elapsed.d -0.25 
 
-Plot
+#### Line plot with means
 
     par(las = 1, mar = c(5, 5, 2, 2))
     plot(s.ratio ~ elapsed.d.offsetneg, data = sratio, subset = CPOM == "yes", ylim = c(0.5, 1.5), xlim = c(-1, 22), pch = 1, xlab = "Days of Incubation", ylab = expression(paste("S"[R])), cex.lab = 1.5, cex.axis = 1.3, cex = 1.5)
@@ -310,3 +311,13 @@ Plot
 ![sratio by days and CPOM](../output/plots/sratio_by_days.jpg)
 
 
+#### Scatter Plot
+
+    par(las = 1, mar = c(5, 5, 2, 2))
+    plot(s.ratio ~ elapsed.d, data = sratio, subset = CPOM == "yes", ylim = c(0.5, 1.5), xlim = c(0, 40), pch = 4, xlab = "Days of Incubation", ylab = expression(paste("S"[R])), cex.lab = 1.5, cex.axis = 1.3, cex = 1.5)
+    points(s.ratio ~ elapsed.d, data = sratio, subset = CPOM == "no", pch = 3, cex = 1.5)
+    legend(10, 1.5, c("Leaf Litter + Sediment", "Sediment Only"), pch = c(4, 3), cex =1)
+    dev.copy(jpeg, "./output/plots/sratio_scatter_by_days.jpg")
+    dev.off()
+
+![sratio by days and CPOM](../output/plots/sratio_scatter_by_days.jpg)
