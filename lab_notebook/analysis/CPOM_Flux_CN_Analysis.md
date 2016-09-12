@@ -6,6 +6,8 @@
 
 * Code created 2 June 2015 - KF
 
+* Modified 12 Sept 2016 - KF - changed t-tests in %C to Kruskal tests to match the rest of the analyses.
+
 ## Purpose
 
 This code creates calculated variables for the C:N data from the CPOM Flux experiment and evaluates differences in the treatments
@@ -86,20 +88,15 @@ $Y ** CPOM **
 
 ##### Test of the effect of CPOM on %C in surface sediments
 
-    t.test(percC ~ CPOM, data = cn, subset = Source == "surf")
+    kruskal.test(percC ~ CPOM, data = cn, subset = Source == "surf")
+    #t.test(percC ~ CPOM, data = cn, subset = Source == "surf")
 
 ~~~~
   
-  Welch Two Sample t-test
+Kruskal-Wallis rank sum test
 
 data:  percC by CPOM
-t = -0.2819, df = 13.952, p-value = 0.7821
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -0.1506697  0.1156697
-sample estimates:
-mean in group N mean in group Y 
-         3.1975          3.2150 
+Kruskal-Wallis chi-squared = 0.277, df = 1, p-value = 0.5987
 
 ~~~~
   
@@ -119,20 +116,15 @@ $Y ** Added DIP and DIN **
   
 ##### Test of the effect of Nutrients on %C in surface sediments
 
-    t.test(percC ~ NUT, data = cn, subset = Source == "surf")
+    kruskal.test(percC ~ NUT, data = cn, subset = Source == "surf")
+    #t.test(percC ~ NUT, data = cn, subset = Source == "surf")
 
 ~~~~
-  
-  Welch Two Sample t-test
+ 
+  Kruskal-Wallis rank sum test
 
 data:  percC by NUT
-t = 0.9976, df = 13.79, p-value = 0.3357
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -0.06918257  0.18918257
-sample estimates:
-mean in group N mean in group Y 
-        3.23625         3.17625 
+Kruskal-Wallis chi-squared = 1.1078, df = 1, p-value = 0.2926
 
 ~~~~
   
