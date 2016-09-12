@@ -11,6 +11,7 @@
 * Modified 9 June 2015 - KF - reran all analyses based on the updated calculations of SOD with the more comprehensive bottle OM data.
 * Modified 12 June 2015 - KF - added analysis of the DO concentration in the bottles.
 * Modified 17 May 2016 - KF - created figure of area normalized SOD.
+* Mdodifies 12 Sept 2016 - KF - calculated the SD of the mean flux
 
 ## Purpose
 
@@ -29,13 +30,14 @@ Flux calculations can be found in `CPOM_Flux_Exp_SOD_flux_calc.md` in the `analy
 #### Areal Flux
 
     summary(sod$SOD)
+    sd(sod$SOD, na.rm = T)
 
 ~~~~
 
 in mmol O2 / m2 / h  
 
-Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
- 0.3567  0.7525  0.9226  1.0200  1.2210  2.0980       1 
+Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs      SD
+ 0.3567  0.7525  0.9226  1.0200  1.2210  2.0980       1  0.3887438
 
 ~~~~
 
@@ -92,13 +94,14 @@ The decimal point is 1 digit(s) to the right of the |
 #### Oxygen Concentration
 
      summary(sod$DO.T0 * 1000)
+     sd(sod$DO.T0 * 1000, na.rm = T)
 
 ~~~~
 
 in umol / L
 
- Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs 
-  80.09  202.10  224.80  206.10  235.70  275.80    1.00
+ Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NAs    SD
+  80.09  202.10  224.80  206.10  235.70  275.80    1.00 48.80059
 
 ~~~~
 
