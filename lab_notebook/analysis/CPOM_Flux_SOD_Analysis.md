@@ -12,6 +12,7 @@
 * Modified 12 June 2015 - KF - added analysis of the DO concentration in the bottles.
 * Modified 17 May 2016 - KF - created figure of area normalized SOD.
 * Mdodifies 12 Sept 2016 - KF - calculated the SD of the mean flux
+* Modified 28 Sept 2016 - KF - modified the DO by days figure for publication
 
 ## Purpose
 
@@ -128,14 +129,14 @@ The decimal point is 1 digit(s) to the right of the |
 
 The subset of low DO values all come from the T-0 incubation day
 
-    par(las = 1, cex = 1, mar=c(5, 5, 3, 2))
-    plot(DO.T0 * 1000 ~ jitter(days.elap, 1), data = sod, subset = CPOM == "yes", pch = 19, ylim = c(0, 300), ylab = expression(paste("Oxygen Concentration (", mu, "mol L"^{-1}, ") ")), xlab = "Days of Incubation")
-    points(DO.T0 * 1000 ~ jitter(days.elap, 1), data = sod, subset = CPOM == "no", pch = 1)
-    legend(10, 100, c("Leaf Litter", "No Leaf Litter"), pch = c(19, 1))
-    dev.copy(jpeg, "./output/plots/DO_by_day.jpg")
+    par(las = 1, cex = 1, mar=c(5, 5, 3, 2), cex = 1.5)
+    plot(DO.T0 * 1000 ~ days.elap, data = sod, subset = CPOM == "yes", pch = 1, ylim = c(0, 300), ylab = expression(paste("Oxygen Concentration (", mu, "mol L"^{-1}, ") ")), xlab = "Days of Incubation")
+    points(DO.T0 * 1000 ~ days.elap, data = sod, subset = CPOM == "no", pch = 2)
+    legend(10, 100, c("Leaf Litter", "No Leaf Litter    "), pch = c(1, 2), cex = 0.7)
+    dev.copy(jpeg, "./output/plots/DO_days.jpg")
     dev.off()
 
-![DO concentration in the bottles by incubation day](../output/plots/DO_by_day.jpg)
+![DO concentration in the bottles by incubation day](../output/plots/DO_days.jpg)
 
 ### SOD Repeated Measures Analysis
 #### Notes on repeated measures

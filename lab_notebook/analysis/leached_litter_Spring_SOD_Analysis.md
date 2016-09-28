@@ -93,6 +93,17 @@ The `OM.tot` data frame contains the total organic matter (leaf + sediment) (g A
 
 ### Analyze DO concentrations
 
+    summary(DO.T0.umol)
+    sd(DO.T0.umol)
+    
+~~~~
+Dissolved Oxygen in all bottles (umol / L)
+
+  Min.    1st Qu.  Median  Mean    3rd Qu.  Max.    SD
+  225.3   227.2    277.3   264.2   290.8    312.4   32.47596
+  
+~~~~
+
     tapply(DO.T0.umol, sod$days.elap, summary) 
     tapply(DO.T0.umol, sod$days.elap, sd)
 
@@ -124,7 +135,48 @@ $S
   226.1   226.7   277.8   262.6   290.8   291.7 31.93086
 
 ~~~~~
+
+### Statistical Test of the Day and Treatment on DO conc
  
+    library("lmerTest", lib.loc="~/Library/R/3.1/library") 
+
+See the Repeated Measures Test of SOD below for justification of this test and model
+ 
+    (fm <- lmer(DO.T0.umol ~ 1 + days.elap * treatment + (1|bod), sod.om))
+
+~~~~
+Linear Mixed Model Results for DO concentration by days * treatment
+ 
+Linear mixed model fit by REML ['merModLmerTest']
+Formula: DO.T0.umol ~ 1 + days.elap * treatment + (1 | bod)
+   Data: sod.om
+REML criterion at convergence: 162.302
+Random effects:
+ Groups   Name        Std.Dev.
+ bod      (Intercept) 32.42   
+ Residual             12.86   
+Number of obs: 20, groups:  bod, 10
+Fixed Effects:
+         (Intercept)             days.elap            treatmentS  
+            266.9174               -1.2807                0.9636  
+days.elap:treatmentS  
+              1.3966  
+
+~~~~
+ 
+    anova(fm)
+
+~~~~
+ANOVA Table for Linear Mixed model of DO conc by Days * Treatment 
+
+Analysis of Variance Table of type III  with  Satterthwaite 
+approximation for degrees of freedom
+                     Sum Sq Mean Sq NumDF DenDF F.value Pr(>F)
+days.elap            83.107  83.107     1  8.00 0.50271 0.4985
+treatment             0.287   0.287     1 10.79 0.00174 0.9675
+days.elap:treatment 119.465 119.465     1  8.00 0.72264 0.4200
+
+~~~~
  
 #### Plot of the DO concentration of the bottles by time and treatment
     
