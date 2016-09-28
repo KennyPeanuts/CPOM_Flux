@@ -325,12 +325,12 @@ days.elap:treatment 0.00005058 0.00005058     1  8.0003  0.4149 0.53753
  
 #### Plot of the OM Normalized SOD 
 
-    par(las = 1, mar = c(6, 6, 3, 3))
-    plot(SOD.OM * 1000 ~ days.elap, data = sod.om, subset = treatment == "LS", ylim = c(0, 100), xlim = c(0, 21), xlab = "Days of Incubation", ylab = expression(paste("SOD (",mu, "mol ", O[2], "(g AFDM)"^{-1}, ")")), pch = 4, cex.axis = 1.2, cex.lab = 1.5, cex = 1.5)
-    points(SOD.OM * 1000 ~ days.elap, data = sod.om, subset = treatment == "S", pch = 1, cex = 1.5)
-    legend(12, 100, c("Leaf Litter", "No Leaf Litter"), pch = c(4, 1), cex = 1)
-    dev.copy(jpeg, "./output/plots/leached_litter_SOD.OM_by_days.jpg")
-    dev.off()
+    par(las = 1, mar = c(5, 5, 2, 2))
+    plot(SOD.OM * 1000 ~ days.elap, data = sod.om, subset = treatment == "LS", ylim = c(0, 100), xlim = c(0, 21), xlab = "Days of Incubation", ylab = expression(paste("SOD (",mu, "mol ", O[2], "(g OM)"^{-1}, " h"^{-1}, ")")), pch = 1, cex.axis = 1.2, cex.lab = 1.5, cex = 2.5, cex.axis = 1.5, cex.lab = 1.5)
+    points(SOD.OM * 1000 ~ days.elap, data = sod.om, subset = treatment == "S", pch = 2, cex = 2.5)
+    #legend(12, 100, c("Leaf Litter", "No Leaf Litter"), pch = c(4, 1), cex = 1)
+    #dev.copy(jpeg, "./output/plots/leached_litter_SOD.OM_by_days.jpg")
+    #dev.off()
 
 
 
