@@ -297,11 +297,11 @@ in umol / (g OM) / h
 
     # Plot of OM normalized SOD by days of incubation (for ASB talk)
     par(las = 1, mar = c(5, 5, 2, 2))
-    plot(sod.OM ~ days.elap, data = sod, subset = CPOM == "yes", ylim = c(0, 100), xlab = " ", ylab = expression(paste("SOD (", mu, "mol (g OM)"^{-1}, " h"^{-1}, ")")), pch = 1, col = "grey4", cex.axis = 1.5, cex.lab = 1.5, cex = 2)
+    plot(sod.OM ~ days.elap, data = sod, subset = CPOM == "yes", ylim = c(0, 100), xlab = " ", ylab = expression(paste("SOD (",mu, "mol ", O[2], " (g OM)"^{-1}, " h"^{-1}, ")")) , pch = 1, col = "grey4", cex.axis = 1.5, cex.lab = 1.5, cex = 2)
     points(sod.mean.CPOM ~ unique(days.elap), data = sod, type = "b", pch = 16, col = "black", cex = 2.5)
     points(sod.OM ~ days.elap, data = sod, subset = CPOM == "no", pch = 2, col = "grey4", cex = 2)
     points(sod.mean.ctl ~ unique(days.elap), data = sod, type = "b", pch = 17, col = "black", cex = 2.5)
-    legend(10, 100, c("Leaf Litter ", "No Leaf Litter "), pch = c(16, 17), cex = 1)
+    legend(10, 100, c("Leaf Litter", "No Leaf Litter"), pch = c(16, 17), cex = 1.2)
     dev.copy(jpeg, "./output/plots/SOD_OM_by_days.jpg")
     dev.off()
 
