@@ -9,6 +9,7 @@
 * Modified 10 March 2015 - KF - continued analysis
 * Modified 24 March 2015 - KF - made figures consistent with SOD for ASB Talk
 * Modified 8 May 2015 - KF - analyzed data with repeated measures using lme and lmeTest package
+* Modified 13 Oct 2016 - KF - changed plots for manuscript
 
 ## Purpose
 
@@ -224,14 +225,14 @@ $C
 #### NOx
 
     par(las = 1, mar = c(5, 5, 2, 2))
-    plot(NOx ~ days, data = nut, subset = CPOM == "C", ylim = c(-50, 200), pch = 1, ylab = expression(paste("Nitrate + Nitirite Flux (mg m"^{-2}, " d"^{-1}, ")")), xlab = "Days of Incubation", cex.axis = 1.5, cex.lab = 1.5, cex = 2)
-    points(NOx ~ days, data = nut, subset = CPOM == "0", pch = 2, col = 1, cex = 2)
+    plot(NOx ~ days, data = nut, subset = CPOM == "C", ylim = c(-50, 200), pch = 1, ylab = expression(paste("Nitrate + Nitirite Flux (mg m"^{-2}, " d"^{-1}, ")")), xlab = " ", cex.axis = 1, cex.lab = 1, cex = 1.5)
+    points(NOx ~ days, data = nut, subset = CPOM == "0", pch = 2, col = 1, cex = 1.5)
     abline(h = 0, lwd = 3)
     means.NOx.CPOM <- c(mean(nut$NOx[nut$CPOM == "C" & nut$days == 2]), mean(nut$NOx[nut$CPOM == "C" & nut$days == 7]), mean(nut$NOx[nut$CPOM == "C" & nut$days == 14]), mean(nut$NOx[nut$CPOM == "C" & nut$days == 21])) 
     means.NOx.NCPOM <- c(mean(nut$NOx[nut$CPOM == "0" & nut$days == 2]), mean(nut$NOx[nut$CPOM == "0" & nut$days == 7]), mean(nut$NOx[nut$CPOM == "0" & nut$days == 14]), mean(nut$NOx[nut$CPOM == "0" & nut$days == 21])) 
-    points(unique(nut$days), means.NOx.CPOM, type = "b", pch = 16, cex = 2.5)   
-    points(unique(nut$days), means.NOx.NCPOM, type = "b", pch = 17, col = 1, cex = 2.5)
-    legend(10, 200, c("Leaf Litter ", "No Leaf Litter "), pch = c(16, 17), col = c(1, 1), cex = 1)
+    points(unique(nut$days), means.NOx.CPOM, type = "b", pch = 16, cex = 1.7)     
+    points(unique(nut$days), means.NOx.NCPOM, type = "b", pch = 17, col = 1, cex = 1.7)
+    legend(10, 200, c("Leaf Litter ", "No Leaf Litter "), pch = c(1, 2), col = c(1, 1), cex = 1)
     dev.copy(png, "./output/plots/CPOM_Flux_NOx_flux.png")
     dev.off()
 
@@ -241,14 +242,14 @@ $C
 #### NH3
 
     par(las = 1, mar = c(5, 5, 2, 2))
-    plot(NH3 ~ days, data = nut, subset = CPOM == "C", ylim = c(-5, 10), pch = 1, ylab = expression(paste("Ammonium Flux (mg m"^{-2}, " d"^{-1}, ")")), xlab = "Days of Incubation", cex.lab = 1.5, cex.axis = 1.5, cex = 2)
-    points(NH3 ~ days, data = nut, subset = CPOM == "0", pch = 2, col = 1, cex = 2)
+    plot(NH3 ~ days, data = nut, subset = CPOM == "C", ylim = c(-5, 10), pch = 1, ylab = expression(paste("Ammonium Flux (mg m"^{-2}, " d"^{-1}, ")")), xlab = " ", cex.lab = 1, cex.axis = 1, cex = 1.5)
+    points(NH3 ~ days, data = nut, subset = CPOM == "0", pch = 2, col = 1, cex = 1.5)
     abline(h = 0, lwd = 3)
     means.NH3.CPOM <- c(mean(nut$NH3[nut$CPOM == "C" & nut$days == 2]), mean(nut$NH3[nut$CPOM == "C" & nut$days == 7]), mean(nut$NH3[nut$CPOM == "C" & nut$days == 14]), mean(nut$NH3[nut$CPOM == "C" & nut$days == 21])) 
     means.NH3.NCPOM <- c(mean(nut$NH3[nut$CPOM == "0" & nut$days == 2]), mean(nut$NH3[nut$CPOM == "0" & nut$days == 7]), mean(nut$NH3[nut$CPOM == "0" & nut$days == 14]), mean(nut$NH3[nut$CPOM == "0" & nut$days == 21])) 
-    points(unique(nut$days), means.NH3.CPOM, type = "b", pch = 16, cex = 2.5)   
-    points(unique(nut$days), means.NH3.NCPOM, type = "b", pch = 17, cex = 2.5, col = 1)
-    legend(10, 10, c("Leaf Litter ", "No Leaf Litter "), pch = c(16, 17), col = c(1, 1), cex = 1)
+    points(unique(nut$days), means.NH3.CPOM, type = "b", pch = 16, cex = 1.7)   
+    points(unique(nut$days), means.NH3.NCPOM, type = "b", pch = 17, cex = 1.7, col = 1)
+    #legend(10, 10, c("Leaf Litter ", "No Leaf Litter "), pch = c(16, 17), col = c(1, 1), cex = 1)
     dev.copy(png, "./output/plots/CPOM_Flux_NH3_flux.png")
     dev.off()
 
@@ -258,14 +259,14 @@ $C
 #### P
 
     par(las = 1, mar = c(5, 5, 2, 2))
-    plot(P ~ days, data = nut, subset = CPOM == "C", ylim = c(-0.5, 1), pch = 1, ylab = expression(paste("Ortho-phosphate Flux (mg m"^{-2}, " d"^{-1}, ")")), xlab = "Days of Incubation", cex.lab = 1.5, cex.axis = 1.5, cex = 2)
-    points(P ~ days, data = nut, subset = CPOM == "0", pch = 2, col = 1, cex = 2)
+    plot(P ~ days, data = nut, subset = CPOM == "C", ylim = c(-0.5, 1), pch = 1, ylab = expression(paste("Ortho-phosphate Flux (mg m"^{-2}, " d"^{-1}, ")")), xlab = "Days of Incubation", cex.lab = 1, cex.axis = 1, cex = 1.5)
+    points(P ~ days, data = nut, subset = CPOM == "0", pch = 2, col = 1, cex = 1.5)
     abline(h = 0, lwd = 3)
     means.P.CPOM <- c(mean(nut$P[nut$CPOM == "C" & nut$days == 2]), mean(nut$P[nut$CPOM == "C" & nut$days == 7]), mean(nut$P[nut$CPOM == "C" & nut$days == 14]), mean(nut$P[nut$CPOM == "C" & nut$days == 21])) 
 means.P.NCPOM <- c(mean(nut$P[nut$CPOM == "0" & nut$days == 2]), mean(nut$P[nut$CPOM == "0" & nut$days == 7]), mean(nut$P[nut$CPOM == "0" & nut$days == 14]), mean(nut$P[nut$CPOM == "0" & nut$days == 21])) 
-    points(unique(nut$days), means.P.CPOM, type = "b", pch = 16, cex = 2.5)   
-    points(unique(nut$days), means.P.NCPOM, type = "b", pch = 17, cex = 2.5)   
-    legend(10, 1, c("Leaf Litter ", "No Leaf Litter "), pch = c(16, 17), col = c(1, 1), cex = 1)
+    points(unique(nut$days), means.P.CPOM, type = "b", pch = 16, cex = 1.7)   
+    points(unique(nut$days), means.P.NCPOM, type = "b", pch = 17, cex = 1.7)   
+    #legend(10, 1, c("Leaf Litter ", "No Leaf Litter "), pch = c(16, 17), col = c(1, 1), cex = 1)
     dev.copy(png, "./output/plots/CPOM_Flux_P_flux.png")
     dev.off()
 

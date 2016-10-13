@@ -314,9 +314,9 @@ Create x variables to offset scatter plot pts
 #### Scatter Plot
 
     par(las = 1, mar = c(5, 5, 2, 2))
-    plot(s.ratio ~ elapsed.d, data = sratio, subset = CPOM == "yes", ylim = c(0.5, 1.5), xlim = c(0, 40), pch = 4, xlab = "Days of Incubation", ylab = expression(paste("S"[R])), cex.lab = 1.5, cex.axis = 1.3, cex = 1.5)
-    points(s.ratio ~ elapsed.d, data = sratio, subset = CPOM == "no", pch = 3, cex = 1.5)
-    legend(10, 1.5, c("Leaf Litter + Sediment", "Sediment Only"), pch = c(4, 3), cex =1)
+    plot(s.ratio ~ elapsed.d, data = sratio, subset = CPOM == "yes", ylim = c(0.5, 1.5), xlim = c(0, 50), pch = 1, xlab = " ", ylab = expression(paste("S"[R])), cex.lab = 1.2, cex.axis = 1.0, cex = 1.2)
+    points(s.ratio ~ elapsed.d, data = sratio, subset = CPOM == "no", pch = 2, cex = 1.2)
+    legend(25, 0.8, c("Leaf Litter", "No Leaf Litter"), pch = c(1, 2), cex =1)
     dev.copy(jpeg, "./output/plots/sratio_scatter_by_days.jpg")
     dev.off()
 

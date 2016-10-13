@@ -238,10 +238,10 @@ Checking for normality of residuals with qqnorm plot
 ### Graphical Analysis
 
     par(las = 1, mar = c(5, 5, 2, 2))
-    plot(s.ratio ~ elapsed.d, data = sratio, subset = treat == "L", ylim = c(0.5, 1.5), pch = 1, xlab = "Days of Incubation", ylab = expression(paste("S"[R])), cex.lab = 1.5, cex.axis = 1.3, cex = 1.5)
-    points(s.ratio ~ elapsed.d, data = sratio, subset = treat == "S", pch = 3, cex = 1.5)
-    points(s.ratio ~ elapsed.d, data = sratio, subset = treat == "LS", pch = 4, cex = 1.5)
-    legend(10, 1.5, c("Leaf Litter Only", "Sediment Only", "Leaf Litter + Sediment"), pch = c(1, 3, 4), cex =1)
+    plot(s.ratio ~ elapsed.d, data = sratio, subset = treat == "L", ylim = c(0.5, 1.5), xlim = c(0, 50), pch = 6, xlab = "Days of Incubation", ylab = expression(paste("S"[R])), cex.lab = 1.2, cex.axis = 1, cex = 1.2)
+    points(s.ratio ~ elapsed.d, data = sratio, subset = treat == "S", pch = 2, cex = 1.2)
+    points(s.ratio ~ elapsed.d, data = sratio, subset = treat == "LS", pch = 1, cex = 1.2)
+    legend(25, 0.8, c("Leaf Litter", "No Leaf Litter", "Leaf Litter Only"), pch = c(1, 2, 6), cex =1)
     dev.copy(jpeg, "./output/plots/leached_litter_sratio_by_days.jpg")
     dev.off()
 
