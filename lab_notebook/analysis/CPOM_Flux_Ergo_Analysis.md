@@ -3,6 +3,7 @@
 ## Modified
 
 * 17 May 2016 - KF - adjusted the calculations of the leaf surface area to only use one surface based on Vlads recommendtion, prepped figures for SFS talk
+* 1 Nov 2016 - KF - added ANOVA analysis of the leaf and nutrient effects for the ms
 
 ## Import Data
 
@@ -231,5 +232,20 @@ Residuals      12 0.60696 0.050580
     
 ![Sediment Ergosterol by CPOM and Nutrients](../output/plots/sed_erg_by_CPOM.jpg)
 
+# Manuscript Plot
+
+    par(las = 1, mar = c(5, 5, 2, 2))
+    plot(ergo.area ~ jitter(as.numeric(CPOM), 1), data = ergo, subset = samp == "sed" & nutrients == "N", ylim = c(0, 3), xlim = c(0.5, 2.5), axes = F, xlab = " ", ylab = expression(paste("Ergosterol (",mu, "g cm"^{-2}, ")")), cex = 1.5, cex.lab = 1.2, cex.axis = 1.5)
+    points(ergo.area ~ jitter(as.numeric(CPOM), 1), data = ergo, subset = samp == "sed" & nutrients != "N", pch = 19, cex = 1.5)
+    points(ergo.area ~ jitter(as.numeric(CPOM), 1), data = ergo, subset = samp == "leaf" & nutrients == "N", pch = 2, cex = 1.5) 
+    points(ergo.area ~ jitter(as.numeric(CPOM), 1), data = ergo, subset = samp == "leaf" & nutrients != "N", pch = 17, cex = 1.5) 
+    axis(2)
+    axis(1, at = c(1, 2), c("No Leaf Litter", "Leaf Litter"))
+    #legend(0, 1, c("Ambient Nutrients", "Added Nutrients"), pch = c(1, 19))
+    box()
+    dev.copy(jpeg, "./output/plots/area_erg_by_CPOM_nut.jpg")
+    dev.off()
     
+![Ergosterol by CPOM and Nutrients](../output/plots/area_erg_by_CPOM_nut.jpg)
+
  
